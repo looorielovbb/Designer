@@ -1,13 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
-
+    compileSdk 34
     defaultConfig {
+        namespace 'com.shuyu.gsyvideoplayer'
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
     }
@@ -25,25 +23,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-//    def viewDependencies = rootProject.ext.viewDependencies
-//    def dataDependencies = rootProject.ext.dataDependencies
-//    compile viewDependencies.ijkplayer_java
-//    compile viewDependencies.ijkplayer_exo
-//    compile viewDependencies.transitionseverywhere
-//    compile dataDependencies.videocache
-//    compile androidDependencies.appcompat_v7
-//    compile 'com.shuyu:gsyVideoPlayer-armv5:2.0.8'
-//    compile 'com.shuyu:gsyVideoPlayer-armv7a:2.0.8'
-//    compile 'com.shuyu:gsyVideoPlayer-arm64:2.0.8'
-//    compile 'com.shuyu:gsyVideoPlayer-x64:2.0.8'
-//    compile 'com.shuyu:gsyVideoPlayer-x86:2.0.8'
-    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.8.3'
-    compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.3'
-    compile 'com.danikula:videocache:2.6.4'
-//    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.andkulikov:transitionseverywhere:1.7.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
+    implementation 'com.danikula:videocache:2.6.4'
+    implementation 'com.andkulikov:transitionseverywhere:1.7.0'
 }
-
-//apply from: './bintray.gradle'

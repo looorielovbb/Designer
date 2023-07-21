@@ -2,15 +2,11 @@ package com.jojo.design.module_mall.ui
 
 import android.graphics.Rect
 import android.os.Handler
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.BaseAppliction
 import com.jojo.design.common_base.adapter.rv.MultiItemTypeAdapter
 import com.jojo.design.common_base.config.arouter.ARouterConfig
@@ -29,7 +25,6 @@ import com.jojo.design.module_mall.adapter.ADA_SearchGoods
 import com.jojo.design.module_mall.bean.CategoryBean
 import com.jojo.design.module_mall.bean.FilterBean
 import com.jojo.design.module_mall.bean.RecordsEntity
-import com.jojo.design.module_mall.dagger2.DaggerMallComponent
 import com.jojo.design.module_mall.dialog.DIA_Filter
 import com.jojo.design.module_mall.helper.PopupFilter
 import com.jojo.design.module_mall.mvp.contract.SearchContract
@@ -37,9 +32,6 @@ import com.jojo.design.module_mall.mvp.model.SearchModel
 import com.jojo.design.module_mall.mvp.presenter.SearchPresenter
 import com.smart.novel.util.bindView
 import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.act_goods_filter.*
-import kotlinx.android.synthetic.main.common_filter_layout.*
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 /**
  *    author : JOJO

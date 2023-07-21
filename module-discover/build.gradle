@@ -4,20 +4,19 @@ if (Boolean.valueOf(rootProject.ext.isBuildModule)) {
     apply plugin: 'com.android.library'
 }
 apply plugin: 'kotlin-android'
-//kotlin扩展插件,无需findViewbyId
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 //ARouter
 kapt {
     arguments {
         arg("moduleName", project.getName())
     }
-    generateStubs = true
 }
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
+        namespace 'com.jojo.design.module_discover'
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -25,10 +24,6 @@ android {
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         //MultiDex分包方法
         multiDexEnabled true
-        ndk {
-            //APP的build.gradle设置支持的SO库架构
-            abiFilters 'armeabi', 'armeabi-v7a'
-        }
     }
 
     buildTypes {
@@ -59,22 +54,12 @@ android {
     }
 }
 
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":common-base")
     implementation project(":common-ui")
     //ARouter
     kapt rootProject.ext.dependencies["arouter-compiler"]
-    //解决Kotlin和DataBinding冲突
-    kapt "com.android.databinding:compiler:$android_version"
-    //butterknife-compiler
     kapt rootProject.ext.dependencies["butterknife-compiler"]
     kapt rootProject.ext.dependencies["dagger-compiler"]
-    //video
-    api rootProject.ext.dependencies["gsyvideo-player"]
-}
-
-repositories {
-    mavenCentral()
 }

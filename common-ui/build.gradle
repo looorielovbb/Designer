@@ -1,18 +1,18 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 //kotlin扩展插件,无需findViewbyId
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 kapt {
     arguments {
         arg("moduleName", project.getName())
     }
-    generateStubs = true
 }
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
+        namespace 'com.jojo.design.common_ui'
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -41,32 +41,25 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //kotlin
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    //解决Kotlin和DataBinding冲突
-    kapt "com.android.databinding:compiler:$android_version"
     //MultiDex分包
-    api rootProject.ext.dependencies["multidex"]
+    implementation rootProject.ext.dependencies["multidex"]
 
-    api rootProject.ext.dependencies["appcompat-v7"]
-    api rootProject.ext.dependencies["junit"]
-    api rootProject.ext.dependencies["test-runner"]
-    api rootProject.ext.dependencies["espresso-core"]
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["junit"]
+    implementation rootProject.ext.dependencies["test-runner"]
+    implementation rootProject.ext.dependencies["espresso-core"]
     //解决V4包重复依赖的问题:./gradlew :app:dependencies可以查看项目包的依赖关系
-    api(rootProject.ext.dependencies["design"]) {
+    implementation(rootProject.ext.dependencies["design"]) {
         exclude group: 'com.android.support'
     }
     //tab
-    api rootProject.ext.dependencies["FlycoTabLayout"]
-    api rootProject.ext.dependencies["Smarttablayout"]
-    api rootProject.ext.dependencies["Smarttablayout-utils"]
+    implementation rootProject.ext.dependencies["FlycoTabLayout"]
+    implementation rootProject.ext.dependencies["Smarttablayout"]
+    implementation rootProject.ext.dependencies["Smarttablayout-utils"]
     //Recyclerview
-    api rootProject.ext.dependencies["recyclerview-v7"]
-    api rootProject.ext.dependencies["banner"]
-    api rootProject.ext.dependencies["cardview-v7"]
+    implementation rootProject.ext.dependencies["recyclerview-v7"]
+    implementation rootProject.ext.dependencies["banner"]
+    implementation rootProject.ext.dependencies["cardview-v7"]
     //ios弹性效果
-    api rootProject.ext.dependencies["ios-scroll"]
-}
-repositories {
-    mavenCentral()
+    implementation rootProject.ext.dependencies["ios-scroll"]
 }

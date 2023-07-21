@@ -1,18 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 //ARouter
 kapt {
     arguments {
         arg("moduleName", project.getName())
     }
-    generateStubs = true
 }
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
+        namespace 'com.jojo.design.module_test'
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -42,7 +42,7 @@ dependencies {
     implementation project(":common-base")
     implementation project(":common-ui")
     kapt rootProject.ext.dependencies["dagger-compiler"]
-    //butterknife-compiler
+    //butter knife-compiler
     kapt rootProject.ext.dependencies["butterknife-compiler"]
     //room
     kapt rootProject.ext.dependencies["room-compiler"]
@@ -50,7 +50,4 @@ dependencies {
     api rootProject.ext.dependencies["room-support-rxjava2"]
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'com.auth0.android:jwtdecode:1.1.1'
-}
-repositories {
-    mavenCentral()
 }

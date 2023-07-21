@@ -11,8 +11,8 @@
         <!--</activity>-->
 
         <activity android:name="com.jojo.design.module_mall.ui.ACT_Search" />
-        <activity android:name=".ui.ACT_GoodsFilter"></activity>
-        <activity android:name=".ui.ACT_GoodsDetail"></activity>
+        <activity android:name=".ui.ACT_GoodsFilter" />
+        <activity android:name=".ui.ACT_GoodsDetail" />
     </application>
 
 
