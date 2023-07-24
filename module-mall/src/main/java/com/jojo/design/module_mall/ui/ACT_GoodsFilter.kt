@@ -39,7 +39,7 @@ import com.will.weiyuekotlin.component.ApplicationComponent
  *    date   : 2019/1/2 6:10 PM
  *    desc   : 商品搜索、筛选结果页面
  */
-@Route(path = ARouterConfig.ACT_GoodsFilter)
+@Route(path = ARouterConfig.ACT_GOODS_FILTER)
 class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.View {
     var mAdapter: ADA_SearchGoods? = null
     var mAdapterCategory: ADA_ChooseCategory? = null
@@ -272,7 +272,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
                 var realPps = position - 1
                 var recordsBean = mAdapter!!.dataList[realPps]
                 //跳转到新页面进行搜索结果展示
-                ARouter.getInstance().build(ARouterConfig.ACT_GoodsDetail)
+                ARouter.getInstance().build(ARouterConfig.ACT_GOODS_DETAIL)
                         .withString(ARouterConstants.PRODUCT_ID, recordsBean.productId)
                         .navigation()
             }
@@ -345,7 +345,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
 
     override fun getSearchGoods(dataBean: RecordsEntity) {
         if (dataBean?.records == null || dataBean.records.isEmpty()) {
-            ToastUtils.makeShortToast(BaseApplication.context.getString(R.string.content_search_content_not_empty))
+            ToastUtils.makeShortToast(BaseApplication.application.getString(R.string.content_search_content_not_empty))
             mAdapter?.update(ArrayList<RecordsEntity.RecordsBean>(), true)
             return
         }

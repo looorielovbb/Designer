@@ -65,7 +65,7 @@ class ADA_TopicPager constructor(context: Context, datas: List<TopicBean>) : Pag
         //专题点击处理
         cardView.setOnClickListener {
             if (!TextUtils.isEmpty(bean.url)) {
-                ARouter.getInstance().build(ARouterConfig.ACT_WEBVIEW)
+                ARouter.getInstance().build(ARouterConfig.ACT_WEB_VIEW)
                         .withString(ARouterConstants.WEB_TITLE, bean.name)
                         .withString(ARouterConstants.WEB_URL, bean.url)
                         .navigation()

@@ -3,7 +3,6 @@ package com.jojo.design.module_discover.ui.video
 import android.content.res.Configuration
 import android.view.View
 import android.widget.ImageView
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
@@ -12,12 +11,7 @@ import com.jojo.design.common_base.utils.glide.GlideUtils
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_discover.R
 import com.jojo.design.module_discover.bean.ItemEntity
-import com.shuyu.gsyvideoplayer.utils.GSYVideoType
-import com.shuyu.gsyvideoplayer.utils.OrientationUtils
-import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
-import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
 import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.act_playvideo.*
 
 /**
  *    author : JOJO
@@ -25,7 +19,7 @@ import kotlinx.android.synthetic.main.act_playvideo.*
  *    date   : 2019/1/24 7:03 PM
  *    desc   : 视频播放
  */
-@Route(path = ARouterConfig.ACT_PlayVideo)
+@Route(path = ARouterConfig.ACT_PLAY_VIDEO)
 class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel>() {
     var videoBean: ItemEntity.ItemDataEntity.DataEntity.ItemBean? = null
     var playUrl: String? = null

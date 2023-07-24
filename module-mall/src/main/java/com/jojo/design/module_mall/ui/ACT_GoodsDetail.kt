@@ -39,7 +39,7 @@ import org.greenrobot.eventbus.EventBus
  *    date   : 2019/1/10 5:05 PM
  *    desc   : 商品详情页面
  */
-@Route(path = ARouterConfig.ACT_GoodsDetail)
+@Route(path = ARouterConfig.ACT_GOODS_DETAIL)
 class ACT_GoodsDetail : BaseActivity<GoodsPresenter, GoodsModel>(), GoodsContract.View {
     var productId: String? = "3115460"
     var currentFragment: Fragment? = null

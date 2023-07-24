@@ -32,7 +32,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //支持DataBinding
+
+    viewBinding {
+        enabled = true
+    }
+
     dataBinding {
         enabled = true
     }
@@ -58,8 +62,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":common-base")
     implementation project(":common-ui")
+
+    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
+
     //ARouter
-    kapt rootProject.ext.dependencies["arouter-compiler"]
-    kapt rootProject.ext.dependencies["butterknife-compiler"]
-    kapt rootProject.ext.dependencies["dagger-compiler"]
+    implementation rootProject.ext.dependencies["arouter"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+    //dagger2
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
 }

@@ -10,15 +10,15 @@ class ARouterConfig {
     companion object {
         //const声明编译时常量
         //想去app
-        const val ACT_WEBVIEW = "/base/act_commonweb"
-        const val ACT_DESIGNERLIST = "/designer/act_designerlist"
+        const val ACT_WEB_VIEW = "/base/act_common_web"
+        const val ACT_DESIGNER_LIST = "/designer/act_designer_list"
         const val ACT_SEARCH = "/mall/act_search"
-        const val ACT_GoodsFilter= "/mall/act_goodsfilter"
-        const val ACT_GoodsDetail= "/mall/act_goodsdetail"
+        const val ACT_GOODS_FILTER= "/mall/act_goods_filter"
+        const val ACT_GOODS_DETAIL= "/mall/act_goods_detail"
         //开眼视频app
-        const val ACT_Category= "/found/act_category"
-        const val ACT_CategoryDetail= "/found/act_categorydetail"
-        const val ACT_PlayVideo= "/found/act_playvideo"
+        const val ACT_CATEGORY= "/found/act_category"
+        const val ACT_CATEGORY_DETAIL= "/found/act_category_detail"
+        const val ACT_PLAY_VIDEO= "/found/act_play_video"
     }
 
 }

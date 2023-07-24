@@ -30,7 +30,7 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 /**
  * 开眼视频分类页面
  */
-@Route(path = ARouterConfig.ACT_Category)
+@Route(path = ARouterConfig.ACT_CATEGORY)
 class ACT_Category : BaseActivity<CategoryPresenter, CategoryModel>(), CategoryContract.View {
     var mAdapter: ADA_Category? = null
     override fun getContentViewLayoutId(): Int = R.layout.act_category
@@ -67,7 +67,7 @@ class ACT_Category : BaseActivity<CategoryPresenter, CategoryModel>(), CategoryC
         mAdapter?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
                 val bean = mAdapter!!.dataList[position]
-                ARouter.getInstance().build(ARouterConfig.ACT_CategoryDetail)
+                ARouter.getInstance().build(ARouterConfig.ACT_CATEGORY_DETAIL)
                         .withString(ARouterConstants.CATEGORY_HEAD_IMAGE, bean.headerImage)
                         .withString(ARouterConstants.CATEGORY_ID, bean.id)
                         .withString(ARouterConstants.CATEGORY_NAME, bean.name)

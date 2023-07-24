@@ -3,7 +3,6 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
 import com.jojo.design.common_base.BaseApplication
-import com.jojo.design.common_base.BaseApplication.Companion.context
 import com.jojo.design.common_base.R
 
 /**
@@ -26,7 +25,7 @@ class ToastUtils {
         fun makeEventToast( text: String?,
                             isLongToast: Boolean) {
 
-            val v = LayoutInflater.from(BaseApplication.context).inflate(R.layout.toast_view, null)
+            val v = LayoutInflater.from(BaseApplication.application).inflate(R.layout.toast_view, null)
             val textView = v.findViewById<TextView>(R.id.text)
             textView.text = text
 
@@ -35,7 +34,7 @@ class ToastUtils {
             if (toast != null) {
                 textView.text = text
             } else {
-                toast = Toast.makeText(BaseApplication.context, text, if (isLongToast) Toast.LENGTH_LONG else Toast.LENGTH_SHORT)
+                toast = Toast.makeText(BaseApplication.application, text, if (isLongToast) Toast.LENGTH_LONG else Toast.LENGTH_SHORT)
             }
 
             toast!!.view = v
@@ -51,7 +50,7 @@ class ToastUtils {
             if (null == text)
                 return
 
-            val v = LayoutInflater.from(BaseApplication.context).inflate(R.layout.toast_view, null)
+            val v = LayoutInflater.from(BaseApplication.application).inflate(R.layout.toast_view, null)
             val textView = v.findViewById<TextView>(R.id.text)
             textView.text = text
 
@@ -60,7 +59,7 @@ class ToastUtils {
             if (toast != null) {
                 textView.text = text
             } else {
-                toast = Toast.makeText(BaseApplication.context, text, Toast.LENGTH_SHORT)
+                toast = Toast.makeText(BaseApplication.application, text, Toast.LENGTH_SHORT)
             }
             toast!!.view = v
             toast!!.show()

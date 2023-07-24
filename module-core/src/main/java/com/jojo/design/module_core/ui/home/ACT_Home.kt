@@ -1,7 +1,6 @@
 package com.jojo.design.module_core.ui.home
 
 import android.os.Bundle
-import android.support.v4.app.FragmentTransaction
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
@@ -11,7 +10,6 @@ import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.bean.MainTabEntity
 import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.act_main.*
 
 /**
  *    author : JOJO

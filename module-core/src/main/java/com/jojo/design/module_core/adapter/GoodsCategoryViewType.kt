@@ -1,17 +1,13 @@
 package com.jojo.design.module_core.adapter
 
 import android.content.Context
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.adapter.rv.ItemViewDelegate
-import com.jojo.design.common_base.adapter.rv.MultiItemTypeAdapter
 import com.jojo.design.common_base.adapter.rv.ViewHolder
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_ui.view.NoScrollGridView
 import com.jojo.design.module_core.R
-import com.jojo.design.module_core.R.id.rv
 import com.jojo.design.module_core.bean.ContentBean
 
 /**
@@ -40,7 +36,7 @@ class GoodsCategoryViewType constructor(context: Context) : ItemViewDelegate<Con
         adapter.update(bean.categorys, true)
 
         gv.setOnItemClickListener { adapterView, view, i, l ->
-            ARouter.getInstance().build(ARouterConfig.ACT_GoodsFilter)
+            ARouter.getInstance().build(ARouterConfig.ACT_GOODS_FILTER)
                     .withString(ARouterConstants.SEARCH_KEYWORDS, adapter.dataList[i].name)
                     .withString(ARouterConstants.TAGCATEGORY_ID,  adapter.dataList[i].id)
                     .navigation()

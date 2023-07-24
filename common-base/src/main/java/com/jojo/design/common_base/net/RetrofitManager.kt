@@ -171,11 +171,11 @@ object RetrofitManager {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             var request = chain.request()
-            if (!NetUtils.isNetworkConnected(BaseApplication.context)) {
+            if (!NetUtils.isNetworkConnected(BaseApplication.application)) {
                 request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build()
             }
             val response = chain.proceed(request)
-            if (NetUtils.isNetworkConnected(BaseApplication.context)) {
+            if (NetUtils.isNetworkConnected(BaseApplication.application)) {
                 val cacheControl = request.cacheControl().toString()
                 Log.e("Tag", "有网")
                 return response.newBuilder().header("Cache-Control", cacheControl)

@@ -25,7 +25,7 @@ class ADA_ChildGoods constructor(context: Context) : CommonAdapter<GoodsEntity.I
         holder.setText(R.id.tv_price, "￥" + bean.price)
 
         holder.setOnClickListener(R.id.iv_image, {
-            ARouter.getInstance().build(ARouterConfig.ACT_GoodsDetail)
+            ARouter.getInstance().build(ARouterConfig.ACT_GOODS_DETAIL)
                     .withString(ARouterConstants.PRODUCT_ID, bean.id)
                     .navigation()
         })

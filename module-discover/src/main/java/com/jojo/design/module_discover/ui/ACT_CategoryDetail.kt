@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.act_category_detail.*
  *    date   : 2019/1/23 4:58 PM
  *    desc   : 开眼视频分类详情页面（5.0新特性CoordinatorLayout +AppBarLayout效果）
  */
-@Route(path = ARouterConfig.ACT_CategoryDetail)
+@Route(path = ARouterConfig.ACT_CATEGORY_DETAIL)
 class ACT_CategoryDetail : BaseActivity<CategoryPresenter, CategoryModel>(), CategoryContract.View {
     var categoryId = ""
     var categoryBean: CategoryBean? = null

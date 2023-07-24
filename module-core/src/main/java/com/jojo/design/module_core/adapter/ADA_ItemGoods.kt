@@ -32,7 +32,7 @@ class ADA_ItemGoods constructor(context: Context) : CommonAdapter<GoodsEntity>(c
         adapter.update(bean.items, true)
 
         holder.setOnClickListener(R.id.iv_image, {
-            ARouter.getInstance().build(ARouterConfig.ACT_WEBVIEW)
+            ARouter.getInstance().build(ARouterConfig.ACT_WEB_VIEW)
                     .withString(ARouterConstants.WEB_TITLE, bean.name)
                     .withString(ARouterConstants.WEB_URL, bean.h5Url)
                     .navigation()

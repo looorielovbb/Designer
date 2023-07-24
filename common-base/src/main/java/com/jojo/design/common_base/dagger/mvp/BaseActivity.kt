@@ -7,12 +7,10 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
-import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.R
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.config.constants.BroadCastConstant
@@ -28,7 +26,7 @@ import javax.inject.Inject
  *    date   : 2018/12/4 9:21 PM
  *    desc   : Dagger2_MVP-Activity的基类 (Activity动画、事件订阅EventBus/广播、状态栏、ButterKnife，多状态View切换)
  */
-abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> : AppCompatActivity(), IBase, BaseContract.BaseView {
+open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> : AppCompatActivity(), IBase, BaseContract.BaseView {
     @Nullable
     @Inject
     @JvmField
@@ -61,7 +59,7 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
         //根据子类布局自定义的区域show多状态布局
         mMultipleStatusView = getLoadingMultipleStatusView()
 
-        initDaggerInject(BaseApplication.mApplicationComponent)
+        initDaggerInject(BaseAppliction.mApplicationComponent)
         mPresenter?.attachViewModel(this, mModel!!)
 
         //Activity默认动画为右进右出
@@ -73,7 +71,6 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
             TransitionMode.SCALE -> overridePendingTransition(R.anim.scale_in, R.anim.scale_out)
             TransitionMode.FADE -> overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             TransitionMode.ZOOM -> overridePendingTransition(R.anim.zoomin, R.anim.zoomout)
-            else -> {}
         }
 
         //事件订阅
@@ -84,6 +81,7 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
 
         //设置沉浸式状态栏
         StatusBarHelper.setStatusBar(this, false, true)
+
         startEvents()
     }
 
@@ -118,15 +116,16 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
     private var broadcastReceiver: BroadcastReceiver? = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             try {
-                val info = packageManager.getPackageInfo(packageName, 0)
+                var info = packageManager.getPackageInfo(packageName, 0)
 
                 if (intent.action == info.packageName + BroadCastConstant.BROADCASE_ADDRESS) {
-                    val bundle = intent.extras
-                    val i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
-                    this@BaseActivity.onReceiveBroadcast(i, bundle)
+                    var bundle = intent.extras
+                    var i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
+                    if (i != null) {
+                        this@BaseActivity.onReceiveBroadcast(i, bundle)
+                    }
                 }
             } catch (e: PackageManager.NameNotFoundException) {
-                Log.e("TAG", "onReceive: ",e )
             }
 
         }
@@ -137,11 +136,11 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
      */
     private fun registerBroadCastReceiver() {
         try {
-            val info = packageManager.getPackageInfo(packageName, 0)
+            var info = packageManager.getPackageInfo(packageName, 0)
             registerReceiver(broadcastReceiver, IntentFilter(info.packageName + BroadCastConstant.BROADCASE_ADDRESS))
             mIsRegisterReceiver = true
         } catch (e: Exception) {
-            Log.e("TAG", "registerBroadCastReceiver: ",e )
+
         }
 
     }
@@ -180,12 +179,12 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
             TransitionMode.SCALE -> overridePendingTransition(R.anim.scale_in, R.anim.scale_out)
             TransitionMode.FADE -> overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             TransitionMode.ZOOM -> overridePendingTransition(R.anim.zoomin, R.anim.zoomout)
-            else -> {}
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        unBinder.unbind()
         if (mIsBind) {
             EventBus.getDefault().unregister(this)
         }

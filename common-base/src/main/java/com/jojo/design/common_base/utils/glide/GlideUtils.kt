@@ -35,7 +35,7 @@ object GlideUtils {
                 .placeholder(defaultImg)
                 .error(defaultImg)
                 .priority(Priority.HIGH)
-        Glide.with(BaseApplication.context)
+        Glide.with(BaseApplication.application)
                 .load(imageUrl)
                 .apply(requestOptions)
                 .transition(DrawableTransitionOptions().crossFade())
@@ -55,7 +55,7 @@ object GlideUtils {
                 .placeholder(defaultImg)
                 .error(defaultImg)
                 .priority(Priority.HIGH)
-        Glide.with(BaseApplication.context)
+        Glide.with(BaseApplication.application)
                 .load(image + ".png")
                 .apply(requestOptions)
                 .transition(DrawableTransitionOptions().crossFade())
@@ -70,14 +70,14 @@ object GlideUtils {
      * @param targetView 目标ImageView
      */
     fun loadOriginalSizeImage(imageUrl: String, targetView: ImageView, defaultImg: Int) {
-        val transformation = CornerOriginSizeTransform(BaseApplication.context, 10f)
+        val transformation = CornerOriginSizeTransform(BaseApplication.application, 10f)
         //上方显示圆角，下发显示直角
         transformation.setExceptCorner(false, false, true, true)
         val requestOptions = RequestOptions()
                 .error(defaultImg)
                 .priority(Priority.HIGH)
                 .transform(transformation)//滑动过程中，会有加载过程的动画，去除这个transformation，就不会有，或者去除transition(new DrawableTransitionOptions().crossFade())也可以
-        Glide.with(BaseApplication.context)
+        Glide.with(BaseApplication.application)
                 .load(imageUrl)
                 .apply(requestOptions)
                 .into(targetView)
@@ -97,7 +97,7 @@ object GlideUtils {
                 .error(defaultImg)
                 .priority(Priority.HIGH)
                 .transform(CircleCrop())
-        Glide.with(BaseApplication.context)
+        Glide.with(BaseApplication.application)
                 .load(image + ".png")
                 .apply(requestOptions)
                 .transition(DrawableTransitionOptions().crossFade())
@@ -117,7 +117,7 @@ object GlideUtils {
                 .error(defaultImg)
                 .priority(Priority.HIGH)
                 .transform(CircleCrop())
-        Glide.with(BaseApplication.context)
+        Glide.with(BaseApplication.application)
                 .load(imageUrl)
                 .apply(requestOptions)
                 .transition(DrawableTransitionOptions().crossFade())

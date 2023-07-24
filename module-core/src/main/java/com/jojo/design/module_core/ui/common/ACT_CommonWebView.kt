@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.act_common_webview.*
  *    date   : 2018/12/25 11:32 AM
  *    desc   : 公共的加载Url的WebView
  */
-@Route(path = ARouterConfig.ACT_WEBVIEW)
+@Route(path = ARouterConfig.ACT_WEB_VIEW)
 class ACT_CommonWebView : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel>() {
     private var webUrl: String? = null
     override fun getContentViewLayoutId(): Int = R.layout.act_common_webview

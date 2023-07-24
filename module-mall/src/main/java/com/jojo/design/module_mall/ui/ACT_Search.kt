@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.foretree.db.star.RxJava2Helper
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.adapter.rv.MultiItemTypeAdapter
 import com.jojo.design.common_base.config.arouter.ARouterConfig
@@ -24,6 +25,7 @@ import com.jojo.design.module_mall.bean.RecordsEntity
 import com.jojo.design.module_mall.db.bean.SearchHistoryBean
 import com.jojo.design.module_mall.db.AppDatabaseHelper
 import com.jojo.design.module_mall.mvp.contract.SearchContract
+import com.jojo.design.module_mall.mvp.contract.SearchContract.*
 import com.jojo.design.module_mall.mvp.model.SearchModel
 import com.jojo.design.module_mall.mvp.presenter.SearchPresenter
 import com.smart.novel.adapter.ADA_HotSearchTag
@@ -147,7 +149,7 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
      */
     private fun doSearch(keywords: String) {
         if (TextUtils.isEmpty(keywords.trim())) {
-            ToastUtils.makeShortToast(BaseApplication.context.getString(R.string.content_search_content_not_empty))
+            ToastUtils.makeShortToast(BaseApplication.application.getString(R.string.content_search_content_not_empty))
             return
         }
         var bean = SearchHistoryBean()
@@ -156,7 +158,7 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
         saveLocalByRoom(bean)
 
         //跳转到新页面进行搜索结果展示
-        ARouter.getInstance().build(ARouterConfig.ACT_GoodsFilter)
+        ARouter.getInstance().build(ARouterConfig.ACT_GOODS_FILTER)
                 .withString(ARouterConstants.SEARCH_KEYWORDS, keywords)
                 .withString(ARouterConstants.TAGCATEGORY_ID, "")
                 .navigation()
@@ -207,4 +209,5 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
 
     override fun getFilterData(dataBean: FilterBean) {
     }
+
 }

@@ -8,19 +8,21 @@
 
     <include
         android:id="@+id/ll_search"
-        layout="@layout/layout_search"></include>
+        layout="@layout/layout_search"/>
 
     <com.jojo.design.common_ui.view.IOSScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_ffffff">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/color_ffffff">
 
             <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/tv_hot_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,10 +38,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp"></com.jojo.design.common_ui.view.tag.TagFlowLayout>
+                android:paddingRight="15dp"/>
 
 
             <TextView
+                app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/tv_recent_title"
                 app:layout_constraintTop_toBottomOf="@+id/taglayout"
                 android:layout_width="wrap_content"
@@ -61,12 +64,12 @@
                 android:layout_marginRight="15dp"
                 android:src="@drawable/btn_trash" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvHistory"
                 app:layout_constraintTop_toBottomOf="@+id/tv_recent_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-        </android.support.constraint.ConstraintLayout>
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.jojo.design.common_ui.view.IOSScrollView>
 </LinearLayout>

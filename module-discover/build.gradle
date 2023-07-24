@@ -37,6 +37,7 @@ android {
         enabled = true
     }
 
+
     //java插件引入了一个概念叫做SourceSets，通过修改SourceSets中的属性，可以指定哪些源文件
     //（ 或文件夹下的源文件 ） 要被编译 ， 哪些源文件要被排除 。
     sourceSets {
@@ -59,7 +60,10 @@ dependencies {
     implementation project(":common-base")
     implementation project(":common-ui")
     //ARouter
-    kapt rootProject.ext.dependencies["arouter-compiler"]
-    kapt rootProject.ext.dependencies["butterknife-compiler"]
-    kapt rootProject.ext.dependencies["dagger-compiler"]
+    implementation rootProject.ext.dependencies["arouter"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+    //dagger2
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
 }

@@ -20,7 +20,7 @@ object NetUtils {
      */
     val isNetworkConnected: Boolean
         get() {
-            val mConnectivityManager = BaseApplication.context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val mConnectivityManager = BaseApplication.application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val mNetworkInfo = mConnectivityManager.activeNetworkInfo
             return mNetworkInfo?.isAvailable ?: false
         }

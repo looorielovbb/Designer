@@ -3,7 +3,7 @@ package com.smart.novel.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import com.jojo.design.common_base.BaseApplication.Companion.context
+import com.jojo.design.common_base.BaseApplication.Companion.application
 import com.jojo.design.common_ui.view.tag.FlowLayout
 import com.jojo.design.common_ui.view.tag.TagAdapter
 import com.jojo.design.module_mall.R
@@ -16,7 +16,7 @@ import com.jojo.design.module_mall.R
  */
 class ADA_HotSearchTag constructor(hotList: List<String>) : TagAdapter<String>(hotList) {
     override fun getView(parent: FlowLayout?, position: Int, name: String?): View {
-        var itemTagView = LayoutInflater.from(context).inflate(R.layout.item_hot_search, null);
+        var itemTagView = LayoutInflater.from(application).inflate(R.layout.item_hot_search, null);
         itemTagView.findViewById<TextView>(R.id.tv_item_name).text = name
         return itemTagView
     }

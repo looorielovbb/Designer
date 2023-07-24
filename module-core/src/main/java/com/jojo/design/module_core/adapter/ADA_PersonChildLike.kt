@@ -23,7 +23,7 @@ class ADA_PersonChildLike constructor(context: Context) : CommonAdapterListView<
         holder.setText(R.id.tv_favNum, bean.favNum.toString())
 
         holder.setOnClickListener(R.id.iv_image, {
-            ARouter.getInstance().build(ARouterConfig.ACT_GoodsDetail)
+            ARouter.getInstance().build(ARouterConfig.ACT_GOODS_DETAIL)
                     .withString(ARouterConstants.PRODUCT_ID, bean.productId)
                     .navigation()
         })

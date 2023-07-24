@@ -1,7 +1,6 @@
 package com.jojo.design.module_discover.adapter
 
 import android.content.Context
-import android.util.Log
 import android.widget.ImageView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.adapter.rv.ItemViewDelegate
@@ -36,7 +35,7 @@ class VideoViewType constructor(context: Context) : ItemViewDelegate<ItemEntity.
         }
         holder.setText(R.id.tv_des, bean?.data?.description)
         holder.setOnClickListener(R.id.iv_card, {
-            ARouter.getInstance().build(ARouterConfig.ACT_PlayVideo)
+            ARouter.getInstance().build(ARouterConfig.ACT_PLAY_VIDEO)
                     .withString(ARouterConstants.PLAY_URL, bean.data.playUrl)
                     .withString(ARouterConstants.PLAY_TITLE, bean.data.title)
                     .withString(ARouterConstants.COVER_IMG, bean.data.cover.detail)

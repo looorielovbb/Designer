@@ -1,14 +1,14 @@
 package com.jojo.design.common_base.adapter.lv;
 
-import android.support.v4.util.SparseArrayCompat;
 
+import androidx.collection.SparseArrayCompat;
 
 /**
  * Created by zhy on 16/6/22.
  */
 public class ItemViewDelegateManagerListView<T>
 {
-    SparseArrayCompat<ItemViewDelegateListView<T>> delegates = new SparseArrayCompat();
+    SparseArrayCompat<ItemViewDelegateListView<T>> delegates = new SparseArrayCompat<>();
 
     public int getItemViewDelegateCount()
     {

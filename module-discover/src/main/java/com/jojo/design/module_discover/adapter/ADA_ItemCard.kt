@@ -29,7 +29,7 @@ class ADA_ItemCard constructor(context: Context) : CommonAdapter<ItemEntity.Item
         }
 
         holder.convertView.setOnClickListener {
-            ARouter.getInstance().build(ARouterConfig.ACT_PlayVideo)
+            ARouter.getInstance().build(ARouterConfig.ACT_PLAY_VIDEO)
 //                    .withSerializable(ARouterConstants.PLAY_VIDEO_BEAN, bean)
                     .withString(ARouterConstants.PLAY_URL, bean.data.playUrl)
                     .withString(ARouterConstants.PLAY_TITLE, bean.data.title)

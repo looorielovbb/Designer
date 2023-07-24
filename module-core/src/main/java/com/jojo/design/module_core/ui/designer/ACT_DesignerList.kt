@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.common_lrecyclcerview.*
  *    date   : 2018/12/24 3:21 PM
  *    desc   : 设计师列表
  */
-@Route(path = ARouterConfig.ACT_DESIGNERLIST)
+@Route(path = ARouterConfig.ACT_DESIGNER_LIST)
 class ACT_DesignerList : BaseActivity<DesignerPresenter, DesignerModel>(), DesignerContract.View {
     var mAdapter: ADA_DesignerList? = null
 
@@ -57,7 +57,7 @@ class ACT_DesignerList : BaseActivity<DesignerPresenter, DesignerModel>(), Desig
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
                 var realPos = position - 1
                 var bean = mAdapter!!.dataList[realPos]
-                ARouter.getInstance().build(ARouterConfig.ACT_WEBVIEW)
+                ARouter.getInstance().build(ARouterConfig.ACT_WEB_VIEW)
                         .withString(ARouterConstants.WEB_URL, "http://www.xiangqu.com/designer2/index?id=" + bean.id)
                         .withString(ARouterConstants.WEB_TITLE, bean.userNick)
                         .navigation()

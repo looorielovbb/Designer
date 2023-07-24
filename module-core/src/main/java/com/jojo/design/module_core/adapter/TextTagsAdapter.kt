@@ -45,8 +45,8 @@ class TextTagsAdapter(data: List<String>) : TagsAdapter() {
         tv.gravity = Gravity.CENTER
         tv.setOnClickListener {
             ToastUtils.makeShortToast(mData[randNum])
-            if (mData[randNum].contains(BaseApplication.context.getString(R.string.string_kaiyan))) {
-                ARouter.getInstance().build(ARouterConfig.ACT_Category)
+            if (mData[randNum].contains(BaseApplication.application.getString(R.string.string_kaiyan))) {
+                ARouter.getInstance().build(ARouterConfig.ACT_CATEGORY)
                         .navigation()
             }
         }
