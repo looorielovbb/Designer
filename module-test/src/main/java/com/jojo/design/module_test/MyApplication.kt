@@ -1,6 +1,6 @@
 package com.jojo.design.module_test
 
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 
 
 /**
@@ -9,7 +9,7 @@ import com.jojo.design.common_base.BaseAppliction
  *    date   : 2018/11/30 9:16 PM
  *    desc   :
  */
-class MyApplication : BaseAppliction() {
+class MyApplication : BaseApplication() {
 
 //    companion object {
 //        var instance: MyApplication by Delegates.notNull()

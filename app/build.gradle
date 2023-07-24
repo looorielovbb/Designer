@@ -1,18 +1,19 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'org.jetbrains.kotlin.android'
-apply plugin: 'kotlin-kapt'
-//1.当*.kt 后缀的Activity上使用@Router（path =xxxxx）时候遇到No match path；原因： *.kt 上的注解需要使用 kotlin方式的注解解释器才可以识别。
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
 kapt {
     arguments {
         arg("moduleName", project.getName())
     }
-    generateStubs = true
 }
 
 android {
-    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    compileSdk rootProject.ext.android["compileSdkVersion"]
+
     defaultConfig {
         namespace 'com.jojo.design'
         minSdkVersion rootProject.ext.android["minSdkVersion"]
@@ -58,15 +59,22 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //所有需要使用ARouter的组件（使用了@Route(path = "/test/test")注解的模块）都需要添加下面这句依赖，否则会找不到路由（there's no route matched）
-    kapt rootProject.ext.dependencies["arouter-compiler"]
-    kapt rootProject.ext.dependencies["butterknife-compiler"]
-    kapt 'com.google.dagger:dagger-compiler:2.47'
-    implementation project(":common-base")
-    implementation project(":common-ui")
     if (!Boolean.valueOf(rootProject.ext.isBuildModule)) {
         implementation project(":module-core")
         implementation project(":module-mall")
         implementation project(":module-discover")
     }
+
+    //ARouter
+    implementation rootProject.ext.dependencies["arouter"]
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+    //dagger2
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation project(":common-base")
+    implementation project(":common-ui")
 }

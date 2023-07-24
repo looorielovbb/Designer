@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 
 import java.util.Locale
 
@@ -20,7 +20,7 @@ object NetUtils {
      */
     val isNetworkConnected: Boolean
         get() {
-            val mConnectivityManager = BaseAppliction.context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val mConnectivityManager = BaseApplication.context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val mNetworkInfo = mConnectivityManager.activeNetworkInfo
             return mNetworkInfo?.isAvailable ?: false
         }

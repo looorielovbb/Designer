@@ -4,7 +4,7 @@ import android.os.Handler
 import android.widget.TextView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.dagger.mvp.databinding.BaseDBActivity
 import com.jojo.design.common_ui.view.MultipleStatusView
@@ -32,7 +32,7 @@ class TestMVPActivity : BaseDBActivity<TestPresenter, TestModel, ActTestMvpBindi
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerCoreComponent.builder().applicationComponent(BaseAppliction.mApplicationComponent).build().inject(this)
+        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startEvents() {

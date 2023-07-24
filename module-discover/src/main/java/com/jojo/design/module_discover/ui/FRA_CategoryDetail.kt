@@ -2,8 +2,7 @@ package com.jojo.design.module_discover.ui
 
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import com.jojo.design.common_base.BaseAppliction
-import com.jojo.design.common_base.config.arouter.ARouterConstants
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_base.utils.RecyclerviewHelper
 import com.jojo.design.common_ui.view.MultipleStatusView
@@ -51,7 +50,7 @@ class FRA_CategoryDetail : BaseFragment<CategoryPresenter, CategoryModel>(), Cat
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerFoundComponent.builder().applicationComponent(BaseAppliction.mApplicationComponent).build().inject(this)
+        DaggerFoundComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startFragmentEvents() {

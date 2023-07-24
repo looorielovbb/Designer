@@ -4,7 +4,7 @@
 
     <!--在Module单独开发模式下使用该mainfest-->
     <application
-        android:name="com.jojo.design.common_base.BaseAppliction"
+        android:name="com.jojo.design.common_base.BaseApplication"
         android:label="@string/app_name"
         android:theme="@style/BaseAppTheme">
         <activity

@@ -6,17 +6,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
-import android.support.v7.widget.RecyclerView.State;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
 import android.view.View;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerView;
 import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerViewAdapter;
@@ -35,7 +34,7 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, State state) {
+    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
         drawHorizontal(c, parent);
         drawVertical(c, parent);
     }
@@ -43,7 +42,7 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
     private int getSpanCount(RecyclerView parent) {
         // 列数
         int spanCount = -1;
-        LayoutManager layoutManager = parent.getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             spanCount = ((GridLayoutManager) layoutManager).getSpanCount();
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
@@ -97,7 +96,7 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
      * @param childCount child个数
      */
     private boolean isLastRaw(RecyclerView parent, int pos, int spanCount, int childCount) {
-        LayoutManager layoutManager = parent.getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         LRecyclerViewAdapter adapter = (LRecyclerViewAdapter) parent.getAdapter();
         if (layoutManager instanceof GridLayoutManager) {
             int leftCount = childCount - childCount % spanCount;//3
@@ -110,7 +109,7 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private boolean isLastColumn(RecyclerView parent, int pos, int spanCount) {
-        LayoutManager layoutManager = parent.getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         LRecyclerViewAdapter adapter = (LRecyclerViewAdapter) parent.getAdapter();
         if (layoutManager instanceof GridLayoutManager) {
             if ((pos - adapter.getHeaderViews().size()) % spanCount == 0)
@@ -122,7 +121,7 @@ public class GridItemDecoration extends RecyclerView.ItemDecoration {
 
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) {
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         int itemPosition = parent.getChildAdapterPosition(view);
         int spanCount = getSpanCount(parent);

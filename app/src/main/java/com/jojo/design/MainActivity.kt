@@ -1,21 +1,22 @@
 package com.jojo.design
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.config.arouter.ARouterConfig
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        tv.setOnClickListener({
+        findViewById<TextView>(R.id.tv).setOnClickListener {
             //发起路由跳转
-            ARouter.getInstance().build(ARouterConfig.ACT_SEARCH).navigation(this, object : NavigationCallback {
+            ARouter.getInstance().build(ARouterConfig.ACT_SEARCH).navigation(this, object :
+                NavigationCallback {
                 override fun onFound(postcard: Postcard) {
                     Log.e("TAG", "找到了")
                 }
@@ -35,6 +36,6 @@ class MainActivity : AppCompatActivity() {
 //            val intents = Intent()
 //            intents.setClass(this,ACT_Home::class.java)
 //            startActivity(intents)
-        })
+        }
     }
 }

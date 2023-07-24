@@ -1,17 +1,18 @@
 package com.jojo.design.common_ui.lrecyclerview.recyclerview;
 
 import android.content.Context;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewParent;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.google.android.material.appbar.AppBarLayout;
 import com.jojo.design.common_ui.lrecyclerview.interfaces.ILoadMoreFooter;
 import com.jojo.design.common_ui.lrecyclerview.interfaces.OnLoadMoreListener;
 import com.jojo.design.common_ui.lrecyclerview.interfaces.OnNetWorkErrorListener;

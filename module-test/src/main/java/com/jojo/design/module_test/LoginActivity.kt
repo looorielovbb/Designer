@@ -1,22 +1,12 @@
 package com.jojo.design.module_test
 
-import android.animation.ValueAnimator
-import android.graphics.Color
-import android.graphics.Path
-import android.graphics.PathMeasure
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.view.animation.LinearInterpolator
-import android.widget.ImageView
 import android.widget.Toast
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.module_test.component.DaggerTestComponent
 import kotlinx.android.synthetic.main.act_login.*
 import javax.inject.Inject
-import android.graphics.drawable.AnimationDrawable
-
-
 
 
 /**
@@ -52,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 //                .build()
 //                .inject(this)
 
-        DaggerTestComponent.builder().applicationComponent(BaseAppliction.mApplicationComponent).build().inject(this)
+        DaggerTestComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
 
         Toast.makeText(this, presenter.getData(), Toast.LENGTH_SHORT).show()
 //        startAnimation()

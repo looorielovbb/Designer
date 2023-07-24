@@ -1,21 +1,19 @@
 package com.jojo.design.module_core.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.utils.ToastUtils
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.widgets.tagcloud.TagsAdapter
 
 import java.util.ArrayList
-import java.util.Collections
 import java.util.Random
 
 /**
@@ -47,7 +45,7 @@ class TextTagsAdapter(data: List<String>) : TagsAdapter() {
         tv.gravity = Gravity.CENTER
         tv.setOnClickListener {
             ToastUtils.makeShortToast(mData[randNum])
-            if (mData[randNum].contains(BaseAppliction.context.getString(R.string.string_kaiyan))) {
+            if (mData[randNum].contains(BaseApplication.context.getString(R.string.string_kaiyan))) {
                 ARouter.getInstance().build(ARouterConfig.ACT_Category)
                         .navigation()
             }

@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jojo.design.common_base.BaseAppliction.Companion.context
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.utils.glide.GlideUtils

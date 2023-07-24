@@ -1,8 +1,7 @@
 package com.jojo.design.common_base.dagger.mvp
 
-import android.databinding.ViewDataBinding
-import android.support.annotation.Nullable
-import com.jojo.design.common_base.BaseAppliction
+import androidx.annotation.Nullable
+import com.jojo.design.common_base.BaseApplication
 import javax.inject.Inject
 
 /**
@@ -23,7 +22,7 @@ abstract class BaseFragment<P : BaseContract.BasePresenter, M : BaseContract.Bas
 
 
     override fun startEvents() {
-        initDaggerInject(BaseAppliction.mApplicationComponent)
+        initDaggerInject(BaseApplication.mApplicationComponent)
         mPresenter?.attachViewModel(this, mModel!!)
         startFragmentEvents()
     }

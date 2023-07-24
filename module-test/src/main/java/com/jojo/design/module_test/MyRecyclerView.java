@@ -9,8 +9,6 @@ package com.jojo.design.module_test;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.jojo.design.common_base.utils.ScreenUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -38,17 +36,31 @@ public class MyRecyclerView extends RecyclerView {
 
     MyLoadRefreshAdapter mLoadRefreshAdapter;
     View headerView, footerView;
-
-    private int mState = STATE_NORMAL;
     //    头布局的高度
     int headerViewHeight;
     //    是否正在触摸
     boolean isOnTouching;
     TextView status;
     boolean isRefresh;
+    MyRecyclerViewListener myRecyclerViewListener;
+    int lastX, lastY;
+    boolean isLoadMore;
+    private int mState = STATE_NORMAL;
     private LinearLayout mLl;
     private LinearLayout.LayoutParams mParams;
     private LayoutManager mLayoutManager;
+
+    public MyRecyclerView(Context context) {
+        super(context);
+    }
+
+    public MyRecyclerView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public MyRecyclerView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
 
     public MyRecyclerViewListener getMyRecyclerViewListener() {
         return myRecyclerViewListener;
@@ -58,22 +70,6 @@ public class MyRecyclerView extends RecyclerView {
     public void setMyRecyclerViewListener(MyRecyclerViewListener myRecyclerViewListener) {
         this.myRecyclerViewListener = myRecyclerViewListener;
     }
-
-    MyRecyclerViewListener myRecyclerViewListener;
-
-    public MyRecyclerView(Context context) {
-        super(context);
-    }
-
-    public MyRecyclerView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public MyRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
-    int lastX, lastY;
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
@@ -161,7 +157,6 @@ public class MyRecyclerView extends RecyclerView {
         objectAnimator.start();
     }
 
-
     //    设置加载更多的判断
     @Override
     public void setLayoutManager(final LayoutManager layout) {
@@ -227,8 +222,6 @@ public class MyRecyclerView extends RecyclerView {
         }
     }
 
-    boolean isLoadMore;
-
     public void onStatusChange(int status) {
         mState = status;
         switch (status) {
@@ -292,12 +285,6 @@ public class MyRecyclerView extends RecyclerView {
         super.setAdapter(mLoadRefreshAdapter);
     }
 
-    public interface MyRecyclerViewListener {
-        void onRefresh();
-
-        void onLoadMore();
-    }
-
     //    完成加载更多
     public void setLoadMoreComplete() {
 //        直接隐藏 尾布局
@@ -309,5 +296,11 @@ public class MyRecyclerView extends RecyclerView {
     public void setRefreshComplete() {
         onStatusChange(STATE_NORMAL);
         autoSize(-headerViewHeight);
+    }
+
+    public interface MyRecyclerViewListener {
+        void onRefresh();
+
+        void onLoadMore();
     }
 }

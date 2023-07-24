@@ -1,16 +1,19 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-//kotlin扩展插件,无需findViewbyId
-apply plugin: 'org.jetbrains.kotlin.android'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
 kapt {
     arguments {
         arg("moduleName", project.getName())
     }
 }
+
 android {
-    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    compileSdk rootProject.ext.android["compileSdkVersion"]
+
     defaultConfig {
         namespace 'com.jojo.design.common_ui'
         minSdkVersion rootProject.ext.android["minSdkVersion"]
@@ -44,22 +47,12 @@ dependencies {
     //MultiDex分包
     implementation rootProject.ext.dependencies["multidex"]
 
-    implementation rootProject.ext.dependencies["appcompat-v7"]
-    implementation rootProject.ext.dependencies["junit"]
-    implementation rootProject.ext.dependencies["test-runner"]
-    implementation rootProject.ext.dependencies["espresso-core"]
-    //解决V4包重复依赖的问题:./gradlew :app:dependencies可以查看项目包的依赖关系
-    implementation(rootProject.ext.dependencies["design"]) {
-        exclude group: 'com.android.support'
-    }
     //tab
     implementation rootProject.ext.dependencies["FlycoTabLayout"]
     implementation rootProject.ext.dependencies["Smarttablayout"]
     implementation rootProject.ext.dependencies["Smarttablayout-utils"]
     //Recyclerview
-    implementation rootProject.ext.dependencies["recyclerview-v7"]
     implementation rootProject.ext.dependencies["banner"]
-    implementation rootProject.ext.dependencies["cardview-v7"]
     //ios弹性效果
     implementation rootProject.ext.dependencies["ios-scroll"]
 }

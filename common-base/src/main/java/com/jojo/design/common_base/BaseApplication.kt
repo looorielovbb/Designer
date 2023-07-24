@@ -2,14 +2,12 @@ package com.jojo.design.common_base
 
 import android.app.Application
 import android.content.Context
-import android.support.multidex.MultiDex
 import android.util.Log
+import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.will.weiyuekotlin.component.ApplicationComponent
-import com.will.weiyuekotlin.component.DaggerApplicationComponent
 import com.will.weiyuekotlin.module.ApplicationModule
 import com.will.weiyuekotlin.module.HttpModule
-import retrofit2.Retrofit
 import kotlin.properties.Delegates
 
 /**
@@ -18,7 +16,7 @@ import kotlin.properties.Delegates
  *    date   : 2018/11/29 3:25 PM
  *    desc   :
  */
-open class BaseAppliction : Application() {
+open class BaseApplication : Application() {
     ////用companion object包裹，实现java中static的效果,包裹的方法或者变量都是static的
     companion object {
         lateinit var context: Context
@@ -39,11 +37,11 @@ open class BaseAppliction : Application() {
     }
 
     private fun initDagger() {
-        mApplicationComponent = DaggerApplicationComponent.builder()
+        /*mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
                 .httpModule(HttpModule())
-                .build()
-        Log.e("TAG", "mApplicationComponent=" + mApplicationComponent)
+                .build()*/
+        Log.e("TAG", "mApplicationComponent=$mApplicationComponent")
     }
 
     /**

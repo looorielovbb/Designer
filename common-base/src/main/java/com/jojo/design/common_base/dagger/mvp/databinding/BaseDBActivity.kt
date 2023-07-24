@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.R
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.config.constants.BroadCastConstant
@@ -79,7 +79,7 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
         }
         unBinder = ButterKnife.bind(this)
 
-        initDaggerInject(BaseAppliction.mApplicationComponent)
+        initDaggerInject(BaseApplication.mApplicationComponent)
         mPresenter?.attachViewModel(this, mModel!!)
 
         //Activity默认动画为右进右出

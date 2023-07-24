@@ -2,8 +2,9 @@ package com.jojo.design.common_ui.lrecyclerview.util;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerView;
 import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerViewAdapter;

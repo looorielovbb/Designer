@@ -6,15 +6,15 @@ if (Boolean.valueOf(rootProject.ext.isBuildModule)) {
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
-//ARouter
+
 kapt {
     arguments {
         arg("moduleName", project.getName())
     }
 }
 android {
-    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    compileSdk rootProject.ext.android["compileSdkVersion"]
+
     defaultConfig {
         namespace 'com.jojo.design.module_discover'
         minSdkVersion rootProject.ext.android["minSdkVersion"]

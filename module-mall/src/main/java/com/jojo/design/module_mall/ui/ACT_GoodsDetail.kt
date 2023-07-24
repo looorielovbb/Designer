@@ -1,7 +1,6 @@
 package com.jojo.design.module_mall.ui
 
 import android.graphics.Color
-import android.os.Build
 import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.util.Log
@@ -9,7 +8,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.bigkoo.convenientbanner.ConvenientBanner
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
@@ -51,7 +50,7 @@ class ACT_GoodsDetail : BaseActivity<GoodsPresenter, GoodsModel>(), GoodsContrac
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerMallComponent.builder().applicationComponent(BaseAppliction.mApplicationComponent).build().inject(this)
+        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startEvents() {

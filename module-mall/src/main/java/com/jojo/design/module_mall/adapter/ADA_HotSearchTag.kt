@@ -3,7 +3,7 @@ package com.smart.novel.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import com.jojo.design.common_base.BaseAppliction.Companion.context
+import com.jojo.design.common_base.BaseApplication.Companion.context
 import com.jojo.design.common_ui.view.tag.FlowLayout
 import com.jojo.design.common_ui.view.tag.TagAdapter
 import com.jojo.design.module_mall.R

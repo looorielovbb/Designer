@@ -1,16 +1,14 @@
 package com.jojo.design.module_mall.ui
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import cn.foretree.db.star.RxJava2Helper
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.adapter.rv.MultiItemTypeAdapter
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
@@ -24,17 +22,12 @@ import com.jojo.design.module_mall.bean.CategoryBean
 import com.jojo.design.module_mall.bean.FilterBean
 import com.jojo.design.module_mall.bean.RecordsEntity
 import com.jojo.design.module_mall.db.bean.SearchHistoryBean
-import com.jojo.design.module_mall.dagger2.DaggerMallComponent
 import com.jojo.design.module_mall.db.AppDatabaseHelper
 import com.jojo.design.module_mall.mvp.contract.SearchContract
 import com.jojo.design.module_mall.mvp.model.SearchModel
 import com.jojo.design.module_mall.mvp.presenter.SearchPresenter
 import com.smart.novel.adapter.ADA_HotSearchTag
 import com.will.weiyuekotlin.component.ApplicationComponent
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.act_search.*
-import kotlinx.android.synthetic.main.layout_search.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -56,7 +49,7 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerMallComponent.builder().applicationComponent(BaseAppliction.mApplicationComponent).build().inject(this)
+//        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startEvents() {
@@ -154,7 +147,7 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
      */
     private fun doSearch(keywords: String) {
         if (TextUtils.isEmpty(keywords.trim())) {
-            ToastUtils.makeShortToast(BaseAppliction.context.getString(R.string.content_search_content_not_empty))
+            ToastUtils.makeShortToast(BaseApplication.context.getString(R.string.content_search_content_not_empty))
             return
         }
         var bean = SearchHistoryBean()

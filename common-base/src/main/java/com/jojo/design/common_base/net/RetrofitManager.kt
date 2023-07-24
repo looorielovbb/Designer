@@ -1,7 +1,7 @@
 package com.jojo.design.common_base.net
 
 import android.util.Log
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.utils.NetUtils
 import com.smart.novel.net.BaseHttpResponse
@@ -18,10 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
-import android.R.attr.port
-import android.R.attr.host
-import android.R.attr.scheme
-import com.alibaba.android.arouter.facade.model.RouteMeta.build
 import okhttp3.HttpUrl
 
 
@@ -175,11 +171,11 @@ object RetrofitManager {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response {
             var request = chain.request()
-            if (!NetUtils.isNetworkConnected(BaseAppliction.context)) {
+            if (!NetUtils.isNetworkConnected(BaseApplication.context)) {
                 request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build()
             }
             val response = chain.proceed(request)
-            if (NetUtils.isNetworkConnected(BaseAppliction.context)) {
+            if (NetUtils.isNetworkConnected(BaseApplication.context)) {
                 val cacheControl = request.cacheControl().toString()
                 Log.e("Tag", "有网")
                 return response.newBuilder().header("Cache-Control", cacheControl)

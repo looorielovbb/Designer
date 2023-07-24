@@ -13,8 +13,8 @@ kapt {
     }
 }
 android {
-    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    compileSdk rootProject.ext.android["compileSdkVersion"]
+
     defaultConfig {
         namespace 'com.jojo.design.module_core'
         minSdkVersion rootProject.ext.android["minSdkVersion"]
@@ -62,7 +62,4 @@ dependencies {
     kapt rootProject.ext.dependencies["arouter-compiler"]
     kapt rootProject.ext.dependencies["butterknife-compiler"]
     kapt rootProject.ext.dependencies["dagger-compiler"]
-    api(rootProject.ext.dependencies["design"]) {
-        exclude group: 'com.android.support'
-    }
 }

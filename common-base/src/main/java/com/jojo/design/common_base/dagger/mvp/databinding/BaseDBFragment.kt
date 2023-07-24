@@ -2,7 +2,7 @@ package com.jojo.design.common_base.dagger.mvp.databinding
 
 import android.databinding.ViewDataBinding
 import android.support.annotation.Nullable
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.dagger.mvp.BaseLazyFragment
 import javax.inject.Inject
@@ -27,7 +27,7 @@ abstract class BaseDBFragment<P : BaseContract.BasePresenter, M : BaseContract.B
 
     override fun startEvents() {
         viewBinding = viewDataBinding as DB
-        initDaggerInject(BaseAppliction.mApplicationComponent)
+        initDaggerInject(BaseApplication.mApplicationComponent)
         mPresenter?.attachViewModel(this, mModel!!)
         startFragmentEvents()
     }

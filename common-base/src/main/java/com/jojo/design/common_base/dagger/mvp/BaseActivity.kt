@@ -6,15 +6,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.annotation.Nullable
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
-import android.view.ActionMode
+import android.util.Log
 import android.view.View
 import android.widget.TextView
-import butterknife.ButterKnife
-import butterknife.Unbinder
-import com.jojo.design.common_base.BaseAppliction
+import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.R
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.config.constants.BroadCastConstant
@@ -42,7 +40,6 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
     @Nullable
     protected var mMultipleStatusView: MultipleStatusView? = null
     protected lateinit var mContext: Context
-    private lateinit var unBinder: Unbinder
     protected var mIsBind: Boolean = false
     protected var mTransitionMode = BaseActivity.TransitionMode.RIGHT
     protected var mIsRegisterReceiver = false
@@ -63,9 +60,8 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
         setContentView(getContentViewLayoutId())
         //根据子类布局自定义的区域show多状态布局
         mMultipleStatusView = getLoadingMultipleStatusView()
-        unBinder = ButterKnife.bind(this)
 
-        initDaggerInject(BaseAppliction.mApplicationComponent)
+        initDaggerInject(BaseApplication.mApplicationComponent)
         mPresenter?.attachViewModel(this, mModel!!)
 
         //Activity默认动画为右进右出
@@ -77,6 +73,7 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
             TransitionMode.SCALE -> overridePendingTransition(R.anim.scale_in, R.anim.scale_out)
             TransitionMode.FADE -> overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             TransitionMode.ZOOM -> overridePendingTransition(R.anim.zoomin, R.anim.zoomout)
+            else -> {}
         }
 
         //事件订阅
@@ -87,7 +84,6 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
 
         //设置沉浸式状态栏
         StatusBarHelper.setStatusBar(this, false, true)
-
         startEvents()
     }
 
@@ -122,16 +118,15 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
     private var broadcastReceiver: BroadcastReceiver? = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             try {
-                var info = packageManager.getPackageInfo(packageName, 0)
+                val info = packageManager.getPackageInfo(packageName, 0)
 
                 if (intent.action == info.packageName + BroadCastConstant.BROADCASE_ADDRESS) {
-                    var bundle = intent.extras
-                    var i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
-                    if (i != null) {
-                        this@BaseActivity.onReceiveBroadcast(i, bundle)
-                    }
+                    val bundle = intent.extras
+                    val i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
+                    this@BaseActivity.onReceiveBroadcast(i, bundle)
                 }
             } catch (e: PackageManager.NameNotFoundException) {
+                Log.e("TAG", "onReceive: ",e )
             }
 
         }
@@ -142,11 +137,11 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
      */
     private fun registerBroadCastReceiver() {
         try {
-            var info = packageManager.getPackageInfo(packageName, 0)
+            val info = packageManager.getPackageInfo(packageName, 0)
             registerReceiver(broadcastReceiver, IntentFilter(info.packageName + BroadCastConstant.BROADCASE_ADDRESS))
             mIsRegisterReceiver = true
         } catch (e: Exception) {
-
+            Log.e("TAG", "registerBroadCastReceiver: ",e )
         }
 
     }
@@ -185,12 +180,12 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
             TransitionMode.SCALE -> overridePendingTransition(R.anim.scale_in, R.anim.scale_out)
             TransitionMode.FADE -> overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             TransitionMode.ZOOM -> overridePendingTransition(R.anim.zoomin, R.anim.zoomout)
+            else -> {}
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unBinder.unbind()
         if (mIsBind) {
             EventBus.getDefault().unregister(this)
         }

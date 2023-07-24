@@ -1,6 +1,6 @@
 package com.jojo.design.module_discover
 
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 
 /**
  *    author : JOJO
@@ -8,5 +8,5 @@ import com.jojo.design.common_base.BaseAppliction
  *    date   : 2019/1/18 12:17 PM
  *    desc   :
  */
-class DiscoverApplication : BaseAppliction() {
+class DiscoverApplication : BaseApplication() {
 }

@@ -1,7 +1,7 @@
 package com.jojo.design.module_mall.ui
 
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_ui.view.MultipleStatusView
@@ -9,9 +9,6 @@ import com.jojo.design.module_mall.R
 import com.jojo.design.module_mall.adapter.ADA_GoodsDes
 import com.jojo.design.module_mall.bean.GoodsDesBean
 import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.fra_goods_des.*
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 /**
  *    author : JOJO

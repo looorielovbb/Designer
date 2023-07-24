@@ -1,6 +1,6 @@
 package com.jojo.design.module_mall
 
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 
 /**
  *    author : JOJO
@@ -8,5 +8,5 @@ import com.jojo.design.common_base.BaseAppliction
  *    date   : 2018/12/4 10:11 AM
  *    desc   :
  */
-class MallApplication : BaseAppliction() {
+class MallApplication : BaseApplication() {
 }

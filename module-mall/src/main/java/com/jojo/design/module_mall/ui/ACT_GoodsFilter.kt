@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.adapter.rv.MultiItemTypeAdapter
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
@@ -68,7 +68,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerMallComponent.builder().applicationComponent(BaseAppliction.mApplicationComponent).build().inject(this)
+        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startEvents() {
@@ -345,7 +345,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
 
     override fun getSearchGoods(dataBean: RecordsEntity) {
         if (dataBean?.records == null || dataBean.records.isEmpty()) {
-            ToastUtils.makeShortToast(BaseAppliction.context.getString(R.string.content_search_content_not_empty))
+            ToastUtils.makeShortToast(BaseApplication.context.getString(R.string.content_search_content_not_empty))
             mAdapter?.update(ArrayList<RecordsEntity.RecordsBean>(), true)
             return
         }

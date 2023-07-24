@@ -1,4 +1,6 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+}
 
 android {
     compileSdk 34
@@ -28,4 +30,5 @@ dependencies {
     implementation 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
     implementation 'com.danikula:videocache:2.6.4'
     implementation 'com.andkulikov:transitionseverywhere:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 }

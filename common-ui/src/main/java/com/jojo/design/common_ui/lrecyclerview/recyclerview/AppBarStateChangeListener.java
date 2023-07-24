@@ -2,6 +2,8 @@ package com.jojo.design.common_ui.lrecyclerview.recyclerview;
 
 import android.support.design.widget.AppBarLayout;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 /**
  * 
  * @author lizhixian
@@ -10,6 +12,8 @@ import android.support.design.widget.AppBarLayout;
  */
 
 public abstract class AppBarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {
+
+    public abstract void onStateChanged(AppBarLayout appBarLayout, State state);
 
     public enum State {
         EXPANDED,

@@ -1,7 +1,5 @@
 package com.jojo.design.module_mall.adapter
 
-import android.content.Context
-import com.jojo.design.common_base.BaseAppliction.Companion.context
 import com.jojo.design.common_base.adapter.rv.ItemViewDelegate
 import com.jojo.design.common_base.adapter.rv.ViewHolder
 import com.jojo.design.module_mall.R

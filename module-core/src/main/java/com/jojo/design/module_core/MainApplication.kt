@@ -1,6 +1,6 @@
 package com.jojo.design.module_core
 
-import com.jojo.design.common_base.BaseAppliction
+import com.jojo.design.common_base.BaseApplication
 
 /**
  *    author : JOJO
@@ -8,5 +8,5 @@ import com.jojo.design.common_base.BaseAppliction
  *    date   : 2018/11/29 3:32 PM
  *    desc   :
  */
-class MainApplication : BaseAppliction() {
+class MainApplication : BaseApplication() {
 }
