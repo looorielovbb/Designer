@@ -6,12 +6,13 @@ if (Boolean.valueOf(rootProject.ext.isBuildModule)) {
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
-//ARouter
+
 kapt {
     arguments {
         arg("moduleName", project.getName())
     }
 }
+
 android {
     compileSdk rootProject.ext.android["compileSdkVersion"]
 
@@ -63,13 +64,16 @@ dependencies {
     implementation project(":common-base")
     implementation project(":common-ui")
 
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
     implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
+    
+    implementation rootProject.ext.dependencies["arouter"]
 
     //ARouter
     implementation rootProject.ext.dependencies["arouter"]
-    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    kapt rootProject.ext.dependencies["arouter-compiler"]
 
     //dagger2
     implementation rootProject.ext.dependencies["dagger"]
-    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+    kapt rootProject.ext.dependencies["dagger-compiler"]
 }

@@ -18,7 +18,8 @@ ext {
             retrofitSdkVersion      : "2.4.0",
             glideSdkVersion         : "4.6.1",
             eventbusVersion         : "3.0.0",
-            rxlifecycle2SdkVersion  : "2.2.1"
+            rxlifecycle2SdkVersion  : "2.2.1",
+            roomVersion: "2.5.2",
     ]
 
     dependencies = [
@@ -49,25 +50,19 @@ ext {
             "picasso"                 : "com.squareup.picasso:picasso:2.5.2",
 
             //view
-            "butterknife"             : "com.jakewharton:butterknife:${version["butterknifeSdkVersion"]}",
-            "butterknife-compiler"    : "com.jakewharton:butterknife-compiler:${version["butterknifeSdkVersion"]}",
             "pickerview"              : "com.contrarywind:Android-PickerView:3.2.5",
             "photoview"               : "com.github.chrisbanes.photoview:library:1.2.3",
-            "numberprogressbar"       : "com.daimajia.numberprogressbar:library:1.2@aar",
-            "nineoldandroids"         : "com.nineoldandroids:library:2.4.0",
-            "paginate"                : "com.github.markomilos:paginate:0.5.1",
-            "vlayout"                 : "com.alibaba.android:vlayout:1.1.0@aar",
-            "lottie"                  : "com.airbnb.android:lottie:2.5.4",
+            "lottie"                  : "com.airbnb.android:lottie:6.1.0",
             "FlycoTabLayout"          : "io.github.h07000223:flycoTabLayout:3.0.0",
-            "Smarttablayout"          : "com.ogaclejapan.smarttablayout:library:1.6.1@aar",
-            "Smarttablayout-utils"    : "com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar",
+            "Smarttablayout"          : "com.ogaclejapan.smarttablayout:library:2.0.0@aar",
+            "Smarttablayout-utils"    : "com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar",
             "banner"                  : "com.bigkoo:convenientbanner:2.1.5",
 
             //ios 列表弹性效果
             "ios-scroll"              : "io.github.everythingme:overscroll-decor-android:1.1.1",
 
             //tools
-            "multidex"                : "com.android.support:multidex:1.0.2",
+            "multidex"                : "androidx.multidex:multidex:2.0.1",
             "arouter"                 : "com.alibaba:arouter-api:1.5.2",
             "arouter-compiler"        : "com.alibaba:arouter-compiler:1.5.2",
 
@@ -76,11 +71,11 @@ ext {
             "dagger-compiler"         : "com.google.dagger:dagger-android-processor:2.47",
 
             //数据库存储
-            "room"                    : "android.arch.persistence.room:runtime:1.0.0",
-            "room-compiler"           : "android.arch.persistence.room:compiler:1.0.0",
+            "room"                    : "androidx.room:room-runtime:${version["roomVersion"]}",
+            "room-compiler"           : "androidx.room:room-compiler:${version["roomVersion"]}",
 
             //添加Room的RxJava支持(必须在使用的module中添加上)
-            "room-support-rxjava2"    : "android.arch.persistence.room:rxjava2:1.0.0",
+            "room-support-rxjava"    : "androidx.room:room-rxjava3:${version["roomVersion"]}",
     ]
 
 }

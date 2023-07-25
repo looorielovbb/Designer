@@ -5,14 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.Nullable
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import butterknife.ButterKnife
-import butterknife.Unbinder
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.R
 import com.jojo.design.common_base.bean.ErrorBean
@@ -32,21 +30,19 @@ import javax.inject.Inject
  *    desc   : Dagger2_MVP-Activity的基类 (Activity动画、支持DataBinding、事件订阅EventBus/广播、状态栏、ButterKnife，多状态View切换)
  */
 abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel, DB : ViewDataBinding> : AppCompatActivity(), IBase, BaseContract.BaseView {
-    @Nullable
     @Inject
     @JvmField
     var mPresenter: P? = null
-    @Nullable
+
     @Inject
     @JvmField
     var mModel: M? = null
-    @Nullable
+
     protected var mMultipleStatusView: MultipleStatusView? = null
     protected lateinit var mContext: Context
-    private lateinit var unBinder: Unbinder
     protected var viewDataBinding: DB? = null
     protected var mIsBind: Boolean = false
-    protected var mTransitionMode = BaseDBActivity.TransitionMode.RIGHT
+    protected var mTransitionMode = TransitionMode.RIGHT
     protected var mIsRegisterReceiver = false
     lateinit var mLoadingDialog: LoadingDialog
 
@@ -63,7 +59,7 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
         mLoadingDialog = LoadingDialog(this)
 
         if (getContentViewLayoutId() != 0) {
-            viewDataBinding = DataBindingUtil.inflate<DB>(LayoutInflater.from(this), getContentViewLayoutId(), null, false)
+            viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(this), getContentViewLayoutId(), null, false)
             setContentView(viewDataBinding?.root)
         } else {
             throw IllegalArgumentException("You must return a right contentView layout resource Id")
@@ -77,7 +73,6 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
             viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(this), getContentViewLayoutId(), mMultipleStatusView, true)
             setContentView(mMultipleStatusView)
         }
-        unBinder = ButterKnife.bind(this)
 
         initDaggerInject(BaseApplication.mApplicationComponent)
         mPresenter?.attachViewModel(this, mModel!!)
@@ -91,6 +86,7 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
             TransitionMode.SCALE -> overridePendingTransition(R.anim.scale_in, R.anim.scale_out)
             TransitionMode.FADE -> overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             TransitionMode.ZOOM -> overridePendingTransition(R.anim.zoomin, R.anim.zoomout)
+            else -> {}
         }
 
         //事件订阅
@@ -98,10 +94,11 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
             EventBus.getDefault().register(this)
         }
         registerBroadCastReceiver()
-
         //设置沉浸式状态栏
-        StatusBarHelper.setStatusBar(this, false, true)
-
+        StatusBarHelper.setStatusBar(this,
+            useThemeStatusBarColor = false,
+            isStatusBarLightMode = true
+        )
         startEvents()
     }
 
@@ -127,7 +124,7 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
             intent.action = info.packageName + BroadCastConstant.BROADCASE_ADDRESS
             intent.putExtra(BroadCastConstant.BROADCASE_INTENT, value)
             context.sendBroadcast(intent)
-        } catch (e: PackageManager.NameNotFoundException) {
+        } catch (_: PackageManager.NameNotFoundException) {
         }
 
     }
@@ -136,16 +133,14 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
     private var broadcastReceiver: BroadcastReceiver? = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             try {
-                var info = packageManager.getPackageInfo(packageName, 0)
+                val info = packageManager.getPackageInfo(packageName, 0)
 
                 if (intent.action == info.packageName + BroadCastConstant.BROADCASE_ADDRESS) {
-                    var bundle = intent.extras
-                    var i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
-                    if (i != null) {
-                        this@BaseDBActivity.onReceiveBroadcast(i, bundle)
-                    }
+                    val bundle = intent.extras
+                    val i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
+                    this@BaseDBActivity.onReceiveBroadcast(i, bundle)
                 }
-            } catch (e: PackageManager.NameNotFoundException) {
+            } catch (_: PackageManager.NameNotFoundException) {
             }
 
         }
@@ -156,13 +151,11 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
      */
     private fun registerBroadCastReceiver() {
         try {
-            var info = packageManager.getPackageInfo(packageName, 0)
+            val info = packageManager.getPackageInfo(packageName, 0)
             registerReceiver(broadcastReceiver, IntentFilter(info.packageName + BroadCastConstant.BROADCASE_ADDRESS))
             mIsRegisterReceiver = true
-        } catch (e: Exception) {
-
+        } catch (_: Exception) {
         }
-
     }
 
     protected open fun onReceiveBroadcast(intent: Int, bundle: Bundle) {
@@ -181,12 +174,12 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
             TransitionMode.SCALE -> overridePendingTransition(R.anim.scale_in, R.anim.scale_out)
             TransitionMode.FADE -> overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             TransitionMode.ZOOM -> overridePendingTransition(R.anim.zoomin, R.anim.zoomout)
+            else -> {}
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unBinder.unbind()
         if (mIsBind) {
             EventBus.getDefault().unregister(this)
         }
@@ -194,7 +187,7 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
             try {
                 mIsRegisterReceiver = false
                 this.unregisterReceiver(broadcastReceiver)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
             } finally {
                 broadcastReceiver = null
             }

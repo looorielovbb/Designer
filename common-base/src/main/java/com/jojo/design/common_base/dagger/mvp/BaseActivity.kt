@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import com.jojo.design.common_base.R
 import com.jojo.design.common_base.bean.ErrorBean
@@ -26,22 +25,21 @@ import javax.inject.Inject
  *    date   : 2018/12/4 9:21 PM
  *    desc   : Dagger2_MVP-Activity的基类 (Activity动画、事件订阅EventBus/广播、状态栏、ButterKnife，多状态View切换)
  */
-open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> : AppCompatActivity(), IBase, BaseContract.BaseView {
-    @Nullable
+abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> :
+    AppCompatActivity(), IBase, BaseContract.BaseView {
     @Inject
     @JvmField
     var mPresenter: P? = null
-    @Nullable
+
     @Inject
     @JvmField
     var mModel: M? = null
-    @Nullable
     protected var mMultipleStatusView: MultipleStatusView? = null
     protected lateinit var mContext: Context
-    protected var mIsBind: Boolean = false
-    protected var mTransitionMode = BaseActivity.TransitionMode.RIGHT
-    protected var mIsRegisterReceiver = false
-    lateinit var mLoadingDialog: LoadingDialog
+    private var mIsBind: Boolean = false
+    private var mTransitionMode = TransitionMode.RIGHT
+    private var mIsRegisterReceiver = false
+    private lateinit var mLoadingDialog: LoadingDialog
 
     /**
      * OverridePendingTransition
@@ -49,6 +47,7 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
     enum class TransitionMode {
         LEFT, RIGHT, TOP, BOTTOM, SCALE, FADE, ZOOM, NOON
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +58,7 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
         //根据子类布局自定义的区域show多状态布局
         mMultipleStatusView = getLoadingMultipleStatusView()
 
-        initDaggerInject(BaseAppliction.mApplicationComponent)
+//        initDaggerInject(BaseAppliction.mApplicationComponent)
         mPresenter?.attachViewModel(this, mModel!!)
 
         //Activity默认动画为右进右出
@@ -71,6 +70,7 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
             TransitionMode.SCALE -> overridePendingTransition(R.anim.scale_in, R.anim.scale_out)
             TransitionMode.FADE -> overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             TransitionMode.ZOOM -> overridePendingTransition(R.anim.zoomin, R.anim.zoomout)
+            else -> {}
         }
 
         //事件订阅
@@ -80,7 +80,10 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
         registerBroadCastReceiver()
 
         //设置沉浸式状态栏
-        StatusBarHelper.setStatusBar(this, false, true)
+        StatusBarHelper.setStatusBar(this,
+            useThemeStatusBarColor = false,
+            isStatusBarLightMode = true
+        )
 
         startEvents()
     }
@@ -107,7 +110,7 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
             intent.action = info.packageName + BroadCastConstant.BROADCASE_ADDRESS
             intent.putExtra(BroadCastConstant.BROADCASE_INTENT, value)
             context.sendBroadcast(intent)
-        } catch (e: PackageManager.NameNotFoundException) {
+        } catch (_: PackageManager.NameNotFoundException) {
         }
 
     }
@@ -116,16 +119,14 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
     private var broadcastReceiver: BroadcastReceiver? = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             try {
-                var info = packageManager.getPackageInfo(packageName, 0)
+                val info = packageManager.getPackageInfo(packageName, 0)
 
                 if (intent.action == info.packageName + BroadCastConstant.BROADCASE_ADDRESS) {
-                    var bundle = intent.extras
-                    var i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
-                    if (i != null) {
-                        this@BaseActivity.onReceiveBroadcast(i, bundle)
-                    }
+                    val bundle = intent.extras
+                    val i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
+                    this@BaseActivity.onReceiveBroadcast(i, bundle)
                 }
-            } catch (e: PackageManager.NameNotFoundException) {
+            } catch (_: PackageManager.NameNotFoundException) {
             }
 
         }
@@ -136,13 +137,14 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
      */
     private fun registerBroadCastReceiver() {
         try {
-            var info = packageManager.getPackageInfo(packageName, 0)
-            registerReceiver(broadcastReceiver, IntentFilter(info.packageName + BroadCastConstant.BROADCASE_ADDRESS))
+            val info = packageManager.getPackageInfo(packageName, 0)
+            registerReceiver(
+                broadcastReceiver,
+                IntentFilter(info.packageName + BroadCastConstant.BROADCASE_ADDRESS)
+            )
             mIsRegisterReceiver = true
-        } catch (e: Exception) {
-
+        } catch (_: Exception) {
         }
-
     }
 
     protected open fun onReceiveBroadcast(intent: Int, bundle: Bundle) {
@@ -157,15 +159,14 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
      * @param title
      */
     fun setHeaderTitle(title: String) {
-
         if (TextUtils.isEmpty(title)) {
             return
         }
-        val titleTV = findViewById<TextView>(R.id.tv_common_title) as TextView
+        val titleTV = findViewById<TextView>(R.id.tv_common_title)
         titleTV.text = title
     }
 
-    fun onActionFinish(v: View) {
+    fun onActionFinish() {
         finish()
     }
 
@@ -179,12 +180,12 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
             TransitionMode.SCALE -> overridePendingTransition(R.anim.scale_in, R.anim.scale_out)
             TransitionMode.FADE -> overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             TransitionMode.ZOOM -> overridePendingTransition(R.anim.zoomin, R.anim.zoomout)
+            else -> {}
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unBinder.unbind()
         if (mIsBind) {
             EventBus.getDefault().unregister(this)
         }
@@ -192,7 +193,7 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
             try {
                 mIsRegisterReceiver = false
                 this.unregisterReceiver(broadcastReceiver)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
             } finally {
                 broadcastReceiver = null
             }
@@ -207,18 +208,19 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
     }
 
 
-    fun isBindEventBus(isBind: Boolean): Boolean {
+    private fun isBindEventBus(isBind: Boolean): Boolean {
         mIsBind = isBind
         return mIsBind
     }
 
-    open fun getOverridePendingTransitionMode(transitionMode: BaseActivity.TransitionMode): BaseActivity.TransitionMode {
+    open fun getOverridePendingTransitionMode(transitionMode: TransitionMode): TransitionMode {
         mTransitionMode = transitionMode
         return mTransitionMode
     }
 
     override fun showDialogLoading(msg: String) {
-        if (!TextUtils.isEmpty(msg)) mLoadingDialog.setTitleText(msg).show() else mLoadingDialog.show()
+        if (!TextUtils.isEmpty(msg)) mLoadingDialog.setTitleText(msg)
+            .show() else mLoadingDialog.show()
 
     }
 
@@ -233,5 +235,4 @@ open abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContrac
     override fun showException(error: ErrorBean) {
         mMultipleStatusView?.showNoNetwork()
     }
-
 }

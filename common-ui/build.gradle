@@ -18,8 +18,6 @@ android {
         namespace 'com.jojo.design.common_ui'
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
-        versionCode rootProject.ext.android["versionCode"]
-        versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         //MultiDex分包方法
         multiDexEnabled true
@@ -44,6 +42,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
+    implementation 'com.google.android.material:material:1.9.0'
+
     //MultiDex分包
     implementation rootProject.ext.dependencies["multidex"]
 
@@ -55,5 +56,4 @@ dependencies {
     implementation rootProject.ext.dependencies["banner"]
     //ios弹性效果
     implementation rootProject.ext.dependencies["ios-scroll"]
-    implementation 'androidx.recyclerview:recyclerview:1.3.0'
 }

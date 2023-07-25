@@ -1,6 +1,7 @@
-package com.will.weiyuekotlin.component
+package com.jojo.design.common_base.dagger.component
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.will.weiyuekotlin.component.ApplicationComponent
 import dagger.Component
 
 

@@ -20,6 +20,4 @@ interface ApplicationComponent {
 //    fun getNetEaseApi(): NewsApi
 //
 //    fun getJanDanApi(): JanDanApi
-
-
 }

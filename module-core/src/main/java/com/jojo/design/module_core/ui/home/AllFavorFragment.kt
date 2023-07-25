@@ -1,18 +1,16 @@
 package com.jojo.design.module_core.ui.home
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.adapter.ADA_PersonLike
 import com.jojo.design.module_core.bean.*
-import com.jojo.design.module_core.dagger2.DaggerCoreComponent
 import com.jojo.design.module_core.mvp.contract.ShoppingContract
 import com.jojo.design.module_core.mvp.model.ShoppingModel
 import com.jojo.design.module_core.mvp.presenter.ShoppingPresenter
 import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.common_recyclcerview.*
 
 /**
  * author : JOJO
@@ -38,7 +36,7 @@ class AllFavorFragment : BaseFragment<ShoppingPresenter, ShoppingModel>(), Shopp
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+//        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startFragmentEvents() {

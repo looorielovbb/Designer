@@ -11,15 +11,13 @@ import javax.inject.Inject
  *    desc   : Dagger2-MVP-BaseFragment
  */
 abstract class BaseFragment<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> : BaseLazyFragment() {
-    @Nullable
     @Inject
     @JvmField
     var mPresenter: P? = null
-    @Nullable
+
     @Inject
     @JvmField
     var mModel: M? = null
-
 
     override fun startEvents() {
         initDaggerInject(BaseApplication.mApplicationComponent)

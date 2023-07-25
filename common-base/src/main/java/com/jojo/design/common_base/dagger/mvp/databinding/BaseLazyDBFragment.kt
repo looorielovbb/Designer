@@ -1,21 +1,17 @@
 package com.jojo.design.common_base.dagger.mvp.databinding
 
-import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.annotation.Nullable
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.Unbinder
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.config.constants.BroadCastConstant
 import com.jojo.design.common_base.dagger.mvp.BaseContract
@@ -32,23 +28,21 @@ import org.greenrobot.eventbus.EventBus
  *    desc   : Dagger-MVP-Fragment懒加载-支持DataBinding
  */
 abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseContract.BaseView {
-    lateinit var mLoadingDialog: LoadingDialog
-    private lateinit var unBinder: Unbinder
-    protected var mIsBind: Boolean = false
-    protected var mIsRegisterReceiver = false
-    protected var viewDataBinding: ViewDataBinding? = null
+    private lateinit var mLoadingDialog: LoadingDialog
+    private var mIsBind: Boolean = false
+    private var mIsRegisterReceiver = false
+    private var viewDataBinding: ViewDataBinding? = null
     protected lateinit var mContext: Context
-    @Nullable
-    protected var mMultipleStatusView: MultipleStatusView? = null
+    private var mMultipleStatusView: MultipleStatusView? = null
 
     private var isFirstResume = true
     private var isFirstVisible = true
     private var isFirstInvisible = true
     private var isPrepared: Boolean = false
 
-    override fun onAttach(activity: Activity?) {
-        super.onAttach(activity)
-        mContext = activity!!
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        mContext = context!!
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,11 +56,11 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (getContentViewLayoutId() != 0) {
+        return if (getContentViewLayoutId() != 0) {
             viewDataBinding = DataBindingUtil.inflate(inflater, getContentViewLayoutId(), null, false)
-            return viewDataBinding?.root
+            viewDataBinding?.root
         } else {
-            return super.onCreateView(inflater, container, savedInstanceState)
+            super.onCreateView(inflater, container, savedInstanceState)
         }
 
 
@@ -74,12 +68,9 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        unBinder = ButterKnife.bind(this, view!!)
         //根据子类布局自定义的区域show多状态布局
         mMultipleStatusView = getLoadingMultipleStatusView()
-
         startEvents()
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -149,11 +140,6 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        unBinder.unbind()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         if (mIsBind) {
@@ -163,7 +149,7 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
             try {
                 mIsRegisterReceiver = false
                 activity?.unregisterReceiver(broadcastReceiver)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
             } finally {
                 broadcastReceiver = null
             }
@@ -191,7 +177,7 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
             intent.action = info.packageName + BroadCastConstant.BROADCASE_ADDRESS
             intent.putExtra(BroadCastConstant.BROADCASE_INTENT, value)
             context.sendBroadcast(intent)
-        } catch (e: PackageManager.NameNotFoundException) {
+        } catch (_: PackageManager.NameNotFoundException) {
         }
 
     }
@@ -200,16 +186,14 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
     private var broadcastReceiver: BroadcastReceiver? = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             try {
-                var info = activity?.packageManager?.getPackageInfo(activity?.packageName, 0)
+                val info = activity?.packageManager?.getPackageInfo(requireActivity().packageName, 0)
 
                 if (intent.action == info?.packageName + BroadCastConstant.BROADCASE_ADDRESS) {
-                    var bundle = intent.extras
-                    var i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
-                    if (i != null) {
-                        onReceiveBroadcast(i, bundle)
-                    }
+                    val bundle = intent.extras
+                    val i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
+                    onReceiveBroadcast(i, bundle)
                 }
-            } catch (e: PackageManager.NameNotFoundException) {
+            } catch (_: PackageManager.NameNotFoundException) {
             }
 
         }
@@ -220,10 +204,10 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
      */
     private fun registerBroadCastReceiver() {
         try {
-            var info = activity?.packageManager?.getPackageInfo(activity?.packageName, 0)
+            val info = activity?.packageManager?.getPackageInfo(requireActivity().packageName, 0)
             activity?.registerReceiver(broadcastReceiver, IntentFilter(info?.packageName + BroadCastConstant.BROADCASE_ADDRESS))
             mIsRegisterReceiver = true
-        } catch (e: Exception) {
+        } catch (_: Exception) {
 
         }
 
@@ -232,7 +216,7 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
     protected open fun onReceiveBroadcast(intent: Int, bundle: Bundle) {
     }
 
-    fun isBindEventBus(isBind: Boolean): Boolean {
+    private fun isBindEventBus(isBind: Boolean): Boolean {
         mIsBind = isBind
         return mIsBind
     }

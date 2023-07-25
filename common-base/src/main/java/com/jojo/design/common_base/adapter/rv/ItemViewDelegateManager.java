@@ -1,7 +1,7 @@
 package com.jojo.design.common_base.adapter.rv;
 
-import android.support.v4.util.SparseArrayCompat;
 
+import androidx.collection.SparseArrayCompat;
 
 /**
  * Created by zhy on 16/6/22.
@@ -16,7 +16,7 @@ public class ItemViewDelegateManager<T>
         return delegates.size();
     }
 
-    public ItemViewDelegateManager<T> addDelegate(ItemViewDelegate<T> delegate)
+    public void addDelegate(ItemViewDelegate<T> delegate)
     {
         int viewType = delegates.size();
         if (delegate != null)
@@ -24,10 +24,9 @@ public class ItemViewDelegateManager<T>
             delegates.put(viewType, delegate);
             viewType++;
         }
-        return this;
     }
 
-    public ItemViewDelegateManager<T> addDelegate(int viewType, ItemViewDelegate<T> delegate)
+    public void addDelegate(int viewType, ItemViewDelegate<T> delegate)
     {
         if (delegates.get(viewType) != null)
         {
@@ -38,7 +37,6 @@ public class ItemViewDelegateManager<T>
                             + delegates.get(viewType));
         }
         delegates.put(viewType, delegate);
-        return this;
     }
 
     public ItemViewDelegateManager<T> removeDelegate(ItemViewDelegate<T> delegate)

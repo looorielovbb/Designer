@@ -1,7 +1,6 @@
 package com.jojo.design.common_ui.lrecyclerview.view;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -9,6 +8,8 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.jojo.design.common_base.view.IOSLoadingView;
 import com.jojo.design.common_ui.R;

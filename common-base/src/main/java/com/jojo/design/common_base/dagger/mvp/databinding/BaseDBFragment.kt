@@ -1,7 +1,7 @@
 package com.jojo.design.common_base.dagger.mvp.databinding
 
-import android.databinding.ViewDataBinding
 import android.support.annotation.Nullable
+import androidx.databinding.ViewDataBinding
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.dagger.mvp.BaseLazyFragment
