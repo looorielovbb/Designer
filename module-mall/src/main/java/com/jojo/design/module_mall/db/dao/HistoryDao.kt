@@ -1,9 +1,13 @@
 package com.jojo.design.module_mall.db.dao
 
-import android.arch.persistence.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 import com.jojo.design.module_mall.db.bean.SearchHistoryBean
-import io.reactivex.Flowable
+import io.reactivex.rxjava3.core.Flowable
 
 /**
  * author : JOJO

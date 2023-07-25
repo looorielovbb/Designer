@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.adapter.rv.MultiItemTypeAdapter
 import com.jojo.design.common_base.config.arouter.ARouterConfig
@@ -68,7 +69,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+//        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startEvents() {

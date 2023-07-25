@@ -44,7 +44,7 @@ class FRA_GoodsComment : BaseFragment<GoodsPresenter, GoodsModel>(), GoodsContra
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+//        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startFragmentEvents() {

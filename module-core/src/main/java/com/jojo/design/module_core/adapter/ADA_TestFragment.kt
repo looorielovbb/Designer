@@ -1,8 +1,8 @@
 package com.jojo.design.module_core.adapter
 
 import android.content.Context
-import com.example.jojo.databindingadapter.recyclerView.CommonAdapter
-import com.example.jojo.databindingadapter.recyclerView.ViewHolder
+import com.jojo.design.common_base.adapter.rv.CommonAdapter
+import com.jojo.design.common_base.adapter.rv.ViewHolder
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.databinding.ItemTestBinding
 
@@ -12,9 +12,9 @@ import com.jojo.design.module_core.databinding.ItemTestBinding
  *    date   : 2018/12/5 5:43 PM
  *    desc   :
  */
-class ADA_TestFragment constructor(context: Context) : CommonAdapter<String, ItemTestBinding>(context) {
-    override fun convert(viewBinding: ItemTestBinding?, holder: ViewHolder.BindingHolder?, p2: String?, position: Int) {
-        holder?.setText(R.id.tv,p2)
+class ADA_TestFragment constructor(context: Context) : CommonAdapter<String>(context) {
+    override fun convert(holder: ViewHolder?, t: String?, position: Int) {
+        holder?.setText(R.id.tv,t)
     }
 
     override fun itemLayoutId(): Int = R.layout.item_test

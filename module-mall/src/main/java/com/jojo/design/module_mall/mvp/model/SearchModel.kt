@@ -6,7 +6,7 @@ import com.jojo.design.module_mall.bean.RecordsEntity
 import com.jojo.design.module_mall.mvp.contract.SearchContract
 import com.jojo.design.module_mall.net.NetMallProvider
 import com.smart.novel.net.BaseHttpResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 /**

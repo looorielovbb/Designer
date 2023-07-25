@@ -34,6 +34,9 @@ android {
         }
     }
     //支持DataBinding
+    viewBinding{
+        enabled = true
+    }
     dataBinding {
         enabled = true
     }
@@ -59,12 +62,28 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":common-base")
     implementation project(":common-ui")
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
+    //Constraint Layout
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    //eventbus
+    implementation rootProject.ext.dependencies["eventbus"]
+    //Room
+    implementation rootProject.ext.dependencies["room"]
+    kapt rootProject.ext.dependencies["room-compiler"]
+    implementation rootProject.ext.dependencies["room-support-rxjava"]
     //ARouter
     implementation rootProject.ext.dependencies["arouter"]
-    implementation 'androidx.recyclerview:recyclerview:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     kapt rootProject.ext.dependencies["arouter-compiler"]
     //dagger2
     implementation rootProject.ext.dependencies["dagger"]
     kapt rootProject.ext.dependencies["dagger-compiler"]
+    //rxjava
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
+    //retrofit
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+    implementation rootProject.ext.dependencies["retrofit-adapter"]
+    //banner
+    implementation rootProject.ext.dependencies["banner"]
 }

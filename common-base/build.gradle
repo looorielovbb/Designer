@@ -19,6 +19,8 @@ android {
         namespace 'com.jojo.design.common_base'
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         multiDexEnabled true
     }
@@ -42,21 +44,21 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //MultiDex分包
-    implementation rootProject.ext.dependencies["multidex"]
-
     implementation project(":common-ui")
+
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     //BaseAdapter
     implementation 'com.github.GraceJoJo:DataBindingBaseAdapter:1.0.1'
 
+    //MultiDex分包
+    implementation rootProject.ext.dependencies["multidex"]
     //net request
     implementation rootProject.ext.dependencies["retrofit"]
     implementation rootProject.ext.dependencies["retrofit-converter-gson"]
-    implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
+    implementation rootProject.ext.dependencies["retrofit-adapter"]
     implementation rootProject.ext.dependencies["retrofit-log"]
-    //rxjava
-    implementation rootProject.ext.dependencies["rxjava2"]
+    implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxandroid"]
 
     //ARouter

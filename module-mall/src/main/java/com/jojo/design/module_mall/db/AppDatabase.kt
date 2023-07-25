@@ -1,15 +1,14 @@
 package com.jojo.design.module_mall.db
 
-import android.arch.persistence.db.SupportSQLiteDatabase
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.migration.Migration
 import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 import com.jojo.design.module_mall.db.bean.SearchHistoryBean
 import com.jojo.design.module_mall.db.dao.HistoryDao
-import okhttp3.internal.Internal.instance
 
 
 /**
@@ -19,7 +18,7 @@ import okhttp3.internal.Internal.instance
  * desc   :
  */
 //注解指定了database的表映射实体数据以及版本等信息
-@Database(entities = arrayOf(SearchHistoryBean::class), version = 1)
+@Database(entities = [SearchHistoryBean::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     private var DB_NAME = "module_mall.db"
     @Volatile

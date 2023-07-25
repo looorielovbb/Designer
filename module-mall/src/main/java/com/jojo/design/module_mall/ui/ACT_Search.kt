@@ -5,7 +5,11 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.foretree.db.star.RxJava2Helper
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -30,9 +34,10 @@ import com.jojo.design.module_mall.mvp.model.SearchModel
 import com.jojo.design.module_mall.mvp.presenter.SearchPresenter
 import com.smart.novel.adapter.ADA_HotSearchTag
 import com.will.weiyuekotlin.component.ApplicationComponent
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 /**
  *    author : JOJO
@@ -45,13 +50,17 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
     var mHistoryAdapter: ADA_SearchHistory? = null
     var mHotSearchAdapter: ADA_HotSearchTag? = null
     var mHistoryList: ArrayList<SearchHistoryBean> = ArrayList()
+    lateinit var rvHistory:RecyclerView
+    lateinit var tv_cancle:TextView
+    lateinit var et_search:EditText
+    lateinit var iv_deleteAll:ImageView
+
 
     override fun getContentViewLayoutId(): Int = R.layout.act_search
 
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-//        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startEvents() {
@@ -111,14 +120,14 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
             }
             false
         })
-        taglayout.setOnTagClickListener { view, position, parent ->
+        /*taglayout.setOnTagClickListener { view, position, parent ->
             var history = SearchHistoryBean()
             history.searchKeyWords = mHotSearchAdapter!!.getItem(position)
             et_search.setText(history.searchKeyWords)
 
             doSearch(mHotSearchAdapter!!.getItem(position))
             true
-        }
+        }*/
         mHistoryAdapter?.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
                 val bean = mHistoryAdapter!!.dataList[position]

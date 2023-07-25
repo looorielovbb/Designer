@@ -44,7 +44,19 @@ dependencies {
     implementation project(":common-base")
     implementation project(":common-ui")
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
-    //添加Room的RxJava支持(必须在使用的module中添加上)
-    implementation 'io.jsonwebtoken:jjwt:0.9.1'
-    implementation 'com.auth0.android:jwtdecode:1.1.1'
+    //ARouter
+    implementation rootProject.ext.dependencies["arouter"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+    //dagger2
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+    //room
+    implementation rootProject.ext.dependencies["room"]
+    kapt rootProject.ext.dependencies["room-compiler"]
+    implementation rootProject.ext.dependencies["room-support-rxjava"]
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'com.auth0.android:jwtdecode:2.0.2'
+
 }

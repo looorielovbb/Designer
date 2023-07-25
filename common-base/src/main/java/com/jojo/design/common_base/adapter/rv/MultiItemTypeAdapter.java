@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -13,24 +14,24 @@ import java.util.List;
 /**
  * Created by zhy on 16/4/9.
  * 支持多种ItemViewType的Adapter：每种Item类型对应一个ItemViewDelegete
- * 对于多中itemviewtype的处理参考：https://github.com/sockeqwe/AdapterDelegates ，有极高的扩展性。
+ * 对于多中item_view_type的处理参考：<a href="https://github.com/sockeqwe/AdapterDelegates">AdapterDelegates</a> ，有极高的扩展性。
  */
 public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     protected Context mContext;
     protected List<T> mDatas = new ArrayList<>();
 
-    protected ItemViewDelegateManager mItemViewDelegateManager;
+    protected ItemViewDelegateManager<T> mItemViewDelegateManager;
     protected OnItemClickListener mOnItemClickListener;
 
     public MultiItemTypeAdapter(Context mContext) {
         this.mContext = mContext;
-        mItemViewDelegateManager = new ItemViewDelegateManager();
+        mItemViewDelegateManager = new ItemViewDelegateManager<T>();
     }
 
     public MultiItemTypeAdapter(Context context, List<T> datas) {
         mContext = context;
         mDatas = datas;
-        mItemViewDelegateManager = new ItemViewDelegateManager();
+        mItemViewDelegateManager = new ItemViewDelegateManager<T>();
     }
 
     @Override
@@ -40,9 +41,10 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     }
 
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemViewDelegate itemViewDelegate = mItemViewDelegateManager.getItemViewDelegate(viewType);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemViewDelegate<T> itemViewDelegate = mItemViewDelegateManager.getItemViewDelegate(viewType);
         int layoutId = itemViewDelegate.getItemViewLayoutId();
         ViewHolder holder = ViewHolder.createViewHolder(mContext, parent, layoutId);
         onViewHolderCreated(holder, holder.getConvertView());
@@ -55,7 +57,7 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     }
 
     public void convert(ViewHolder holder, T t) {
-        mItemViewDelegateManager.convert(holder, t, holder.getAdapterPosition());
+        mItemViewDelegateManager.convert(holder, t, holder.getBindingAdapterPosition());
     }
 
     protected boolean isEnabled(int viewType) {
@@ -65,37 +67,30 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
 
     protected void setListener(final ViewGroup parent, final ViewHolder viewHolder, int viewType) {
         if (!isEnabled(viewType)) return;
-        viewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnItemClickListener != null) {
-                    int position = viewHolder.getAdapterPosition();
-                    mOnItemClickListener.onItemClick(v, viewHolder, position);
-                }
+        viewHolder.getConvertView().setOnClickListener(v -> {
+            if (mOnItemClickListener != null) {
+                int position = viewHolder.getBindingAdapterPosition();
+                mOnItemClickListener.onItemClick(v, viewHolder, position);
             }
         });
 
-        viewHolder.getConvertView().setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (mOnItemClickListener != null) {
-                    int position = viewHolder.getAdapterPosition();
-                    return mOnItemClickListener.onItemLongClick(v, viewHolder, position);
-                }
-                return false;
+        viewHolder.getConvertView().setOnLongClickListener(v -> {
+            if (mOnItemClickListener != null) {
+                int position = viewHolder.getBindingAdapterPosition();
+                return mOnItemClickListener.onItemLongClick(v, viewHolder, position);
             }
+            return false;
         });
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         convert(holder, mDatas.get(position));
     }
 
     @Override
     public int getItemCount() {
-        int itemCount = mDatas.size();
-        return itemCount;
+        return mDatas.size();
     }
 
 
@@ -103,12 +98,12 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         return mDatas;
     }
 
-    public MultiItemTypeAdapter addItemViewDelegate(ItemViewDelegate<T> itemViewDelegate) {
+    public MultiItemTypeAdapter<T> addItemViewDelegate(ItemViewDelegate<T> itemViewDelegate) {
         mItemViewDelegateManager.addDelegate(itemViewDelegate);
         return this;
     }
 
-    public MultiItemTypeAdapter addItemViewDelegate(int viewType, ItemViewDelegate<T> itemViewDelegate) {
+    public MultiItemTypeAdapter<T> addItemViewDelegate(int viewType, ItemViewDelegate<T> itemViewDelegate) {
         mItemViewDelegateManager.addDelegate(viewType, itemViewDelegate);
         return this;
     }
@@ -124,20 +119,17 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     /**
      * 设置适配器的数据，添加数据
      *
-     * @param dataList
+     * @param dataList 数据
      */
-    public void update(List<T> dataList) {
-        if (dataList != null) {
-            mDatas.addAll(dataList);
-        }
-
-        notifyDataSetChanged();
+    public void update(@NonNull List<T> dataList) {
+        mDatas.addAll(dataList);
+        notifyItemRangeChanged(0,dataList.size(),null);
     }
 
     /**
      * 设置适配器数据
      *
-     * @param dataList
+     * @param dataList 数据集
      * @param isClear  是否需要清空list然后在加载数据
      */
     public void update(List<T> dataList, Boolean isClear) {

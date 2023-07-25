@@ -5,7 +5,7 @@ import com.jojo.design.module_mall.bean.CategoryBean
 import com.jojo.design.module_mall.bean.FilterBean
 import com.jojo.design.module_mall.bean.RecordsEntity
 import com.smart.novel.net.BaseHttpResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  *    author : JOJO

@@ -3,18 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="bean"
-            type="com.jojo.design.common_base.bean.ErrorBean"></variable>
+            type="com.jojo.design.common_base.bean.ErrorBean"/>
     </data>
 
-
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/tv_head"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -38,7 +37,5 @@
                 android:textColor="@color/color_ffffff"
                 android:textSize="20sp" />
         </com.jojo.design.common_ui.view.MultipleStatusView>
-    </android.support.constraint.ConstraintLayout>
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

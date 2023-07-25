@@ -2,11 +2,12 @@ package com.jojo.design.module_core.ui.home
 
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
+import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerView
 import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerViewAdapter
 import com.jojo.design.common_ui.lrecyclerview.recyclerview.ProgressStyle
 import com.jojo.design.common_ui.view.MultipleStatusView
@@ -15,12 +16,10 @@ import com.jojo.design.module_core.widgets.RefreshView
 import com.jojo.design.module_core.adapter.ADA_ShoppingContent
 import com.jojo.design.module_core.adapter.ADA_TestFragment
 import com.jojo.design.module_core.bean.*
-import com.jojo.design.module_core.dagger2.DaggerCoreComponent
 import com.jojo.design.module_core.mvp.contract.ShoppingContract
 import com.jojo.design.module_core.mvp.model.ShoppingModel
 import com.jojo.design.module_core.mvp.presenter.ShoppingPresenter
 import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.common_lrecyclcerview.*
 
 /**
  *    author : JOJO
@@ -30,19 +29,9 @@ import kotlinx.android.synthetic.main.common_lrecyclcerview.*
  */
 class ShoppingFragmentOld : BaseFragment<ShoppingPresenter, ShoppingModel>(), ShoppingContract.View {
     private var mTitle: String? = null
-
+    private lateinit var lrecyclerview:LRecyclerView
     override fun getContentViewLayoutId(): Int = R.layout.fra_shopping
-    open lateinit var mAdapter: ADA_ShoppingContent
-
-    companion object {
-        fun getInstance(title: String): ShoppingFragmentOld {
-            var fragment = ShoppingFragmentOld()
-            var bundle = Bundle()
-            fragment.arguments = bundle
-            fragment.mTitle = title
-            return fragment
-        }
-    }
+    lateinit var mAdapter: ADA_ShoppingContent
 
     override fun onFirstUserVisible() {
     }
@@ -59,18 +48,18 @@ class ShoppingFragmentOld : BaseFragment<ShoppingPresenter, ShoppingModel>(), Sh
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+//        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startFragmentEvents() {
 //        var mAdapter = ADA_TestFragment(mContext)
-
-        mAdapter = ADA_ShoppingContent(activity!!)
+        lrecyclerview = requireView().findViewById(R.id.lrecyclerview)
+        mAdapter = ADA_ShoppingContent(requireActivity())
         val mLRecyclerViewAdapter = LRecyclerViewAdapter(mAdapter)
         lrecyclerview.setRefreshHeader(RefreshView(mContext))
         val headerView = LayoutInflater.from(mContext).inflate(R.layout.shoping_head_view, null, false)
         //头部添加Recyclerview
-        var recyclerview = headerView.findViewById<RecyclerView>(R.id.recyclerview)
+        val recyclerview = headerView.findViewById<RecyclerView>(R.id.recyclerview)
 //        mLRecyclerViewAdapter.addHeaderView(headerView)
         //设置外层列表Adapter
         lrecyclerview.adapter = mLRecyclerViewAdapter

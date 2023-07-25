@@ -3,6 +3,8 @@ package com.jojo.design.common_base.adapter.rv;
 import android.content.Context;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -47,37 +49,29 @@ public abstract class CommonAdapter<T> extends MultiItemTypeAdapter<T> {
 
     /**
      * 设置适配器的数据，添加数据
-     *
-     * @param dataList
+     * @param dataList 数据
      */
-    public void update(List<T> dataList) {
-        if (dataList != null) {
-            mDatas.addAll(dataList);
-        }
-
-        notifyDataSetChanged();
+    public void update(@NonNull List<T> dataList) {
+        mDatas.addAll(dataList);
+        notifyItemRangeChanged(0,dataList.size(),null);
     }
 
     /**
      * 设置适配器数据
-     *
-     * @param dataList
+     * @param dataList 数据
      * @param isClear  是否需要清空list然后在加载数据
      */
-    public void update(List<T> dataList, Boolean isClear) {
+    public void update(@NonNull List<T> dataList, Boolean isClear) {
         if (isClear) {
             clear();
         }
-        if (dataList != null) {
-            mDatas.addAll(dataList);
-        }
-        notifyDataSetChanged();
+        mDatas.addAll(dataList);
+        notifyItemRangeChanged(0,dataList.size(),null);
     }
 
     /**
      * 单条刷新
-     *
-     * @param dataList
+     * @param dataList 数据
      * @param isClear  是否需要清空list然后在加载数据
      */
     public void update(List<T> dataList, Boolean isClear, int position) {
@@ -120,7 +114,7 @@ public abstract class CommonAdapter<T> extends MultiItemTypeAdapter<T> {
     /**
      * 清空集合，设置适配器数据
      *
-     * @param list
+     * @param list 数据
      */
     public void setDataList(Collection<T> list) {
         this.mDatas.clear();

@@ -1,12 +1,11 @@
 package com.jojo.design.module_mall.adapter
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import com.jojo.design.common_base.adapter.rv.CommonAdapter
 import com.jojo.design.common_base.adapter.rv.ViewHolder
 import com.jojo.design.module_mall.R
 import com.jojo.design.module_mall.bean.CategoryBean
-import com.jojo.design.module_mall.db.bean.SearchHistoryBean
 
 /**
  *    author : JOJO

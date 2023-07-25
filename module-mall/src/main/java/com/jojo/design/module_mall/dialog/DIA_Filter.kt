@@ -1,13 +1,10 @@
 package com.jojo.design.module_mall.dialog
 
-import android.app.ActionBar
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.WindowManager
 import android.widget.LinearLayout
 import com.jojo.design.common_base.utils.ScreenUtil
 import com.jojo.design.module_mall.R
@@ -28,13 +25,13 @@ class DIA_Filter constructor(context: Activity) {
         mContext = context
         mDialog = Dialog(context, R.style.style_custom_dialog)
         mContentView = LayoutInflater.from(context).inflate(R.layout.dia_filter, null)
-        mDialog?.setContentView(mContentView)
+        mDialog?.setContentView(mContentView!!)
     }
 
 
     fun getDialog(): Dialog {
         if (mDialog?.window != null) {
-            mDialog?.window!!.setGravity(Gravity.RIGHT)
+            mDialog?.window!!.setGravity(Gravity.END)
             mDialog?.window!!.setWindowAnimations(R.style.AnimationRightFade)
             val lp = mDialog?.window!!.attributes
             //背景灰度

@@ -69,6 +69,10 @@ dependencies {
     
     implementation rootProject.ext.dependencies["arouter"]
 
+    //constraint layout
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
+
     //ARouter
     implementation rootProject.ext.dependencies["arouter"]
     kapt rootProject.ext.dependencies["arouter-compiler"]

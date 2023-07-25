@@ -5,7 +5,6 @@ import com.jojo.design.common_base.net.RetrofitManager
 import com.jojo.design.common_base.net.RxObserverListener
 import com.jojo.design.module_mall.bean.*
 import com.jojo.design.module_mall.mvp.contract.GoodsContract
-import com.jojo.design.module_mall.mvp.contract.SearchContract
 import javax.inject.Inject
 
 /**

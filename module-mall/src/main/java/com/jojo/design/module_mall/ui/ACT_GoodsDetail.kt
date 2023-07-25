@@ -1,11 +1,11 @@
 package com.jojo.design.module_mall.ui
 
 import android.graphics.Color
-import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.bigkoo.convenientbanner.ConvenientBanner
 import com.jojo.design.common_base.BaseApplication
@@ -20,18 +20,11 @@ import com.jojo.design.module_mall.bean.CommentBean
 import com.jojo.design.module_mall.bean.GoodsContentBean
 import com.jojo.design.module_mall.bean.GoodsDesBean
 import com.jojo.design.module_mall.bean.RevelentBean
-import com.jojo.design.module_mall.dagger2.DaggerMallComponent
 import com.jojo.design.module_mall.helper.BannerHelper
 import com.jojo.design.module_mall.mvp.contract.GoodsContract
 import com.jojo.design.module_mall.mvp.model.GoodsModel
 import com.jojo.design.module_mall.mvp.presenter.GoodsPresenter
 import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.act_goods_detail.*
-import kotlinx.android.synthetic.main.layout_bottom_goods_detail.*
-import kotlinx.android.synthetic.main.layout_title_goods_detail.*
-import kotlinx.android.synthetic.main.layout_top_goods_detail.*
-import kotlinx.android.synthetic.main.layout_top_goods_detail.view.*
-import org.greenrobot.eventbus.EventBus
 
 /**
  *    author : JOJO
@@ -50,7 +43,7 @@ class ACT_GoodsDetail : BaseActivity<GoodsPresenter, GoodsModel>(), GoodsContrac
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+//        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startEvents() {
