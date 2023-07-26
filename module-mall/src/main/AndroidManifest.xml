@@ -1,19 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jojo.design.module_mall">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
-        <!--<activity android:name="com.jojo.design.module_mall.ui.ACT_Search">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-
         <activity android:name="com.jojo.design.module_mall.ui.ACT_Search" />
         <activity android:name=".ui.ACT_GoodsFilter" />
         <activity android:name=".ui.ACT_GoodsDetail" />
     </application>
-
-
 </manifest>

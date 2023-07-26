@@ -6,6 +6,7 @@ import android.text.SpannableString
 import android.text.style.ScaleXSpan
 import android.util.AttributeSet
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 
 /**
  * author : JOJO
@@ -13,7 +14,7 @@ import android.widget.TextView
  * date   : 2019/1/24 11:21 AM
  * desc   : 可以设置字间距的TextView
  */
-class LetterSpaceTextView : TextView {
+class LetterSpaceTextView : AppCompatTextView {
     var spacing = Spacing.NORMAL
         set(spacing) {
             field = spacing
@@ -38,7 +39,7 @@ class LetterSpaceTextView : TextView {
     }
 
     private fun applySpacing() {
-        if (this == null || this.originalText == null) return
+        if (this.originalText == null) return
         val builder = StringBuilder()
         for (i in 0 until originalText!!.length) {
             builder.append(originalText!![i])

@@ -12,7 +12,7 @@ import com.jojo.design.common_base.utils.StatusBarHelper
 import com.jojo.design.common_base.utils.ToastUtils
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_test.adapter.ADA_TestLoadMore
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import kotlinx.android.synthetic.main.act_test_loadmore.*
 import java.util.logging.Handler
 

@@ -1,4 +1,4 @@
-package com.will.weiyuekotlin.module
+package com.jojo.design.common_base.module
 
 import android.content.Context
 import com.jojo.design.common_base.BaseApplication

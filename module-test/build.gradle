@@ -3,13 +3,9 @@ plugins {
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'io.github.JailedBird.ARouterPlugin'
 }
-//ARouter
-kapt {
-    arguments {
-        arg("moduleName", project.getName())
-    }
-}
+
 android {
     compileSdk rootProject.ext.android["compileSdkVersion"]
 
@@ -20,15 +16,13 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
-        //指定room.schemaLocation生成的文件路径,当执行项目后，在Android Studio 的Project视图下，查看项目，会发现Module生成了一个schemas的文件夹.
-        //会生成版x.Json文件,可以在.json文件查看Room数据库的配置情况
+        multiDexEnabled true
+
         javaCompileOptions {
             annotationProcessorOptions {
-                //记录数据库sql
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
-        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -37,6 +31,10 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 }
 
 dependencies {
@@ -53,7 +51,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     //room
     implementation rootProject.ext.dependencies["room"]
-    kapt rootProject.ext.dependencies["room-compiler"]
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
     implementation rootProject.ext.dependencies["room-support-rxjava"]
 
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'

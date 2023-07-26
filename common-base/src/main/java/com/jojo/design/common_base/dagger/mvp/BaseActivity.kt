@@ -7,9 +7,10 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentActivity
+import androidx.viewbinding.ViewBinding
 import com.jojo.design.common_base.R
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.config.constants.BroadCastConstant
@@ -25,8 +26,8 @@ import javax.inject.Inject
  *    date   : 2018/12/4 9:21 PM
  *    desc   : Dagger2_MVP-Activity的基类 (Activity动画、事件订阅EventBus/广播、状态栏、ButterKnife，多状态View切换)
  */
-abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> :
-    AppCompatActivity(), IBase, BaseContract.BaseView {
+abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel,B : ViewDataBinding> :
+    FragmentActivity(), IBase, BaseContract.BaseView {
     @Inject
     @JvmField
     var mPresenter: P? = null
@@ -34,6 +35,8 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
     @Inject
     @JvmField
     var mModel: M? = null
+
+    lateinit var binding:B
     protected var mMultipleStatusView: MultipleStatusView? = null
     protected lateinit var mContext: Context
     private var mIsBind: Boolean = false
@@ -41,20 +44,16 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
     private var mIsRegisterReceiver = false
     private lateinit var mLoadingDialog: LoadingDialog
 
-    /**
-     * OverridePendingTransition
-     */
     enum class TransitionMode {
         LEFT, RIGHT, TOP, BOTTOM, SCALE, FADE, ZOOM, NOON
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
         mLoadingDialog = LoadingDialog(this)
 
-        setContentView(getContentViewLayoutId())
+        setContentView(binding.root)
         //根据子类布局自定义的区域show多状态布局
         mMultipleStatusView = getLoadingMultipleStatusView()
 
@@ -72,7 +71,6 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
             TransitionMode.ZOOM -> overridePendingTransition(R.anim.zoomin, R.anim.zoomout)
             else -> {}
         }
-
         //事件订阅
         if (isBindEventBus(mIsBind)) {
             EventBus.getDefault().register(this)
@@ -80,18 +78,17 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
         registerBroadCastReceiver()
 
         //设置沉浸式状态栏
-        StatusBarHelper.setStatusBar(this,
+        StatusBarHelper.setStatusBar(
+            this,
             useThemeStatusBarColor = false,
             isStatusBarLightMode = true
         )
-
         startEvents()
     }
 
 
     /**
      * 发送一个广播
-     *
      * @param value
      */
     protected fun sendCommonBroadcast(value: Int) {
@@ -100,7 +97,6 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
 
     /**
      * 发送一个广播
-     *
      * @param value
      */
     open fun sendBroadcast(context: Context, value: Int) {
@@ -120,7 +116,6 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
         override fun onReceive(context: Context, intent: Intent) {
             try {
                 val info = packageManager.getPackageInfo(packageName, 0)
-
                 if (intent.action == info.packageName + BroadCastConstant.BROADCASE_ADDRESS) {
                     val bundle = intent.extras
                     val i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
@@ -128,7 +123,6 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
                 }
             } catch (_: PackageManager.NameNotFoundException) {
             }
-
         }
     }
 
@@ -155,7 +149,6 @@ abstract class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.Bas
 
     /**
      * 设置标题
-     *
      * @param title
      */
     fun setHeaderTitle(title: String) {

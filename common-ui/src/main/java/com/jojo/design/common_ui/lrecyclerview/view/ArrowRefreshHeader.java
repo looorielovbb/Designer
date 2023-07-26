@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.jojo.design.common_base.view.IOSLoadingView;
+import com.jojo.design.common_ui.view.IOSLoadingView;
 import com.jojo.design.common_ui.R;
 import com.jojo.design.common_ui.lrecyclerview.interfaces.IRefreshHeader;
 import com.jojo.design.common_ui.lrecyclerview.progressindicator.AVLoadingIndicatorView;

@@ -3,9 +3,6 @@ package com.shuyu.gsyvideoplayer.video.base;
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
-import android.support.annotation.AttrRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
@@ -33,6 +30,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.shuyu.gsyvideoplayer.utils.CommonUtil.hideNavKey;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * 播放UI的显示、控制层、手势处理等

@@ -5,18 +5,18 @@
 
         <variable
             name="bean"
-            type="com.jojo.design.common_base.bean.ErrorBean"></variable>
+            type="com.jojo.design.common_base.bean.ErrorBean"/>
     </data>
 
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
 
         <include
             android:id="@+id/title"
-            layout="@layout/common_title"></include>
+            layout="@layout/common_title"/>
 
         <TextView
             android:id="@+id/tv"
@@ -50,8 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:background="@color/color_ffffff"
-            app:layout_constraintTop_toBottomOf="@+id/tv_txt"></FrameLayout>
+            app:layout_constraintTop_toBottomOf="@+id/tv_txt"/>
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

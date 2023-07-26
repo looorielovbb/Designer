@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'io.github.JailedBird.ARouterPlugin'
 }
 
 kapt {
@@ -73,10 +74,10 @@ dependencies {
 
     //ARouter
     implementation rootProject.ext.dependencies["arouter"]
-    kapt rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
 
     //dagger2
     implementation rootProject.ext.dependencies["dagger"]
-    kapt rootProject.ext.dependencies["dagger-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
 
 }

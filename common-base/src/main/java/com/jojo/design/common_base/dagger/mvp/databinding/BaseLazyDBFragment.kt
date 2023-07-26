@@ -158,7 +158,6 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
 
     /**
      * 发送一个广播
-     *
      * @param value
      */
     protected fun sendCommonBroadcast(value: Int) {
@@ -167,7 +166,6 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
 
     /**
      * 发送一个广播
-     *
      * @param value
      */
     open fun sendBroadcast(context: Context, value: Int) {

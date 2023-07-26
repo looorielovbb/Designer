@@ -10,7 +10,7 @@ import com.jojo.design.module_core.R
 import com.jojo.design.module_core.adapter.ADA_DesignerTypeList
 import com.jojo.design.module_core.bean.TagCategoryEntity
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import kotlinx.android.synthetic.main.fra_designertype_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode

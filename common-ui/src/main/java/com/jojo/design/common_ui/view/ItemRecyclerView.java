@@ -2,13 +2,14 @@ package com.jojo.design.common_ui.view;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 商品详情页底部的RecyclerView
@@ -39,7 +40,7 @@ public class ItemRecyclerView extends RecyclerView implements View.OnScrollChang
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
-            case MotionEvent.ACTION_MOVE:
+            case MotionEvent.ACTION_MOVE -> {
                 float Y = ev.getY();
                 float Ys = Y - oldY;
                 float X = ev.getX();
@@ -50,20 +51,16 @@ public class ItemRecyclerView extends RecyclerView implements View.OnScrollChang
                 if (Ys > 0 && currentPosition == 0) {
                     getParent().getParent().requestDisallowInterceptTouchEvent(false);
                 }
-                break;
-
-            case MotionEvent.ACTION_DOWN:
+            }
+            case MotionEvent.ACTION_DOWN -> {
                 getParent().getParent().requestDisallowInterceptTouchEvent(true);
                 oldY = ev.getY();
                 oldX = ev.getX();
-                break;
-
-            case MotionEvent.ACTION_UP:
-                getParent().getParent().requestDisallowInterceptTouchEvent(true);
-                break;
-
-            default:
-                break;
+            }
+            case MotionEvent.ACTION_UP ->
+                    getParent().getParent().requestDisallowInterceptTouchEvent(true);
+            default -> {
+            }
         }
         return super.onInterceptTouchEvent(ev);
     }
@@ -71,7 +68,7 @@ public class ItemRecyclerView extends RecyclerView implements View.OnScrollChang
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
-            case MotionEvent.ACTION_MOVE:
+            case MotionEvent.ACTION_MOVE -> {
                 float Y = ev.getY();
                 float Ys = Y - oldY;
                 float X = ev.getX();
@@ -82,20 +79,16 @@ public class ItemRecyclerView extends RecyclerView implements View.OnScrollChang
                 if (Ys > 0 && currentPosition == 0) {
                     getParent().getParent().requestDisallowInterceptTouchEvent(false);
                 }
-                break;
-
-            case MotionEvent.ACTION_DOWN:
+            }
+            case MotionEvent.ACTION_DOWN -> {
                 getParent().getParent().requestDisallowInterceptTouchEvent(true);
                 oldY = ev.getY();
                 oldX = ev.getX();
-                break;
-
-            case MotionEvent.ACTION_UP:
-                getParent().getParent().requestDisallowInterceptTouchEvent(true);
-                break;
-
-            default:
-                break;
+            }
+            case MotionEvent.ACTION_UP ->
+                    getParent().getParent().requestDisallowInterceptTouchEvent(true);
+            default -> {
+            }
         }
         return super.onTouchEvent(ev);
     }

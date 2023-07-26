@@ -1,6 +1,5 @@
 package com.jojo.design.common_base.dagger.mvp.databinding
 
-import android.support.annotation.Nullable
 import androidx.databinding.ViewDataBinding
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseContract
@@ -14,15 +13,15 @@ import javax.inject.Inject
  *    desc   : Dagger2-MVP-BaseFragment（支持DataBinding）
  */
 abstract class BaseDBFragment<P : BaseContract.BasePresenter, M : BaseContract.BaseModel, DB : ViewDataBinding> : BaseLazyFragment() {
-    @Nullable
+
     @Inject
     @JvmField
     var mPresenter: P? = null
-    @Nullable
+
     @Inject
     @JvmField
     var mModel: M? = null
-    protected var viewBinding: DB? = null
+    private var viewBinding: DB? = null
 
 
     override fun startEvents() {

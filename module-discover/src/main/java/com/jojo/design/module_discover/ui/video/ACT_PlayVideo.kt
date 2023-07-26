@@ -3,6 +3,7 @@ package com.jojo.design.module_discover.ui.video
 import android.content.res.Configuration
 import android.view.View
 import android.widget.ImageView
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
@@ -11,7 +12,7 @@ import com.jojo.design.common_base.utils.glide.GlideUtils
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_discover.R
 import com.jojo.design.module_discover.bean.ItemEntity
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO
@@ -138,6 +139,7 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
         }
     }
 
+    @Deprecated
     override fun onBackPressed() {
 
         if (orientationUtils != null) {

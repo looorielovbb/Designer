@@ -32,7 +32,7 @@ import com.jojo.design.module_mall.mvp.contract.SearchContract
 import com.jojo.design.module_mall.mvp.model.SearchModel
 import com.jojo.design.module_mall.mvp.presenter.SearchPresenter
 import com.smart.novel.util.bindView
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO

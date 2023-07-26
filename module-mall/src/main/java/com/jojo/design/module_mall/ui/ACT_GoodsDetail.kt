@@ -24,7 +24,7 @@ import com.jojo.design.module_mall.helper.BannerHelper
 import com.jojo.design.module_mall.mvp.contract.GoodsContract
 import com.jojo.design.module_mall.mvp.model.GoodsModel
 import com.jojo.design.module_mall.mvp.presenter.GoodsPresenter
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO

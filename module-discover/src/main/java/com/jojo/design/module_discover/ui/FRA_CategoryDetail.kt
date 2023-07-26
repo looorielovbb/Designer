@@ -16,7 +16,7 @@ import com.jojo.design.module_discover.adapter.ADA_CategoryDetail
 import com.jojo.design.module_discover.bean.CategoryBean
 import com.jojo.design.module_discover.bean.ItemEntity
 import com.jojo.design.module_discover.bean.TabEntity
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import kotlinx.android.synthetic.main.fra_category_detail.*
 
 /**

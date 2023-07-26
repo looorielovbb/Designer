@@ -6,12 +6,6 @@ plugins {
     id 'io.github.JailedBird.ARouterPlugin'
 }
 
-kapt {
-    arguments {
-        arg("moduleName", project.getName())
-    }
-}
-
 android {
     compileSdk rootProject.ext.android["compileSdkVersion"]
 
@@ -23,6 +17,12 @@ android {
         versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -37,8 +37,9 @@ android {
         enabled = true
     }
 
-    kapt {
-        generateStubs = true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
@@ -63,11 +64,11 @@ dependencies {
 
     //ARouter
     implementation rootProject.ext.dependencies["arouter"]
-    kapt rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor  rootProject.ext.dependencies["arouter-compiler"]
 
     //dagger2
     implementation rootProject.ext.dependencies["dagger"]
-    kapt rootProject.ext.dependencies["dagger-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
 
     //事件订阅
     implementation rootProject.ext.dependencies["eventbus"]
@@ -77,5 +78,5 @@ dependencies {
 
     //数据库
     implementation rootProject.ext.dependencies["room"]
-    kapt rootProject.ext.dependencies["room-compiler"]
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
 }

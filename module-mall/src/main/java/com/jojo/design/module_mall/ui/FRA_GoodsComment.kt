@@ -14,7 +14,7 @@ import com.jojo.design.module_mall.dagger2.DaggerMallComponent
 import com.jojo.design.module_mall.mvp.contract.GoodsContract
 import com.jojo.design.module_mall.mvp.model.GoodsModel
 import com.jojo.design.module_mall.mvp.presenter.GoodsPresenter
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import kotlinx.android.synthetic.main.fra_goods_comment.*
 
 /**

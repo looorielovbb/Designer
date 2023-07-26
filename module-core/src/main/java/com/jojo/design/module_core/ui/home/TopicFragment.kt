@@ -8,13 +8,11 @@ import com.jojo.design.module_core.R
 import com.jojo.design.module_core.adapter.ADA_TopicPager
 import com.jojo.design.module_core.bean.TopicBean
 import com.jojo.design.module_core.bean.TopicDetailEntity
-import com.jojo.design.module_core.dagger2.DaggerCoreComponent
 import com.jojo.design.module_core.mvp.contract.TopicContract
 import com.jojo.design.module_core.mvp.model.TopicModel
 import com.jojo.design.module_core.mvp.presenter.TopicPresenter
 import com.jojo.design.module_core.widgets.cardview.ShadowTransformer
-import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.fra_topic.*
+import com.jojo.design.common_base.component.ApplicationComponent
 import java.util.ArrayList
 
 /**
@@ -32,8 +30,8 @@ class TopicFragment : BaseFragment<TopicPresenter, TopicModel>(), TopicContract.
 
     companion object {
         fun getInstance(title: String): TopicFragment {
-            var fragment = TopicFragment()
-            var bundle = Bundle()
+            val fragment = TopicFragment()
+            val bundle = Bundle()
             fragment.arguments = bundle
             fragment.mTitle = title
             return fragment
@@ -55,7 +53,7 @@ class TopicFragment : BaseFragment<TopicPresenter, TopicModel>(), TopicContract.
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+//        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startFragmentEvents() {

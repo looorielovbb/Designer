@@ -8,7 +8,7 @@ import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_mall.R
 import com.jojo.design.module_mall.adapter.ADA_GoodsDes
 import com.jojo.design.module_mall.bean.GoodsDesBean
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 

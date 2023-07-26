@@ -1,8 +1,7 @@
 package com.jojo.design.module_core.widgets.cardview
 
-import android.support.v4.view.ViewPager
-import android.support.v7.widget.CardView
 import android.view.View
+import androidx.viewpager.widget.ViewPager
 
 
 class ShadowTransformer(private val mViewPager: ViewPager, private val mAdapter: ICardAdapter) : ViewPager.OnPageChangeListener, ViewPager.PageTransformer {

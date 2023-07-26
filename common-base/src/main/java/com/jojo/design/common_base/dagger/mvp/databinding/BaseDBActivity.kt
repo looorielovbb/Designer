@@ -6,11 +6,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.annotation.Nullable
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentActivity
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.R
 import com.jojo.design.common_base.bean.ErrorBean
@@ -29,7 +28,7 @@ import javax.inject.Inject
  *    date   : 2018/12/4 9:21 PM
  *    desc   : Dagger2_MVP-Activity的基类 (Activity动画、支持DataBinding、事件订阅EventBus/广播、状态栏、ButterKnife，多状态View切换)
  */
-abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel, DB : ViewDataBinding> : AppCompatActivity(), IBase, BaseContract.BaseView {
+abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel, DB : ViewDataBinding> : FragmentActivity(), IBase, BaseContract.BaseView {
     @Inject
     @JvmField
     var mPresenter: P? = null

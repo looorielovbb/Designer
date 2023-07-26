@@ -4,7 +4,7 @@ import com.jojo.design.module_mall.ui.ACT_GoodsDetail
 import com.jojo.design.module_mall.ui.ACT_GoodsFilter
 import com.jojo.design.module_mall.ui.ACT_Search
 import com.jojo.design.module_mall.ui.FRA_GoodsComment
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import dagger.Component
 
 /**

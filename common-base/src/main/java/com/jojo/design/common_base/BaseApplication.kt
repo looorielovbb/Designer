@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import kotlin.properties.Delegates
 
 /**

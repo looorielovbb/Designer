@@ -1,14 +1,13 @@
 package com.jojo.design.module_core.ui.home
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.adapter.TextTagsAdapter
-import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.fra_discorvery.*
+import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO

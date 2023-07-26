@@ -13,7 +13,7 @@ import com.jojo.design.module_core.dagger2.DaggerCoreComponent
 import com.jojo.design.module_core.mvp.contract.ShoppingContract
 import com.jojo.design.module_core.mvp.model.ShoppingModel
 import com.jojo.design.module_core.mvp.presenter.ShoppingPresenter
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import kotlinx.android.synthetic.main.common_recyclcerview.*
 
 /**

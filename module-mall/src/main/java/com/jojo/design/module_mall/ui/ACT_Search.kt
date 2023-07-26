@@ -33,7 +33,7 @@ import com.jojo.design.module_mall.mvp.contract.SearchContract.*
 import com.jojo.design.module_mall.mvp.model.SearchModel
 import com.jojo.design.module_mall.mvp.presenter.SearchPresenter
 import com.smart.novel.adapter.ADA_HotSearchTag
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.*

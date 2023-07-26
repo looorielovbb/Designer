@@ -7,8 +7,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +16,9 @@ import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import androidx.core.view.MotionEventCompat;
+import androidx.core.view.ViewCompat;
 
 import com.jojo.design.common_ui.R;
 

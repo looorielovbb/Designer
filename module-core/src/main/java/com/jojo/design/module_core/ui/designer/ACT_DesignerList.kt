@@ -1,11 +1,10 @@
 package com.jojo.design.module_core.ui.designer
 
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.adapter.rv.MultiItemTypeAdapter
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
@@ -14,14 +13,12 @@ import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.bean.DesignerEntity
 import com.jojo.design.module_core.bean.TagCategoryEntity
-import com.jojo.design.module_core.dagger2.DaggerCoreComponent
 import com.jojo.design.module_core.mvp.contract.DesignerContract
 import com.jojo.design.module_core.mvp.model.DesignerModel
 import com.jojo.design.module_core.mvp.presenter.DesignerPresenter
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import com.jojo.design.common_base.utils.RecyclerviewHelper
 import com.jojo.design.module_core.adapter.ADA_DesignerList
-import kotlinx.android.synthetic.main.common_lrecyclcerview.*
 
 
 /**
@@ -39,7 +36,7 @@ class ACT_DesignerList : BaseActivity<DesignerPresenter, DesignerModel>(), Desig
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+//        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
     }
 
     override fun startEvents() {

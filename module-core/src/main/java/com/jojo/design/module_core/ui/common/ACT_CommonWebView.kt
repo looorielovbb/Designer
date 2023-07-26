@@ -10,8 +10,7 @@ import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
-import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.act_common_webview.*
+import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO
@@ -53,6 +52,7 @@ class ACT_CommonWebView : BaseActivity<BaseContract.BasePresenter, BaseContract.
             }
         }
         webview.webViewClient = object : WebViewClient() {
+            @Deprecated
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
                 return true

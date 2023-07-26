@@ -1,7 +1,7 @@
 package com.jojo.design.common_base.dagger.component
 
 import androidx.appcompat.app.AppCompatActivity
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import dagger.Component
 
 

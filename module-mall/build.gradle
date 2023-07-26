@@ -7,12 +7,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.github.JailedBird.ARouterPlugin'
-//ARouter
-kapt {
-    arguments {
-        arg("moduleName", project.getName())
-    }
-}
+
 android {
     compileSdk rootProject.ext.android["compileSdkVersion"]
 
@@ -25,6 +20,11 @@ android {
         testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         //MultiDex分包方法
         multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -69,14 +69,14 @@ dependencies {
     implementation rootProject.ext.dependencies["eventbus"]
     //Room
     implementation rootProject.ext.dependencies["room"]
-    kapt rootProject.ext.dependencies["room-compiler"]
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
     implementation rootProject.ext.dependencies["room-support-rxjava"]
     //ARouter
     implementation rootProject.ext.dependencies["arouter"]
-    kapt rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     //dagger2
     implementation rootProject.ext.dependencies["dagger"]
-    kapt rootProject.ext.dependencies["dagger-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     //rxjava
     implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxandroid"]

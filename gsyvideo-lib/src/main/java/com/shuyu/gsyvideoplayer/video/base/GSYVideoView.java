@@ -7,9 +7,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.support.annotation.AttrRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.InflateException;
 import android.view.View;
@@ -39,6 +36,10 @@ import tv.danmaku.ijk.media.player.IjkLibLoader;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 import static com.shuyu.gsyvideoplayer.utils.CommonUtil.getTextSpeed;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * 视频回调与状态处理等相关层

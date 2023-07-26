@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jojo.design.module_discover">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
         <activity
@@ -10,11 +9,11 @@
        防止ACT_PlayVideo切换横竖屏时声明周期重建，频繁请求网络刷新页面-->
         <activity
             android:name=".ui.ACT_CategoryDetail"
-            android:configChanges="keyboardHidden|orientation"></activity>
+            android:configChanges="keyboardHidden|orientation"/>
         <activity
             android:name=".ui.video.ACT_PlayVideo"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
     </application>
 
 

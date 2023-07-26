@@ -1,7 +1,7 @@
 package com.jojo.design.module_core.widgets.cardview
 
+import androidx.cardview.widget.CardView
 
-import android.support.v7.widget.CardView
 
 interface ICardAdapter {
 

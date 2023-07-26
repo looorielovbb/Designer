@@ -1,12 +1,12 @@
-package com.jojo.design.common_base.view
+package com.jojo.design.common_ui.view
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.view.animation.LinearInterpolator
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.LinearInterpolator
 import com.jojo.design.common_ui.R
 
 
@@ -16,7 +16,11 @@ import com.jojo.design.common_ui.R
  *    date   : 2018/12/3 12:14 PM
  *    desc   : 仿IOS 菊花LoadingView
  */
-class IOSLoadingView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
+class IOSLoadingView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
     private var mWidth: Int = 0
 
     private var mHeight: Int = 0
@@ -57,11 +61,14 @@ class IOSLoadingView @JvmOverloads constructor(context: Context, attrs: Attribut
             val attr = typedArray.getIndex(i)
 
             when (attr) {
-                R.styleable.IOS_LoadingView_pathColor -> mSegmentColor = typedArray.getColor(attr, mDefaultColor)
+                R.styleable.IOS_LoadingView_pathColor -> mSegmentColor =
+                    typedArray.getColor(attr, mDefaultColor)
 
-                R.styleable.IOS_LoadingView_segmentLength -> mSegmentLength = typedArray.getDimensionPixelSize(attr, mDefaultSegmentLength)
+                R.styleable.IOS_LoadingView_segmentLength -> mSegmentLength =
+                    typedArray.getDimensionPixelSize(attr, mDefaultSegmentLength)
 
-                R.styleable.IOS_LoadingView_segmentWidth -> mSegmentWidth = typedArray.getDimensionPixelSize(attr, mDefaultSegmentWidth)
+                R.styleable.IOS_LoadingView_segmentWidth -> mSegmentWidth =
+                    typedArray.getDimensionPixelSize(attr, mDefaultSegmentWidth)
             }
 
         }
@@ -103,14 +110,19 @@ class IOSLoadingView @JvmOverloads constructor(context: Context, attrs: Attribut
 
 
     override fun onDraw(canvas: Canvas) {
-
         super.onDraw(canvas)
 
         for (i in 0..11) {
 
             mPaint!!.alpha = (i + 1 + control) % 12 * 255 / 12
 
-            canvas.drawLine(mCenterX.toFloat(), (mCenterY - mSegmentLength).toFloat(), mCenterX.toFloat(), (mCenterY - mSegmentLength * 2).toFloat(), mPaint)
+            canvas.drawLine(
+                mCenterX.toFloat(),
+                (mCenterY - mSegmentLength).toFloat(),
+                mCenterX.toFloat(),
+                (mCenterY - mSegmentLength * 2).toFloat(),
+                mPaint!!
+            )
 
             canvas.rotate(30F, mCenterX.toFloat(), mCenterY.toFloat())
 

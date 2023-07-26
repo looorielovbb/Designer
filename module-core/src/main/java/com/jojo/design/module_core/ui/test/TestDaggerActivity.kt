@@ -8,13 +8,11 @@ import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.utils.ToastUtils
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
-import com.jojo.design.module_core.dagger2.DaggerCoreComponent
 import com.jojo.design.module_core.mvp.contract.TestContract
 import com.jojo.design.module_core.mvp.model.TestModel
 import com.jojo.design.module_core.mvp.presenter.TestPresenter
 import com.smart.novel.util.bindView
-import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.test.*
+import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO
@@ -38,7 +36,7 @@ class TestDaggerActivity : BaseActivity<TestPresenter, TestModel>(), TestContrac
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = multiplestatusview
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerCoreComponent.builder().applicationComponent(mApplicationComponent).build().inject(this)
+//        DaggerCoreComponent.builder().applicationComponent(mApplicationComponent).build().inject(this)
     }
 
     override fun startEvents() {

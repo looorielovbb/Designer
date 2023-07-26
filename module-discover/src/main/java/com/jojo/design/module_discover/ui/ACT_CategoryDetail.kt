@@ -25,7 +25,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 import kotlinx.android.synthetic.main.act_category_detail.*
 
 /**

@@ -1,6 +1,6 @@
-package com.will.weiyuekotlin.component
+package com.jojo.design.common_base.component
 
-import com.will.weiyuekotlin.module.ApplicationModule
+import com.jojo.design.common_base.module.ApplicationModule
 import com.will.weiyuekotlin.module.HttpModule
 
 import dagger.Component

@@ -1,6 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
         <!--给所有在ACT_PlayVideo上面的Activity指定android:configChanges="keyboardHidden|orientation"，
               防止ACT_PlayVideo切换横竖屏时声明周期重建，频繁请求网络刷新页面-->
@@ -19,6 +17,4 @@
         <activity android:name=".ui.designer.ACT_DesignerList" />
         <activity android:name=".ui.common.ACT_CommonWebView" />
     </application>
-
-
 </manifest>

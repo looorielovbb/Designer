@@ -19,7 +19,7 @@ import com.jojo.design.module_core.bean.*
 import com.jojo.design.module_core.mvp.contract.ShoppingContract
 import com.jojo.design.module_core.mvp.model.ShoppingModel
 import com.jojo.design.module_core.mvp.presenter.ShoppingPresenter
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO
@@ -108,9 +108,9 @@ class ShoppingFragmentOld : BaseFragment<ShoppingPresenter, ShoppingModel>(), Sh
     }
 
     override fun getGoodsList(dataList: List<GoodsEntity>) {
-        var mData = ArrayList<ContentBean>()
-        var categoryBean = ContentBean(1, mCategoryList, dataList)
-        var goodsBean = ContentBean(2, mCategoryList, dataList)
+        val mData = ArrayList<ContentBean>()
+        val categoryBean = ContentBean(1, mCategoryList, dataList)
+        val goodsBean = ContentBean(2, mCategoryList, dataList)
 //        var viewPagerBean = ContentBean(3, mCategoryList, dataList)
         mData.add(categoryBean)
         mData.add(goodsBean)

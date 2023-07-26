@@ -1,7 +1,6 @@
 package com.jojo.design.module_core.ui.home
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
@@ -10,7 +9,7 @@ import com.jojo.design.module_core.bean.*
 import com.jojo.design.module_core.mvp.contract.ShoppingContract
 import com.jojo.design.module_core.mvp.model.ShoppingModel
 import com.jojo.design.module_core.mvp.presenter.ShoppingPresenter
-import com.will.weiyuekotlin.component.ApplicationComponent
+import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  * author : JOJO

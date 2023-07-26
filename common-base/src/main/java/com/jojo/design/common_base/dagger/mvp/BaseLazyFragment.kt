@@ -1,6 +1,5 @@
 package com.jojo.design.common_base.dagger.mvp
 
-import android.app.Activity
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -8,13 +7,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.config.constants.BroadCastConstant
 import com.jojo.design.common_ui.dialog.LoadingDialog
@@ -40,9 +39,9 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
     private var isFirstInvisible = true
     private var isPrepared: Boolean = false
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext = context!!
+        mContext = requireContext()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +69,8 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
         startEvents()
     }
 
+    @Suppress("DEPRECATION")
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initPrepare()
@@ -94,6 +95,7 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
     }
 
 
+    @Deprecated("Deprecated in Java")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser) {
@@ -125,7 +127,7 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
     override fun onDetach() {
         super.onDetach()
         try {
-            val childFragmentManager = android.support.v4.app.Fragment::class.java.getDeclaredField("mChildFragmentManager")
+            val childFragmentManager = Fragment::class.java.getDeclaredField("mChildFragmentManager")
             childFragmentManager.isAccessible = true
             childFragmentManager.set(this, null)
 
@@ -160,7 +162,7 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
      * @param value
      */
     protected fun sendCommonBroadcast(value: Int) {
-        sendBroadcast(activity!!, value)
+        sendBroadcast(requireActivity(), value)
     }
 
     /**

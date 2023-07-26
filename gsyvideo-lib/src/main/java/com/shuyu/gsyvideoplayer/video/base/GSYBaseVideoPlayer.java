@@ -186,9 +186,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
 
     /**
      * 克隆切换参数
-     *
-     * @param from
-     * @param to
      */
     private void cloneParams(GSYBaseVideoPlayer from, GSYBaseVideoPlayer to) {
         to.setLooping(from.isLooping());
@@ -423,8 +420,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
         postDelayed(mCheckoutTask, 500);
     }
 
-    /************************* 开放接口 *************************/
-
     /**
      * 旋转处理
      *
@@ -453,8 +448,6 @@ public abstract class GSYBaseVideoPlayer extends GSYVideoControlView {
 
     /**
      * 利用window层播放全屏效果
-     *
-     * @param context
      * @param actionBar 是否有actionBar，有的话需要隐藏
      * @param statusBar 是否有状态bar，有的话需要隐藏
      */

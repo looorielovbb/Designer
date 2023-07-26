@@ -1,21 +1,19 @@
 package com.jojo.design.module_core.ui.test
 
 import android.os.Handler
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_base.utils.ToastUtils
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.adapter.ADA_TestFragment
-import com.jojo.design.module_core.dagger2.DaggerCoreComponent
 import com.jojo.design.module_core.mvp.contract.TestContract
 import com.jojo.design.module_core.mvp.model.TestModel
 import com.jojo.design.module_core.mvp.presenter.TestPresenter
 import com.smart.novel.util.bindView
-import com.will.weiyuekotlin.component.ApplicationComponent
-import kotlinx.android.synthetic.main.test_fragment.*
+import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO
@@ -46,7 +44,7 @@ class TestFragment : BaseFragment<TestPresenter, TestModel>(), TestContract.View
     override fun getLoadingMultipleStatusView(): MultipleStatusView? = multiplestatusview
 
     override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerCoreComponent.builder().applicationComponent(mApplicationComponent).build().inject(this)
+//        DaggerCoreComponent.builder().applicationComponent(mApplicationComponent).build().inject(this)
     }
 
     override fun startFragmentEvents() {

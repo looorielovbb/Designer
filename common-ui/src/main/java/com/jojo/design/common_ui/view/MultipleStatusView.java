@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.jojo.design.common_ui.R;
 
 import java.util.ArrayList;
@@ -22,20 +21,16 @@ import java.util.ArrayList;
  */
 @SuppressWarnings("unused")
 public class MultipleStatusView extends RelativeLayout {
-    private static final String TAG = "MultipleStatusView";
-
-    private static final LayoutParams DEFAULT_LAYOUT_PARAMS =
-            new LayoutParams(LayoutParams.MATCH_PARENT,
-                    LayoutParams.MATCH_PARENT);
-
     public static final int STATUS_CONTENT = 0x00;
     public static final int STATUS_LOADING = 0x01;
     public static final int STATUS_EMPTY = 0x02;
     public static final int STATUS_ERROR = 0x03;
     public static final int STATUS_NO_NETWORK = 0x04;
-
+    private static final String TAG = "MultipleStatusView";
+    private static final LayoutParams DEFAULT_LAYOUT_PARAMS =
+            new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     private static final int NULL_RESOURCE_ID = -1;
-
+    private final ArrayList<Integer> mOtherIds = new ArrayList<>();
     private View mEmptyView;
     private View mErrorView;
     private View mLoadingView;
@@ -46,12 +41,10 @@ public class MultipleStatusView extends RelativeLayout {
     private int mLoadingViewResId;
     private int mNoNetworkViewResId;
     private int mContentViewResId;
-
     private int mViewStatus;
     private LayoutInflater mInflater;
     private OnClickListener mOnRetryClickListener;
-
-    private final ArrayList<Integer> mOtherIds = new ArrayList<>();
+    private SparseArray<View> mViews = new SparseArray<>();
 
     public MultipleStatusView(Context context) {
         this(context, null);
@@ -146,8 +139,6 @@ public class MultipleStatusView extends RelativeLayout {
         }
         showViewById(mEmptyView.getId());
     }
-
-    private SparseArray<View> mViews = new SparseArray<>();
 
     /**
      * 通过viewId获取控件,减少findViewById的次数
