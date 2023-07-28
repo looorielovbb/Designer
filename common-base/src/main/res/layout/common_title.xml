@@ -6,6 +6,8 @@
     android:background="@color/color_212121">
 
     <View
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/view_statusbar"
         android:layout_width="match_parent"
         android:layout_height="20dp"

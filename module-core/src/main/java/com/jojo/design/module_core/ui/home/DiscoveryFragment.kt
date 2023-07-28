@@ -7,7 +7,6 @@ import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.adapter.TextTagsAdapter
-import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO

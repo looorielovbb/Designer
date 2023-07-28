@@ -1,7 +1,6 @@
 package com.jojo.design.module_test.component
 
 import com.jojo.design.module_test.LoginActivity
-import com.jojo.design.common_base.component.ApplicationComponent
 import dagger.Component
 
 /**

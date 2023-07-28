@@ -1,12 +1,15 @@
 package com.jojo.design.module_mall.ui
 
 import android.graphics.Rect
+import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.adapter.rv.MultiItemTypeAdapter
@@ -15,7 +18,6 @@ import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.utils.RecyclerviewHelper
 import com.jojo.design.common_base.utils.ToastUtils
-import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.common_ui.view.MyPopupWindow
 import com.jojo.design.common_ui.view.NoScrollGridView
 import com.jojo.design.module_mall.R
@@ -31,8 +33,6 @@ import com.jojo.design.module_mall.helper.PopupFilter
 import com.jojo.design.module_mall.mvp.contract.SearchContract
 import com.jojo.design.module_mall.mvp.model.SearchModel
 import com.jojo.design.module_mall.mvp.presenter.SearchPresenter
-import com.smart.novel.util.bindView
-import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO
@@ -56,7 +56,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
     var mAdapterfilterPrice: ADA_FilterPrice? = null
     var selectFilterPrice: String? = null
     //    @BindView(R.id.iv_search) lateinit var ivSearch: ImageView //单模块下开发OK，组件化开发会报编译错误
-    private val ivSearch by bindView<ImageView>(R.id.iv_search) //Kotlin下组件化开发时只能使用此种方式，否则会报编译错误。
+    private val ivSearch:ImageView? = null
     var outCategoryId: String? = null
     var keyword: String? = null
     var sort: Int = 0 //最新、最热、推荐
@@ -64,20 +64,19 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
     var isClick = false
     var preBean: CategoryBean? = null
     var preBeanRec: CategoryBean? = null
-    override fun getContentViewLayoutId(): Int = R.layout.act_goods_filter
 
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
 
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-//        DaggerMallComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.act_goods_filter)
     }
 
-    override fun startEvents() {
+    fun startEvents() {
         ivSearch.visibility = View.VISIBLE
-        outCategoryId = intent.extras.getString(ARouterConstants.TAGCATEGORY_ID)
+        outCategoryId = intent.extras.getString(ARouterConstants.TAG_CATEGORY_ID)
         keyword = intent.extras.getString(ARouterConstants.SEARCH_KEYWORDS)
         setHeaderTitle(keyword!!)
-
+        setSupportActionBar()
 
         initGoodsRecyclerview()
 
@@ -130,6 +129,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
      * 初始化商品列表
      */
     private fun initGoodsRecyclerview() {
+        val lrecyclerview = findViewById<>()
         mAdapter = ADA_SearchGoods(mContext)
         RecyclerviewHelper.initLayoutManagerRecyclerView(lrecyclerview, mAdapter!!, GridLayoutManager(mContext, 2), mContext)
         lrecyclerview.setPullRefreshEnabled(false)
@@ -197,7 +197,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
                 var paramsMap = HashMap<String, String>()
                 //传了分类ID，就不传关键字匹配
                 outCategoryId = bean.id.toString()
-                if (bean.id == 0) outCategoryId = intent.extras.getString(ARouterConstants.TAGCATEGORY_ID)
+                if (bean.id == 0) outCategoryId = intent.extras.getString(ARouterConstants.TAG_CATEGORY_ID)
                 requestGoodList(paramsMap)
 
                 rb_category.text = bean.name

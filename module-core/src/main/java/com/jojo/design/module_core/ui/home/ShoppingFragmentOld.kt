@@ -1,11 +1,9 @@
 package com.jojo.design.module_core.ui.home
 
-import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerView
 import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerViewAdapter
@@ -19,7 +17,6 @@ import com.jojo.design.module_core.bean.*
 import com.jojo.design.module_core.mvp.contract.ShoppingContract
 import com.jojo.design.module_core.mvp.model.ShoppingModel
 import com.jojo.design.module_core.mvp.presenter.ShoppingPresenter
-import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO

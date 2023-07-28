@@ -4,5 +4,5 @@
     android:layout_height="wrap_content"
     android:background="@color/color_ffffff">
 
-    <include layout="@layout/common_recyclcerview"></include>
+    <include layout="@layout/common_recyclerview"></include>
 </android.support.constraint.ConstraintLayout>

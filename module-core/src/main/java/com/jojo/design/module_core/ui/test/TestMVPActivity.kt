@@ -11,7 +11,6 @@ import com.jojo.design.module_core.R
 import com.jojo.design.module_core.databinding.ActTestMvpBinding
 import com.jojo.design.module_core.mvp.model.TestModel
 import com.jojo.design.module_core.mvp.presenter.TestPresenter
-import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO

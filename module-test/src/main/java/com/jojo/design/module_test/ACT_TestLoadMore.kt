@@ -1,20 +1,14 @@
 package com.jojo.design.module_test
 
-import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
-import android.view.LayoutInflater
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.dagger.mvp.BaseContract
-import com.jojo.design.common_base.utils.StatusBarHelper
-import com.jojo.design.common_base.utils.ToastUtils
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_test.adapter.ADA_TestLoadMore
-import com.jojo.design.common_base.component.ApplicationComponent
 import kotlinx.android.synthetic.main.act_test_loadmore.*
-import java.util.logging.Handler
 
 /**
  *    author : JOJO

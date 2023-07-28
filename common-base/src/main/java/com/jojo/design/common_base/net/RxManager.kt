@@ -1,7 +1,8 @@
 package com.jojo.design.common_base.net
 
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.observers.DisposableObserver
+
 
 /**
  *    author : JOJO

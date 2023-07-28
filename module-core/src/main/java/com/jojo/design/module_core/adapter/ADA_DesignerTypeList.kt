@@ -25,7 +25,7 @@ class ADA_DesignerTypeList constructor(context: Context) : CommonAdapterListView
 
         holder.convertView.setOnClickListener {
             ARouter.getInstance().build(ARouterConfig.ACT_DESIGNER_LIST)
-                    .withString(ARouterConstants.TAGCATEGORY_ID, bean.categoryId)
+                    .withString(ARouterConstants.TAG_CATEGORY_ID, bean.categoryId)
                     .withString(ARouterConstants.TAG_ID, bean.id)
                     .withString(ARouterConstants.TAG_NAME, bean.name)
                     .navigation()

@@ -16,7 +16,6 @@ import com.jojo.design.module_core.bean.TagCategoryEntity
 import com.jojo.design.module_core.mvp.contract.DesignerContract
 import com.jojo.design.module_core.mvp.model.DesignerModel
 import com.jojo.design.module_core.mvp.presenter.DesignerPresenter
-import com.jojo.design.common_base.component.ApplicationComponent
 import com.jojo.design.common_base.utils.RecyclerviewHelper
 import com.jojo.design.module_core.adapter.ADA_DesignerList
 
@@ -42,7 +41,7 @@ class ACT_DesignerList : BaseActivity<DesignerPresenter, DesignerModel>(), Desig
     override fun startEvents() {
         val extras = intent.extras
         setHeaderTitle(extras.getString(ARouterConstants.TAG_NAME))
-        mPresenter?.getDesinerList(extras.getString(ARouterConstants.TAGCATEGORY_ID), extras.getString(ARouterConstants.TAG_ID))
+        mPresenter?.getDesinerList(extras.getString(ARouterConstants.TAG_CATEGORY_ID), extras.getString(ARouterConstants.TAG_ID))
         mAdapter = ADA_DesignerList(mContext)
         RecyclerviewHelper.initRecyclerView(lrecyclerview, mAdapter!!, mContext)
 

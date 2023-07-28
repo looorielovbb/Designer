@@ -1,10 +1,6 @@
 package com.jojo.design.common_base.net
 
-import okhttp3.internal.Internal.instance
 import java.lang.reflect.ParameterizedType
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
 
 /**
  *    author : JOJO

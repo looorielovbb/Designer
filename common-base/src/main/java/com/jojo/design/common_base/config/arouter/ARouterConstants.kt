@@ -11,25 +11,25 @@ interface ARouterConstants {
         /**
          * 想去App
          */
-        val WEB_URL = "web_url"
-        val WEB_TITLE = "web_title"
-        val TAGCATEGORY_ID = "tagcategory_id"
-        val TAG_ID = "tag_id"
-        val TAG_NAME: String = "tag_name"
-        val SEARCH_KEYWORDS: String = "search_keywords"
-        val PRODUCT_ID: String = "product_id"
+        const val WEB_URL = "web_url"
+        const val WEB_TITLE = "web_title"
+        const val TAG_CATEGORY_ID = "tag_category_id"
+        const val TAG_ID = "tag_id"
+        const val TAG_NAME: String = "tag_name"
+        const val SEARCH_KEYWORDS: String = "search_keywords"
+        const val PRODUCT_ID: String = "product_id"
         /**
          *  开眼视频
          */
-        val CATEGORY_ID: String = "category_id"
-        val CATEGORY_HEAD_IMAGE: String = "category_head_image"
-        val CATEGORY_NAME: String = "category_name"
-        val CATEGORY_BEAN: String = "category_bean"
-        val PLAY_VIDEO_BEAN: String = "play_video_bean"
-        val PLAY_URL: String="play_url"
-        val PLAY_TITLE: String="play_title"
-        val COVER_IMG: String = "cover_img"
-        val VIDEO_BG_IMG: String="video_bg_img"
+        const val CATEGORY_ID: String = "category_id"
+        const val CATEGORY_HEAD_IMAGE: String = "category_head_image"
+        const val CATEGORY_NAME: String = "category_name"
+        const val CATEGORY_BEAN: String = "category_bean"
+        const val PLAY_VIDEO_BEAN: String = "play_video_bean"
+        const val PLAY_URL: String="play_url"
+        const val PLAY_TITLE: String="play_title"
+        const val COVER_IMG: String = "cover_img"
+        const val VIDEO_BG_IMG: String="video_bg_img"
     }
 
 }

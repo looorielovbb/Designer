@@ -4,7 +4,6 @@ import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.module_discover.bean.CategoryBean
 import com.jojo.design.module_discover.bean.ItemEntity
 import com.jojo.design.module_discover.bean.TabEntity
-import io.reactivex.Observable
 
 /**
  *    author : JOJO

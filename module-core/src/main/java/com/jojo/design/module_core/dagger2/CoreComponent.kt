@@ -5,7 +5,6 @@ import com.jojo.design.module_core.ui.home.*
 import com.jojo.design.module_core.ui.test.TestDaggerActivity
 import com.jojo.design.module_core.ui.test.TestFragment
 import com.jojo.design.module_core.ui.test.TestMVPActivity
-import com.jojo.design.common_base.component.ApplicationComponent
 import dagger.Component
 
 /**

@@ -12,7 +12,6 @@ import com.jojo.design.common_base.utils.glide.GlideUtils
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_discover.R
 import com.jojo.design.module_discover.bean.ItemEntity
-import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO

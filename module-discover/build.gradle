@@ -65,6 +65,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
     implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
     implementation "androidx.cardview:cardview:1.0.0"
+    //google material
+    implementation 'com.google.android.material:material:1.9.0'
 
     //constraint layout
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -82,4 +84,7 @@ dependencies {
     implementation rootProject.ext.dependencies["Smarttablayout-utils"]
     implementation rootProject.ext.dependencies["eventbus"]
     implementation rootProject.ext.dependencies["ios-scroll"]
+
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
 }

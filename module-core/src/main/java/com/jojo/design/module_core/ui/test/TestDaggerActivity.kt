@@ -12,7 +12,6 @@ import com.jojo.design.module_core.mvp.contract.TestContract
 import com.jojo.design.module_core.mvp.model.TestModel
 import com.jojo.design.module_core.mvp.presenter.TestPresenter
 import com.smart.novel.util.bindView
-import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO

@@ -8,10 +8,10 @@ package com.jojo.design.common_base.config.constants
  */
 class BroadCastConstant {
     companion object {
-        @JvmField val LOGOUT = 1001
-        @JvmField val LOGIN_SUCCESS = 1002
+        const val LOGOUT = 1001
+        const val LOGIN_SUCCESS = 1002
         //广播相对地址
-        @JvmField val BROADCASE_ADDRESS = ".broadcast"
-        @JvmField val BROADCASE_INTENT = ".intent"
+        const val BROADCAST_ADDRESS = ".broadcast"
+        const val BROADCAST_INTENT = ".intent"
     }
 }

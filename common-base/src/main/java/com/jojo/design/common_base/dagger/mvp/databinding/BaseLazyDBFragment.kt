@@ -172,8 +172,8 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
         try {
             val info = context.packageManager.getPackageInfo(context.packageName, 0)
             val intent = Intent()
-            intent.action = info.packageName + BroadCastConstant.BROADCASE_ADDRESS
-            intent.putExtra(BroadCastConstant.BROADCASE_INTENT, value)
+            intent.action = info.packageName + BroadCastConstant.BROADCAST_ADDRESS
+            intent.putExtra(BroadCastConstant.BROADCAST_INTENT, value)
             context.sendBroadcast(intent)
         } catch (_: PackageManager.NameNotFoundException) {
         }
@@ -186,9 +186,9 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
             try {
                 val info = activity?.packageManager?.getPackageInfo(requireActivity().packageName, 0)
 
-                if (intent.action == info?.packageName + BroadCastConstant.BROADCASE_ADDRESS) {
+                if (intent.action == info?.packageName + BroadCastConstant.BROADCAST_ADDRESS) {
                     val bundle = intent.extras
-                    val i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
+                    val i = bundle!!.getInt(BroadCastConstant.BROADCAST_INTENT)
                     onReceiveBroadcast(i, bundle)
                 }
             } catch (_: PackageManager.NameNotFoundException) {
@@ -203,7 +203,7 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
     private fun registerBroadCastReceiver() {
         try {
             val info = activity?.packageManager?.getPackageInfo(requireActivity().packageName, 0)
-            activity?.registerReceiver(broadcastReceiver, IntentFilter(info?.packageName + BroadCastConstant.BROADCASE_ADDRESS))
+            activity?.registerReceiver(broadcastReceiver, IntentFilter(info?.packageName + BroadCastConstant.BROADCAST_ADDRESS))
             mIsRegisterReceiver = true
         } catch (_: Exception) {
 

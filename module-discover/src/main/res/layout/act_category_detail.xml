@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_ffffff">
     <!--    android:fitsSystemWindows="true" 时，非沉浸式状态栏-->
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +23,7 @@
             app:statusBarScrim="@android:color/transparent"
             app:titleEnabled="false">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -31,21 +32,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:scaleType="fitXY"
-                    android:src="@color/color_212121" />
+                    android:src="@color/color_212121"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:paddingBottom="12dp"
                     android:paddingTop="45dp"
-                    android:text="科技"
+                    android:paddingBottom="12dp"
                     android:textColor="@color/color_ffffff"
                     android:textSize="28sp"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="科技" />
 
                 <com.jojo.design.common_ui.view.LetterSpaceTextView
                     android:id="@+id/tv_des"
@@ -54,25 +58,26 @@
                     android:ellipsize="end"
                     android:paddingBottom="10dp"
                     android:singleLine="true"
-                    android:text="这是描述这是描述"
                     android:textColor="@color/color_dddddd"
                     android:textSize="14sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                    tools:text="这是描述这是描述" />
 
                 <TextView
                     android:id="@+id/tv_care"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="8dp"
-                    android:text="37382人关注"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="8dp"
                     android:textColor="@color/color_dddddd"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/view_div"
                     app:layout_constraintEnd_toStartOf="@+id/view_div"
                     app:layout_constraintTop_toBottomOf="@+id/tv_des"
-                    app:layout_constraintTop_toTopOf="@+id/view_div" />
+                    app:layout_constraintTop_toTopOf="@+id/view_div"
+                    tools:text="37382人关注" />
 
                 <View
                     android:id="@+id/view_div"
@@ -81,29 +86,29 @@
                     android:background="@color/color_ffffff"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_des"></View>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_des" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:text="58925人看过"
                     android:textColor="@color/color_dddddd"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/view_div"
                     app:layout_constraintStart_toEndOf="@+id/view_div"
-                    app:layout_constraintTop_toTopOf="@+id/view_div" />
+                    app:layout_constraintTop_toTopOf="@+id/view_div"
+                    tools:text="58925人看过" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/bg_shape_ffffff_10"
-                    android:paddingBottom="4dp"
                     android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
                     android:paddingTop="4dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="4dp"
                     android:text="+关注"
                     android:textColor="@color/color_333333"
                     android:textSize="13sp"
@@ -112,9 +117,9 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view_div" />
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
@@ -134,19 +139,12 @@
                     android:textSize="17sp"
                     android:textStyle="bold"
                     android:visibility="gone" />
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
-            <!--在tab和toorbar之间的分割线-->
-            <!--<View-->
-            <!--android:id="@+id/view_title_divider"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="2px"-->
-            <!--android:layout_marginTop="68dp"-->
-            <!--android:background="@color/color_eeeeee"-->
-            <!--app:layout_collapseMode="pin"></View>-->
-        </android.support.design.widget.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
         <!--tablayout-->
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/color_ffffff">
@@ -154,8 +152,10 @@
             <View
                 android:id="@+id/view_divier_one"
                 android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="@color/color_eeeeee"></View>
+                android:layout_height="2dp"
+                android:background="@color/color_eeeeee"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.ogaclejapan.smarttablayout.SmartTabLayout
                 android:id="@+id/tablayout"
@@ -179,17 +179,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="2px"
                 android:background="@color/color_eeeeee"
-                app:layout_constraintBottom_toBottomOf="parent"></View>
-        </android.support.constraint.ConstraintLayout>
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

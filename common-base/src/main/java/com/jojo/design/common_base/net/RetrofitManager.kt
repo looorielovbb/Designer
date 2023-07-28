@@ -6,19 +6,20 @@ import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.utils.NetUtils
 import com.smart.novel.net.BaseHttpResponse
 import com.zongxueguan.naochanle_android.retrofitrx.ApiService
-import io.reactivex.Observable
-import io.reactivex.observers.DisposableObserver
+import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.observers.DisposableObserver
 import okhttp3.*
 import okio.Buffer
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import okhttp3.HttpUrl
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 
 
 /**
@@ -66,7 +67,7 @@ object RetrofitManager {
                     retrofit = Retrofit.Builder()
                             .baseUrl(API.BASE_XIANGQU_SERVER_IP)//默认的BaseUrl 建议以/结尾
                             .addConverterFactory(GsonConverterFactory.create())//设置 Json 转换器
-                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//RxJava 适配器
+                            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())//RxJava 适配器
                             .client(mClient)
                             .build()
                 }
@@ -321,7 +322,7 @@ object RetrofitManager {
     /**
      * 建立请求(未封装Json数据的情形)
      */
-    fun <T> doRequest(observable: Observable<T>, observerListener: BaseObserverListener<T>): DisposableObserver<T> {
+    fun <T : Any> doRequest(observable: Observable<@NonNull T>, observerListener: BaseObserverListener<T>): DisposableObserver<T> {
 
         return observable
                 .compose(RxSchedulers.io_main())

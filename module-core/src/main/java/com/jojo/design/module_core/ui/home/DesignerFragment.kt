@@ -13,7 +13,6 @@ import com.jojo.design.module_core.bean.TagCategoryEntity
 import com.jojo.design.module_core.mvp.contract.DesignerContract
 import com.jojo.design.module_core.mvp.model.DesignerModel
 import com.jojo.design.module_core.mvp.presenter.DesignerPresenter
-import com.jojo.design.common_base.component.ApplicationComponent
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems

@@ -8,7 +8,6 @@ import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.bigkoo.convenientbanner.ConvenientBanner
-import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
@@ -24,7 +23,6 @@ import com.jojo.design.module_mall.helper.BannerHelper
 import com.jojo.design.module_mall.mvp.contract.GoodsContract
 import com.jojo.design.module_mall.mvp.model.GoodsModel
 import com.jojo.design.module_mall.mvp.presenter.GoodsPresenter
-import com.jojo.design.common_base.component.ApplicationComponent
 
 /**
  *    author : JOJO

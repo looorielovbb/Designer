@@ -4,7 +4,7 @@ import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.net.BaseResponse
 import com.jojo.design.module_core.bean.*
 import com.smart.novel.net.BaseHttpResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  *    author : JOJO

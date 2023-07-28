@@ -38,7 +38,7 @@ class GoodsCategoryViewType constructor(context: Context) : ItemViewDelegate<Con
         gv.setOnItemClickListener { adapterView, view, i, l ->
             ARouter.getInstance().build(ARouterConfig.ACT_GOODS_FILTER)
                     .withString(ARouterConstants.SEARCH_KEYWORDS, adapter.dataList[i].name)
-                    .withString(ARouterConstants.TAGCATEGORY_ID,  adapter.dataList[i].id)
+                    .withString(ARouterConstants.TAG_CATEGORY_ID,  adapter.dataList[i].id)
                     .navigation()
         }
     }

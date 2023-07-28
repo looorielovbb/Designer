@@ -33,7 +33,6 @@ import com.jojo.design.module_mall.mvp.contract.SearchContract.*
 import com.jojo.design.module_mall.mvp.model.SearchModel
 import com.jojo.design.module_mall.mvp.presenter.SearchPresenter
 import com.smart.novel.adapter.ADA_HotSearchTag
-import com.jojo.design.common_base.component.ApplicationComponent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.*
@@ -55,13 +54,6 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
     lateinit var et_search:EditText
     lateinit var iv_deleteAll:ImageView
 
-
-    override fun getContentViewLayoutId(): Int = R.layout.act_search
-
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
-
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-    }
 
     override fun startEvents() {
         var data = ArrayList<SearchHistoryBean>()
@@ -169,7 +161,7 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
         //跳转到新页面进行搜索结果展示
         ARouter.getInstance().build(ARouterConfig.ACT_GOODS_FILTER)
                 .withString(ARouterConstants.SEARCH_KEYWORDS, keywords)
-                .withString(ARouterConstants.TAGCATEGORY_ID, "")
+                .withString(ARouterConstants.TAG_CATEGORY_ID, "")
                 .navigation()
     }
 

@@ -19,6 +19,7 @@ import com.jojo.design.common_base.config.constants.BroadCastConstant
 import com.jojo.design.common_ui.dialog.LoadingDialog
 import com.jojo.design.common_ui.view.MultipleStatusView
 import org.greenrobot.eventbus.EventBus
+import javax.inject.Inject
 
 /**
  *    author : JOJO
@@ -26,7 +27,7 @@ import org.greenrobot.eventbus.EventBus
  *    date   : 2018/12/5 2:57 PM
  *    desc   : Dagger-MVP-Fragment懒加载
  */
-abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseContract.BaseView {
+abstract class BaseLazyFragment<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> : Fragment(), BaseContract.BaseView {
     lateinit var mLoadingDialog: LoadingDialog
     private var mIsBind: Boolean = false
     private var mIsRegisterReceiver = false
@@ -38,6 +39,14 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
     private var isFirstVisible = true
     private var isFirstInvisible = true
     private var isPrepared: Boolean = false
+
+    @Inject
+    @JvmField
+    var mPresenter: P? = null
+
+    @Inject
+    @JvmField
+    var mModel: M? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,18 +64,14 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return if (getContentViewLayoutId() != 0) {
-            inflater.inflate(getContentViewLayoutId(), null)
-        } else {
-            super.onCreateView(inflater, container, savedInstanceState)
-        }
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //根据子类布局自定义的区域show多状态布局
-        mMultipleStatusView = getLoadingMultipleStatusView()
-        startEvents()
+//        mMultipleStatusView = getLoadingMultipleStatusView()
+        mPresenter?.attachViewModel(this, mModel!!)
     }
 
     @Suppress("DEPRECATION")
@@ -82,18 +87,7 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
             isFirstResume = false
             return
         }
-        if (userVisibleHint) {
-            onUserVisible()
-        }
     }
-
-    override fun onPause() {
-        super.onPause()
-        if (userVisibleHint) {
-            onUserInvisible()
-        }
-    }
-
 
     @Deprecated("Deprecated in Java")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
@@ -102,24 +96,17 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
             if (isFirstVisible) {
                 isFirstVisible = false
                 initPrepare()
-            } else {
-                onUserVisible()
             }
         } else {
             if (isFirstInvisible) {
                 isFirstInvisible = false
-                onFirstUserInvisible()
-            } else {
-                onUserInvisible()
             }
         }
     }
 
 
     @Synchronized private fun initPrepare() {
-        if (isPrepared) {
-            onFirstUserVisible()
-        } else {
+        if (!isPrepared) {
             isPrepared = true
         }
     }
@@ -158,7 +145,6 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
 
     /**
      * 发送一个广播
-     *
      * @param value
      */
     protected fun sendCommonBroadcast(value: Int) {
@@ -167,15 +153,14 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
 
     /**
      * 发送一个广播
-     *
      * @param value
      */
     open fun sendBroadcast(context: Context, value: Int) {
         try {
             val info = context.packageManager.getPackageInfo(context.packageName, 0)
             val intent = Intent()
-            intent.action = info.packageName + BroadCastConstant.BROADCASE_ADDRESS
-            intent.putExtra(BroadCastConstant.BROADCASE_INTENT, value)
+            intent.action = info.packageName + BroadCastConstant.BROADCAST_ADDRESS
+            intent.putExtra(BroadCastConstant.BROADCAST_INTENT, value)
             context.sendBroadcast(intent)
         } catch (e: PackageManager.NameNotFoundException) {
             Log.e("TAG","sendBroadcast",e)
@@ -188,10 +173,9 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
         override fun onReceive(context: Context, intent: Intent) {
             try {
                 val info = activity?.packageManager?.getPackageInfo(requireActivity().packageName, 0)
-
-                if (intent.action == info?.packageName + BroadCastConstant.BROADCASE_ADDRESS) {
+                if (intent.action == info?.packageName + BroadCastConstant.BROADCAST_ADDRESS) {
                     val bundle = intent.extras
-                    val i = bundle!!.getInt(BroadCastConstant.BROADCASE_INTENT)
+                    val i = bundle!!.getInt(BroadCastConstant.BROADCAST_INTENT)
                     onReceiveBroadcast(i, bundle)
                 }
             } catch (e: PackageManager.NameNotFoundException) {
@@ -206,7 +190,7 @@ abstract class BaseLazyFragment : Fragment(), IBase, IBaseLazyFragment, BaseCont
     private fun registerBroadCastReceiver() {
         try {
             val info = activity?.packageManager?.getPackageInfo(requireActivity().packageName, 0)
-            activity?.registerReceiver(broadcastReceiver, IntentFilter(info?.packageName + BroadCastConstant.BROADCASE_ADDRESS))
+            activity?.registerReceiver(broadcastReceiver, IntentFilter(info?.packageName + BroadCastConstant.BROADCAST_ADDRESS))
             mIsRegisterReceiver = true
         } catch (e: Exception) {
             Log.e("TAG","onReceive",e)

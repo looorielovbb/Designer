@@ -4,7 +4,6 @@ import com.jojo.design.module_mall.ui.ACT_GoodsDetail
 import com.jojo.design.module_mall.ui.ACT_GoodsFilter
 import com.jojo.design.module_mall.ui.ACT_Search
 import com.jojo.design.module_mall.ui.FRA_GoodsComment
-import com.jojo.design.common_base.component.ApplicationComponent
 import dagger.Component
 
 /**
@@ -13,7 +12,7 @@ import dagger.Component
  *    date   : 2018/12/5 10:19 AM
  *    desc   :
  */
-@Component(dependencies = [(ApplicationComponent::class)])
+@Component
 interface MallComponent {
     fun inject(activity: ACT_Search)
     fun inject(activity: ACT_GoodsFilter)

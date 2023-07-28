@@ -1,7 +1,6 @@
 package com.jojo.design.module_core.ui.home
 
 import android.os.Bundle
-import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
@@ -12,7 +11,6 @@ import com.jojo.design.module_core.mvp.contract.TopicContract
 import com.jojo.design.module_core.mvp.model.TopicModel
 import com.jojo.design.module_core.mvp.presenter.TopicPresenter
 import com.jojo.design.module_core.widgets.cardview.ShadowTransformer
-import com.jojo.design.common_base.component.ApplicationComponent
 import java.util.ArrayList
 
 /**

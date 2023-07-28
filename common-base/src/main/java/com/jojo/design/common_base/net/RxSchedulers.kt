@@ -1,10 +1,9 @@
 package com.jojo.design.common_base.net
 
-import io.reactivex.Observable
-import io.reactivex.ObservableSource
-import io.reactivex.ObservableTransformer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.ObservableTransformer
+import io.reactivex.rxjava3.schedulers.Schedulers
+
 
 /**
  * 线程调度
@@ -13,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
  */
 
 object RxSchedulers {
-    fun <T> io_main(): ObservableTransformer<T, T> {
+    fun <T:Any> io_main(): ObservableTransformer<T, T> {
         return ObservableTransformer { observable ->
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

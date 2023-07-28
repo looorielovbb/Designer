@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
-import com.jojo.design.common_base.component.ApplicationComponent
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.utils.StatusBarHelper

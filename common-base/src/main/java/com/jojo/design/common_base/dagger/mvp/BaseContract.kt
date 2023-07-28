@@ -26,7 +26,7 @@ interface BaseContract {
         /**
          * 绑定View
          */
-        fun attachViewModel(view: BaseView,model: BaseContract.BaseModel)
+        fun attachViewModel(view: BaseView,model: BaseModel)
 
         /**
          * 解除绑定

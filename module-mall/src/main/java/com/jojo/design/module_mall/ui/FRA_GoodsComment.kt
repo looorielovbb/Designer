@@ -1,6 +1,5 @@
 package com.jojo.design.module_mall.ui
 
-import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_mall.R
@@ -10,11 +9,9 @@ import com.jojo.design.module_mall.bean.CommentBean
 import com.jojo.design.module_mall.bean.GoodsContentBean
 import com.jojo.design.module_mall.bean.GoodsDesBean
 import com.jojo.design.module_mall.bean.RevelentBean
-import com.jojo.design.module_mall.dagger2.DaggerMallComponent
 import com.jojo.design.module_mall.mvp.contract.GoodsContract
 import com.jojo.design.module_mall.mvp.model.GoodsModel
 import com.jojo.design.module_mall.mvp.presenter.GoodsPresenter
-import com.jojo.design.common_base.component.ApplicationComponent
 import kotlinx.android.synthetic.main.fra_goods_comment.*
 
 /**

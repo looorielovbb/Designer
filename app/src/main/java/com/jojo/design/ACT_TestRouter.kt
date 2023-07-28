@@ -18,9 +18,9 @@ import com.jojo.design.databinding.ActTestBinding
 class ACT_TestRouter : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var viewDataBinding = DataBindingUtil.inflate<ActTestBinding>(LayoutInflater.from(this), R.layout.act_test, null, false)
+        val viewDataBinding = DataBindingUtil.inflate<ActTestBinding>(LayoutInflater.from(this), R.layout.act_test, null, false)
         setContentView(viewDataBinding.root)
-        var bean = ErrorBean()
+        val bean = ErrorBean()
         bean.msg = "DataBinding测试"
         viewDataBinding?.bean = bean
     }
