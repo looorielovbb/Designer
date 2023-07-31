@@ -1,9 +1,9 @@
-package cn.foretree.db.star
+package com.jojo.design.common_base.utils
 
-import io.reactivex.Flowable
-import io.reactivex.FlowableTransformer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.FlowableTransformer
+import io.reactivex.rxjava3.schedulers.Schedulers
 import org.reactivestreams.Subscriber
 
 /**
@@ -14,7 +14,7 @@ import org.reactivestreams.Subscriber
  */
 object RxJava2Helper {
     @JvmStatic
-    fun <T> getFlowable(method: () -> T): Flowable<T> {
+    fun <T : Any> getFlowable(method: () -> T): Flowable<T> {
         return object : Flowable<T>() {
             override fun subscribeActual(s: Subscriber<in T>) {
                 try {
@@ -29,11 +29,11 @@ object RxJava2Helper {
     }
 
     @JvmStatic
-    fun <T> io2main(): FlowableTransformer<T, T> {
+    fun <T : Any> io2main(): FlowableTransformer<T, T> {
         return FlowableTransformer { upstream ->
             upstream
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
         }
     }
 }

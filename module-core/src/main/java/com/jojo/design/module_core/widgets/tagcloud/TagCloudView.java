@@ -29,7 +29,6 @@ import android.graphics.Point;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -38,6 +37,8 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+
+import androidx.annotation.IntDef;
 
 import com.jojo.design.module_core.R;
 
@@ -73,7 +74,7 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
     private int minSize;
 
     private boolean isOnTouch = false;
-    private Handler handler = new Handler(Looper.getMainLooper());
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     private TagsAdapter tagsAdapter = new NOPTagsAdapter();
     private OnTagClickListener onTagClickListener;
@@ -100,7 +101,7 @@ public class TagCloudView extends ViewGroup implements Runnable, TagsAdapter.OnD
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TagCloudView);
 
             String m = typedArray.getString(R.styleable.TagCloudView_autoScrollMode);
-            mode = Integer.valueOf(m);
+            mode = Integer.parseInt(m);
 
             setManualScroll(typedArray.getBoolean(R.styleable.TagCloudView_manualScroll, true));
             mAngleX = typedArray.getFloat(R.styleable.TagCloudView_startAngleX, 0.5f);

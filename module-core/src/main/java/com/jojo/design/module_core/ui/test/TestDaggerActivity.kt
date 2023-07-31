@@ -1,17 +1,15 @@
 package com.jojo.design.module_core.ui.test
 
+import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.widget.TextView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.utils.ToastUtils
-import com.jojo.design.common_ui.view.MultipleStatusView
-import com.jojo.design.module_core.R
+import com.jojo.design.module_core.databinding.TestBinding
 import com.jojo.design.module_core.mvp.contract.TestContract
 import com.jojo.design.module_core.mvp.model.TestModel
 import com.jojo.design.module_core.mvp.presenter.TestPresenter
-import com.smart.novel.util.bindView
 
 /**
  *    author : JOJO
@@ -21,25 +19,28 @@ import com.smart.novel.util.bindView
  */
 @Route(path = "/base/act_testdagger")
 class TestDaggerActivity : BaseActivity<TestPresenter, TestModel>(), TestContract.View {
-    private val tv_head by bindView<TextView>(R.id.tv_head)
     override fun getData(result: String) {
         ToastUtils.makeShortToast(result)
-        Log.e("TAG", "result=" + result)
-//        var bean = ErrorBean()
-//        bean.msg = result
-//        viewDataBinding?.bean = bean
+        Log.e("TAG", "result=$result")
     }
 
-    override fun getContentViewLayoutId(): Int = R.layout.test
-
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = multiplestatusview
-
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-//        DaggerCoreComponent.builder().applicationComponent(mApplicationComponent).build().inject(this)
+    lateinit var binding:TestBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = TestBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
-    override fun startEvents() {
-        tv_head.setText("Dagger+MVP-Activity中测试ButterKnife")
+    override fun onStart() {
+        super.onStart()
+        startEvents()
+    }
+
+
+
+
+    private fun startEvents() {
+        binding.tvHead.text = "Dagger+MVP-Activity中测试ButterKnife"
         mMultipleStatusView?.showLoading()
         mPresenter?.getData("presenter init successful Activity-MVP-测试")
         Handler().postDelayed({

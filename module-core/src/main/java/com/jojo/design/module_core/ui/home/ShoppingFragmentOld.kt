@@ -1,7 +1,10 @@
 package com.jojo.design.module_core.ui.home
 
+import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
@@ -14,6 +17,7 @@ import com.jojo.design.module_core.widgets.RefreshView
 import com.jojo.design.module_core.adapter.ADA_ShoppingContent
 import com.jojo.design.module_core.adapter.ADA_TestFragment
 import com.jojo.design.module_core.bean.*
+import com.jojo.design.module_core.databinding.FraShoppingBinding
 import com.jojo.design.module_core.mvp.contract.ShoppingContract
 import com.jojo.design.module_core.mvp.model.ShoppingModel
 import com.jojo.design.module_core.mvp.presenter.ShoppingPresenter
@@ -27,28 +31,25 @@ import com.jojo.design.module_core.mvp.presenter.ShoppingPresenter
 class ShoppingFragmentOld : BaseFragment<ShoppingPresenter, ShoppingModel>(), ShoppingContract.View {
     private var mTitle: String? = null
     private lateinit var lrecyclerview:LRecyclerView
-    override fun getContentViewLayoutId(): Int = R.layout.fra_shopping
+    private var binding:FraShoppingBinding? = null
     lateinit var mAdapter: ADA_ShoppingContent
 
-    override fun onFirstUserVisible() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fra_shopping,container,false)
     }
 
-    override fun onFirstUserInvisible() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        startFragmentEvents()
     }
 
-    override fun onUserVisible() {
-    }
 
-    override fun onUserInvisible() {
-    }
 
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
-
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-//        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
-    }
-
-    override fun startFragmentEvents() {
+     private fun startFragmentEvents() {
 //        var mAdapter = ADA_TestFragment(mContext)
         lrecyclerview = requireView().findViewById(R.id.lrecyclerview)
         mAdapter = ADA_ShoppingContent(requireActivity())
@@ -71,10 +72,10 @@ class ShoppingFragmentOld : BaseFragment<ShoppingPresenter, ShoppingModel>(), Sh
         //设置底部加载文字提示
         lrecyclerview.setFooterViewHint(mContext.resources.getString(R.string.list_footer_loading), mContext.resources.getString(R.string.list_footer_end), mContext.resources.getString(R.string.list_footer_network_error))
         //Headview为RecyclerView时的处理
-        var data = ArrayList<String>()
+        val data = ArrayList<String>()
         (0..50).mapTo(data) { "Item=" + it }
 //        mAdapter.update(data, true)
-        var mAdapter2 = ADA_TestFragment(mContext)
+        val mAdapter2 = ADA_TestFragment(mContext)
         recyclerview.adapter = mAdapter2
         recyclerview.layoutManager = LinearLayoutManager(mContext)
         mAdapter2.update(data.subList(0, 5), true)
@@ -97,7 +98,7 @@ class ShoppingFragmentOld : BaseFragment<ShoppingPresenter, ShoppingModel>(), Sh
         }
     }
 
-    var mCategoryList: ArrayList<CategoryEntity> = ArrayList<CategoryEntity>()
+    private var mCategoryList: ArrayList<CategoryEntity> = arrayListOf()
     override fun getCategoryList(dataList: List<CategoryEntity>) {
         mCategoryList.addAll(dataList)
         //获取商品列表

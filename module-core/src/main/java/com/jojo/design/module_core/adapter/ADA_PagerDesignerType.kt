@@ -1,13 +1,10 @@
 package com.jojo.design.module_core.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.view.ViewPager
-import com.jojo.design.common_base.dagger.mvp.BaseFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.dagger.mvp.BaseLazyFragment
-import com.jojo.design.module_core.R.id.viewpager
-import java.util.ArrayList
 
 /**
  *    author : JOJO
@@ -15,11 +12,14 @@ import java.util.ArrayList
  *    date   : 2018/12/10 9:55 PM
  *    desc   :
  */
-class ADA_PagerDesignerType constructor(fm: FragmentManager, fragmentList: List<BaseLazyFragment>) : FragmentStatePagerAdapter(fm) {
-    var mFragmentList = ArrayList<BaseLazyFragment>()
+class ADA_PagerDesignerType<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> constructor(
+    fm: FragmentManager,
+    fragmentList: List<BaseLazyFragment<P, M>>
+) : FragmentStatePagerAdapter(fm) {
+    var mFragmentList = ArrayList<BaseLazyFragment<P, M>>()
 
     init {
-        mFragmentList = fragmentList as ArrayList<BaseLazyFragment>
+        mFragmentList = fragmentList as ArrayList<BaseLazyFragment<P, M>>
     }
 
     override fun getItem(position: Int): Fragment {

@@ -1,17 +1,16 @@
 package com.jojo.design.module_core.ui.home
 
 import android.os.Bundle
+import android.view.View
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
-import com.jojo.design.common_ui.view.MultipleStatusView
-import com.jojo.design.module_core.R
 import com.jojo.design.module_core.adapter.ADA_TopicPager
 import com.jojo.design.module_core.bean.TopicBean
 import com.jojo.design.module_core.bean.TopicDetailEntity
+import com.jojo.design.module_core.databinding.FraTopicBinding
 import com.jojo.design.module_core.mvp.contract.TopicContract
 import com.jojo.design.module_core.mvp.model.TopicModel
 import com.jojo.design.module_core.mvp.presenter.TopicPresenter
 import com.jojo.design.module_core.widgets.cardview.ShadowTransformer
-import java.util.ArrayList
 
 /**
  *    author : JOJO
@@ -24,7 +23,7 @@ class TopicFragment : BaseFragment<TopicPresenter, TopicModel>(), TopicContract.
     private val mDatas = ArrayList<TopicBean>()
     private var mCardAdapter: ADA_TopicPager? = null
     private var mCardShadowTransformer: ShadowTransformer? = null
-    override fun getContentViewLayoutId(): Int = R.layout.fra_topic
+    private var binding: FraTopicBinding? = null
 
     companion object {
         fun getInstance(title: String): TopicFragment {
@@ -36,34 +35,26 @@ class TopicFragment : BaseFragment<TopicPresenter, TopicModel>(), TopicContract.
         }
     }
 
-    override fun onFirstUserVisible() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FraTopicBinding.bind(view)
+        startFragmentEvents()
     }
 
-    override fun onFirstUserInvisible() {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
-    override fun onUserVisible() {
-    }
-
-    override fun onUserInvisible() {
-    }
-
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
-
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-//        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
-    }
-
-    override fun startFragmentEvents() {
+    private fun startFragmentEvents() {
         mPresenter?.getTopics("131")
         mPresenter?.getTopicDetail("5192")
-
         mCardAdapter = ADA_TopicPager(mContext, mDatas)
-        mCardShadowTransformer = ShadowTransformer(vp_card, mCardAdapter!!)
+        mCardShadowTransformer = ShadowTransformer(binding?.vpCard!!, mCardAdapter!!)
         mCardShadowTransformer?.enableScaling(true)
-        vp_card.adapter = mCardAdapter
-        vp_card.setPageTransformer(false, mCardShadowTransformer)
-        vp_card.offscreenPageLimit = 3
+        binding?.vpCard?.adapter = mCardAdapter
+        binding?.vpCard?.setPageTransformer(false, mCardShadowTransformer)
+        binding?.vpCard?.offscreenPageLimit = 3
     }
 
     override fun getTopics(dataList: List<TopicBean>) {

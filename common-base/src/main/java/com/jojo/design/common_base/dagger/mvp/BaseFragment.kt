@@ -8,6 +8,6 @@ import androidx.databinding.ViewDataBinding
  *    date   : 2018/12/5 3:51 PM
  *    desc   : Dagger2-MVP-BaseFragment
  */
-open class BaseFragment<P : BaseContract.BasePresenter, M : BaseContract.BaseModel>() : BaseLazyFragment<P,M>() {
+open class BaseFragment<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> : BaseLazyFragment<P,M>() {
 
 }

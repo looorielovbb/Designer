@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="bean"
-            type="com.jojo.design.common_base.bean.ErrorBean"></variable>
+            type="com.jojo.design.common_base.bean.ErrorBean" />
     </data>
 
-
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,7 +19,8 @@
             android:layout_height="100dp"
             android:gravity="center"
             android:text="Fragment测试"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.jojo.design.common_ui.view.MultipleStatusView
             android:id="@+id/multiplestatusview"
@@ -45,13 +45,12 @@
                 android:textColor="@color/color_ffffff"
                 android:textSize="20sp" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_txt"></android.support.v7.widget.RecyclerView>
+                android:layout_below="@+id/tv_txt" />
         </com.jojo.design.common_ui.view.MultipleStatusView>
-    </android.support.constraint.ConstraintLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -13,7 +13,7 @@ import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.utils.StatusBarHelper
-import com.jojo.design.module_core.mvp.contract.CategoryContract
+import com.jojo.design.module_discover.mvp.contract.CategoryContract
 import com.jojo.design.module_core.mvp.model.CategoryModel
 import com.jojo.design.module_core.mvp.presenter.CategoryPresenter
 import com.jojo.design.module_discover.R
@@ -95,7 +95,7 @@ class ACT_Category : BaseActivity<CategoryPresenter, CategoryModel>(), CategoryC
         mAdapter?.update(dataList, true)
     }
 
-    override fun getCategorieDetail(dataBean: ItemEntity) {
+    override fun getCategoryDetail(dataBean: ItemEntity) {
     }
 
 }

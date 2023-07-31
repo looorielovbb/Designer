@@ -13,4 +13,5 @@
 
     <!--StatusBarHelper-->
     <item type="id" name="fake_status_bar_view" />
+    <item name="tag_view_binding" type="id">view_binding_tag</item>
 </resources>

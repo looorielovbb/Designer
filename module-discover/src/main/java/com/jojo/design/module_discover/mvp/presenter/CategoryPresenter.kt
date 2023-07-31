@@ -1,10 +1,9 @@
 package com.jojo.design.module_core.mvp.presenter
 
-import android.util.Log
 import com.jojo.design.common_base.dagger.mvp.BasePresenter
 import com.jojo.design.common_base.net.RetrofitManager
 import com.jojo.design.common_base.net.RxObserverListener
-import com.jojo.design.module_core.mvp.contract.CategoryContract
+import com.jojo.design.module_discover.mvp.contract.CategoryContract
 import com.jojo.design.module_discover.bean.CategoryBean
 import com.jojo.design.module_discover.bean.ItemEntity
 import com.jojo.design.module_discover.bean.TabEntity
@@ -41,9 +40,9 @@ class CategoryPresenter @Inject constructor() : BasePresenter<CategoryContract.V
 
     override fun getCategorieDetail(id: String, tabType: Int) {
         mView?.showDialogLoading("")
-        rxManager?.addObserver(RetrofitManager.doRequest(mModel!!.getCategorieDetail(id, tabType), object : RxObserverListener<ItemEntity>(mView) {
+        rxManager?.addObserver(RetrofitManager.doRequest(mModel!!.getCategoryDetail(id, tabType), object : RxObserverListener<ItemEntity>(mView) {
             override fun onSuccess(result: ItemEntity?) {
-                mView?.getCategorieDetail(result!!)
+                mView?.getCategoryDetail(result!!)
                 mView?.dismissDialogLoading()
             }
 

@@ -6,17 +6,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.config.constants.BroadCastConstant
 import com.jojo.design.common_base.dagger.mvp.BaseContract
-import com.jojo.design.common_base.dagger.mvp.IBase
-import com.jojo.design.common_base.dagger.mvp.IBaseLazyFragment
 import com.jojo.design.common_ui.dialog.LoadingDialog
 import com.jojo.design.common_ui.view.MultipleStatusView
 import org.greenrobot.eventbus.EventBus
@@ -27,22 +21,20 @@ import org.greenrobot.eventbus.EventBus
  *    date   : 2018/12/5 2:57 PM
  *    desc   : Dagger-MVP-Fragment懒加载-支持DataBinding
  */
-abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseContract.BaseView {
+abstract class BaseLazyDBFragment : Fragment(), BaseContract.BaseView {
     private lateinit var mLoadingDialog: LoadingDialog
     private var mIsBind: Boolean = false
     private var mIsRegisterReceiver = false
-    private var viewDataBinding: ViewDataBinding? = null
     protected lateinit var mContext: Context
     private var mMultipleStatusView: MultipleStatusView? = null
 
-    private var isFirstResume = true
     private var isFirstVisible = true
     private var isFirstInvisible = true
     private var isPrepared: Boolean = false
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext = context!!
+        mContext = context
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,74 +47,10 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
         registerBroadCastReceiver()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return if (getContentViewLayoutId() != 0) {
-            viewDataBinding = DataBindingUtil.inflate(inflater, getContentViewLayoutId(), null, false)
-            viewDataBinding?.root
-        } else {
-            super.onCreateView(inflater, container, savedInstanceState)
-        }
-
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //根据子类布局自定义的区域show多状态布局
-        mMultipleStatusView = getLoadingMultipleStatusView()
-        startEvents()
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initPrepare()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (isFirstResume) {
-            isFirstResume = false
-            return
-        }
-        if (userVisibleHint) {
-            onUserVisible()
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (userVisibleHint) {
-            onUserInvisible()
-        }
-    }
-
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            if (isFirstVisible) {
-                isFirstVisible = false
-                initPrepare()
-            } else {
-                onUserVisible()
-            }
-        } else {
-            if (isFirstInvisible) {
-                isFirstInvisible = false
-                onFirstUserInvisible()
-            } else {
-                onUserInvisible()
-            }
-        }
-    }
-
-
-    @Synchronized private fun initPrepare() {
-        if (isPrepared) {
-            onFirstUserVisible()
-        } else {
-            isPrepared = true
-        }
+        mMultipleStatusView = MultipleStatusView(mContext)
     }
 
     override fun onDetach() {
@@ -131,7 +59,6 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
             val childFragmentManager = Fragment::class.java.getDeclaredField("mChildFragmentManager")
             childFragmentManager.isAccessible = true
             childFragmentManager.set(this, null)
-
         } catch (e: NoSuchFieldException) {
             throw RuntimeException(e)
         } catch (e: IllegalAccessException) {
@@ -161,7 +88,7 @@ abstract class BaseLazyDBFragment : Fragment(), IBase, IBaseLazyFragment, BaseCo
      * @param value
      */
     protected fun sendCommonBroadcast(value: Int) {
-        sendBroadcast(activity!!, value)
+        sendBroadcast(requireActivity(), value)
     }
 
     /**

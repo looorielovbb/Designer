@@ -13,7 +13,7 @@ import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.utils.StatusBarHelper
 import com.jojo.design.common_base.utils.glide.GlideUtils
-import com.jojo.design.module_core.mvp.contract.CategoryContract
+import com.jojo.design.module_discover.mvp.contract.CategoryContract
 import com.jojo.design.module_core.mvp.model.CategoryModel
 import com.jojo.design.module_core.mvp.presenter.CategoryPresenter
 import com.jojo.design.module_discover.R
@@ -112,10 +112,10 @@ class ACT_CategoryDetail : BaseActivity<CategoryPresenter, CategoryModel>(), Cat
      */
     private fun initToorbar() {
         val tv_title = findViewById<TextView>(R.id.tv_title)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         val appbar = findViewById<AppBarLayout>(R.id.appbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false);
+//        setSupportActionBar(toolbar)
+//        supportActionBar?.setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow_white)
         toolbar.setNavigationOnClickListener { onBackPressed() }
         tv_title.text = intent.extras?.getString(ARouterConstants.CATEGORY_NAME)
@@ -131,7 +131,7 @@ class ACT_CategoryDetail : BaseActivity<CategoryPresenter, CategoryModel>(), Cat
     override fun getCategories(dataList: List<CategoryBean>) {
     }
 
-    override fun getCategorieDetail(dataBean: ItemEntity) {
+    override fun getCategoryDetail(dataBean: ItemEntity) {
     }
 
     /**

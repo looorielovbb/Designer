@@ -1,9 +1,9 @@
 package com.jojo.design.module_core.adapter
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.adapter.rv.CommonAdapter
 import com.jojo.design.common_base.adapter.rv.ViewHolder
@@ -31,12 +31,12 @@ class ADA_ItemGoods constructor(context: Context) : CommonAdapter<GoodsEntity>(c
         rvGoods.adapter = adapter
         adapter.update(bean.items, true)
 
-        holder.setOnClickListener(R.id.iv_image, {
+        holder.setOnClickListener(R.id.iv_image) {
             ARouter.getInstance().build(ARouterConfig.ACT_WEB_VIEW)
-                    .withString(ARouterConstants.WEB_TITLE, bean.name)
-                    .withString(ARouterConstants.WEB_URL, bean.h5Url)
-                    .navigation()
-        })
+                .withString(ARouterConstants.WEB_TITLE, bean.name)
+                .withString(ARouterConstants.WEB_URL, bean.h5Url)
+                .navigation()
+        }
     }
 
     override fun itemLayoutId(): Int = R.layout.item_goods

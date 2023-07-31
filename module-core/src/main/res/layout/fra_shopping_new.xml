@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,7 @@
         android:id="@+id/ll_title"
         layout="@layout/common_search_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></include>
+        android:layout_height="wrap_content" />
 
     <com.jojo.design.module_core.widgets.MyNestedScrollView
         android:id="@+id/scrollView"
@@ -22,16 +23,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content" />
             <!--TabLayout+ViewPager-->
             <RelativeLayout
                 android:id="@+id/rl_tablayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/fade_status_bar">
+                android:layout_height="50dp">
 
                 <com.ogaclejapan.smarttablayout.SmartTabLayout
                     android:id="@+id/tablayout"
@@ -51,7 +51,7 @@
                     app:stl_underlineThickness="0dp" />
             </RelativeLayout>
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/vp_shoping"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

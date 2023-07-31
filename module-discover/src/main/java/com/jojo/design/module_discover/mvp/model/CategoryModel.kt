@@ -1,11 +1,11 @@
 package com.jojo.design.module_core.mvp.model
 
-import com.jojo.design.module_core.mvp.contract.CategoryContract
+import com.jojo.design.module_discover.mvp.contract.CategoryContract
 import com.jojo.design.module_core.net.NetFoundProvider
 import com.jojo.design.module_discover.bean.CategoryBean
 import com.jojo.design.module_discover.bean.ItemEntity
 import com.jojo.design.module_discover.bean.TabEntity
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 /**
@@ -19,7 +19,7 @@ class CategoryModel @Inject constructor() : CategoryContract.Model {
 
     override fun getCategories(): Observable<List<CategoryBean>> = NetFoundProvider.requestService.getCategories()
 
-    override fun getCategorieDetail(id: String, tabType: Int): Observable<ItemEntity> {
+    override fun getCategoryDetail(id: String, tabType: Int): Observable<ItemEntity> {
         var observable: Observable<ItemEntity>? = null
         when (tabType) {
             0, 1 -> observable = NetFoundProvider.requestService.getCategorieDetail(id)

@@ -1,6 +1,7 @@
 package com.jojo.design.module_discover.ui.video
 
 import android.content.res.Configuration
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -9,9 +10,11 @@ import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.utils.glide.GlideUtils
-import com.jojo.design.common_ui.view.MultipleStatusView
-import com.jojo.design.module_discover.R
 import com.jojo.design.module_discover.bean.ItemEntity
+import com.jojo.design.module_discover.databinding.ActPlayvideoBinding
+import com.shuyu.gsyvideoplayer.utils.OrientationUtils
+import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
+
 
 /**
  *    author : JOJO
@@ -29,23 +32,27 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
     var orientationUtils: OrientationUtils? = null
     var isPlay: Boolean = false
     var isPause: Boolean = false
-    override fun getContentViewLayoutId(): Int = R.layout.act_playvideo
 
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
     override fun getOverridePendingTransitionMode(transitionMode: TransitionMode): TransitionMode {
         return super.getOverridePendingTransitionMode(TransitionMode.BOTTOM)
     }
 
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
+    private lateinit var binding:ActPlayvideoBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActPlayvideoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
-    override fun startEvents() {
 
-        playTitile = intent.extras.getString(ARouterConstants.PLAY_TITLE)
-        playUrl = intent.extras.getString(ARouterConstants.PLAY_URL)
-        coverImg = intent.extras.getString(ARouterConstants.COVER_IMG)
-        bgImg = intent.extras.getString(ARouterConstants.VIDEO_BG_IMG)
-        tv_title.text = playTitile
+
+    private fun startEvents() {
+
+        playTitile = intent.extras?.getString(ARouterConstants.PLAY_TITLE)
+        playUrl = intent.extras?.getString(ARouterConstants.PLAY_URL)
+        coverImg = intent.extras?.getString(ARouterConstants.COVER_IMG)
+        bgImg = intent.extras?.getString(ARouterConstants.VIDEO_BG_IMG)
+        binding.tvTitle.text = playTitile
         //加载视频背景图片
 //        GlideUtils.loadBackgroudView(mContext, bgImg!!, layout_root)
 
@@ -59,30 +66,30 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
         //设置加载时封面
         val ivCoverVideo = ImageView(this)
         ivCoverVideo.scaleType = ImageView.ScaleType.CENTER_CROP
-        videoPlayer.thumbImageView = ivCoverVideo
+        binding.videoPlayer.thumbImageView = ivCoverVideo
         GlideUtils.loadNormalImage(coverImg!!, ivCoverVideo, 0)
-        videoPlayer.setUp(playUrl, false, "")
+        binding.videoPlayer.setUp(playUrl, false, "")
 
         //设置显示比例:全局的，所以页面显示比例不一样时，需重新设置
         GSYVideoType.setShowType(GSYVideoType.SCREEN_TYPE_DEFAULT)
         //增加title
-        videoPlayer.titleTextView.visibility = View.VISIBLE
+        binding.videoPlayer.titleTextView.visibility = View.VISIBLE
         //设置返回键
-        videoPlayer.backButton.visibility = View.VISIBLE
+        binding.videoPlayer.backButton.visibility = View.VISIBLE
         //设置旋转
-        orientationUtils = OrientationUtils(this, videoPlayer)
+        orientationUtils = OrientationUtils(this, binding.videoPlayer)
         //初始化不打开外部的旋转
         orientationUtils!!.isEnable = false
-        videoPlayer.isShowFullAnimation = false
-        videoPlayer.isNeedLockFull = true
+        binding.videoPlayer.isShowFullAnimation = false
+        binding.videoPlayer.isNeedLockFull = true
         //是否可以滑动调整
-        videoPlayer.setIsTouchWiget(true)
+        binding.videoPlayer.setIsTouchWiget(true)
 
         //视频播放相关操作事件监听
         initVideoListener()
 
         //打开页面即开始播放
-        videoPlayer.startPlayLogic()
+        binding.videoPlayer.startPlayLogic()
     }
 
     /**
@@ -90,17 +97,17 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
      */
     private fun initVideoListener() {
         //设置返回按键功能
-        videoPlayer.backButton.setOnClickListener { v -> onBackPressed() }
+        binding.videoPlayer.backButton.setOnClickListener { v -> onBackPressed() }
         //设置全屏按键功能,这是使用的是选择屏幕，而不是全屏
-        videoPlayer.fullscreenButton.setOnClickListener { v -> orientationUtils?.resolveByClick() }
+        binding.videoPlayer.fullscreenButton.setOnClickListener { v -> orientationUtils?.resolveByClick() }
 
-        videoPlayer.setLockClickListener({ view, lock ->
+        binding.videoPlayer.setLockClickListener { view, lock ->
             if (orientationUtils != null) {
                 //配合下方的onConfigurationChanged
                 orientationUtils!!.isEnable = !lock
             }
-        })
-        videoPlayer.setStandardVideoAllCallBack(object : SampleListener() {
+        }
+        binding.videoPlayer.setStandardVideoAllCallBack(object : SampleListener() {
             override fun onPrepared(url: String, vararg objects: Any) {
                 super.onPrepared(url, objects)
                 //开始播放了才能旋转和全屏
@@ -134,7 +141,7 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
         super.onConfigurationChanged(newConfig)
         //如果旋转了就全屏
         if (isPlay && !isPause) {
-            videoPlayer.onConfigurationChanged(this, newConfig, orientationUtils!!)
+            binding.videoPlayer.onConfigurationChanged(this, newConfig, orientationUtils!!)
         }
     }
 

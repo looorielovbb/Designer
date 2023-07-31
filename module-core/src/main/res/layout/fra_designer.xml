@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="user"
             type="com.jojo.design.common_base.bean.ErrorBean"/>
@@ -39,14 +38,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/bg_banner_header" />
+                        android:src="@drawable/bg_banner_header"
+                        android:contentDescription="iv" />
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/btm_mask" />
+                        android:src="@drawable/btm_mask"
+                        android:contentDescription="iv" />
                 </RelativeLayout>
 
                 <!--不透明度背景-->
@@ -112,7 +113,7 @@
                 <com.jojo.design.common_ui.view.CustomViewPager
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="1800px"
+                    android:layout_height="1080dp"
                     app:layout_constraintTop_toBottomOf="@+id/tab"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

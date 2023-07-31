@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.jojo.design.common_base.R
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.config.constants.BroadCastConstant
@@ -25,7 +26,7 @@ import javax.inject.Inject
  *    desc   : Dagger2_MVP-Activity的基类 (Activity动画、事件订阅EventBus/广播、状态栏、ButterKnife，多状态View切换)
  */
 open class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> :
-    AppCompatActivity(), BaseContract.BaseView {
+    FragmentActivity(), BaseContract.BaseView {
     @Inject
     @JvmField
     var mPresenter: P? = null

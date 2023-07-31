@@ -11,7 +11,7 @@ import dagger.Component
  *    date   : 2019/1/18 14:29 PM
  *    desc   : Dagger2
  */
-@Component(dependencies = [(ApplicationComponent::class)])
+@Component(dependencies = [])
 interface FoundComponent {
     fun inject(activity: ACT_Category)
     fun inject(activity: ACT_CategoryDetail)

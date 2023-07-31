@@ -47,14 +47,48 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "androidx.cardview:cardview:1.0.0"
+    //BaseAdapter
+    implementation 'com.github.GraceJoJo:DataBindingBaseAdapter:1.0.1'
+
+    //MultiDex分包
     implementation rootProject.ext.dependencies["multidex"]
+    //net request
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+    implementation rootProject.ext.dependencies["retrofit-adapter"]
+    implementation rootProject.ext.dependencies["retrofit-log"]
+
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
+
+    //ARouter
+    implementation rootProject.ext.dependencies["arouter"]
+    annotationProcessor  rootProject.ext.dependencies["arouter-compiler"]
+
+    //dagger2
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    //事件订阅
+    implementation rootProject.ext.dependencies["eventbus"]
+
+    //图片
+    implementation rootProject.ext.dependencies["glide"]
+
+    //数据库
+    implementation rootProject.ext.dependencies["room"]
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
+
     implementation rootProject.ext.dependencies["FlycoTabLayout"]
     implementation rootProject.ext.dependencies["Smarttablayout"]
     implementation rootProject.ext.dependencies["Smarttablayout-utils"]
     implementation rootProject.ext.dependencies["banner"]
     implementation rootProject.ext.dependencies["ios-scroll"]
+
 }

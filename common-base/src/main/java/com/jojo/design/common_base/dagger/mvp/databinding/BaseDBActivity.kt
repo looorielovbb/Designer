@@ -6,16 +6,12 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.LayoutInflater
-import androidx.databinding.DataBindingUtil
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.FragmentActivity
-import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.R
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.config.constants.BroadCastConstant
 import com.jojo.design.common_base.dagger.mvp.BaseContract
-import com.jojo.design.common_base.dagger.mvp.IBase
 import com.jojo.design.common_base.utils.StatusBarHelper
 import com.jojo.design.common_ui.dialog.LoadingDialog
 import com.jojo.design.common_ui.view.MultipleStatusView
@@ -28,7 +24,8 @@ import javax.inject.Inject
  *    date   : 2018/12/4 9:21 PM
  *    desc   : Dagger2_MVP-Activity的基类 (Activity动画、支持DataBinding、事件订阅EventBus/广播、状态栏、ButterKnife，多状态View切换)
  */
-abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel, DB : ViewDataBinding> : FragmentActivity(), IBase, BaseContract.BaseView {
+abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel, DB : ViewDataBinding> :
+    AppCompatActivity(), BaseContract.BaseView {
     @Inject
     @JvmField
     var mPresenter: P? = null
@@ -37,13 +34,13 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
     @JvmField
     var mModel: M? = null
 
-    protected var mMultipleStatusView: MultipleStatusView? = null
-    protected lateinit var mContext: Context
+    private lateinit var mContext: Context
     protected var viewDataBinding: DB? = null
-    protected var mIsBind: Boolean = false
-    protected var mTransitionMode = TransitionMode.RIGHT
-    protected var mIsRegisterReceiver = false
-    lateinit var mLoadingDialog: LoadingDialog
+    private var mIsBind: Boolean = false
+    private var mTransitionMode = TransitionMode.RIGHT
+    private var mIsRegisterReceiver = false
+    private lateinit var mLoadingDialog: LoadingDialog
+    protected var mMultipleStatusView:MultipleStatusView? = null
 
     /**
      * OverridePendingTransition
@@ -56,24 +53,8 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
         super.onCreate(savedInstanceState)
         mContext = this
         mLoadingDialog = LoadingDialog(this)
-
-        if (getContentViewLayoutId() != 0) {
-            viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(this), getContentViewLayoutId(), null, false)
-            setContentView(viewDataBinding?.root)
-        } else {
-            throw IllegalArgumentException("You must return a right contentView layout resource Id")
-        }
-
         //根据子类布局自定义的区域show多状态布局
-        mMultipleStatusView = getLoadingMultipleStatusView()
         //如果子类返回null,则处理成showloading为整个布局范围
-        if (mMultipleStatusView == null) {
-            mMultipleStatusView = MultipleStatusView(this)
-            viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(this), getContentViewLayoutId(), mMultipleStatusView, true)
-            setContentView(mMultipleStatusView)
-        }
-
-        initDaggerInject(BaseApplication.mApplicationComponent)
         mPresenter?.attachViewModel(this, mModel!!)
 
         //Activity默认动画为右进右出
@@ -94,17 +75,20 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
         }
         registerBroadCastReceiver()
         //设置沉浸式状态栏
-        StatusBarHelper.setStatusBar(this,
+        StatusBarHelper.setStatusBar(
+            this,
             useThemeStatusBarColor = false,
             isStatusBarLightMode = true
         )
-        startEvents()
     }
 
+    override fun onStart() {
+        super.onStart()
+        mMultipleStatusView = MultipleStatusView(mContext)
+    }
 
     /**
      * 发送一个广播
-     *
      * @param value
      */
     protected fun sendCommonBroadcast(value: Int) {
@@ -113,7 +97,6 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
 
     /**
      * 发送一个广播
-     *
      * @param value
      */
     open fun sendBroadcast(context: Context, value: Int) {
@@ -125,7 +108,6 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
             context.sendBroadcast(intent)
         } catch (_: PackageManager.NameNotFoundException) {
         }
-
     }
 
     //广播接收器
@@ -141,7 +123,6 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
                 }
             } catch (_: PackageManager.NameNotFoundException) {
             }
-
         }
     }
 
@@ -151,7 +132,10 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
     private fun registerBroadCastReceiver() {
         try {
             val info = packageManager.getPackageInfo(packageName, 0)
-            registerReceiver(broadcastReceiver, IntentFilter(info.packageName + BroadCastConstant.BROADCAST_ADDRESS))
+            registerReceiver(
+                broadcastReceiver,
+                IntentFilter(info.packageName + BroadCastConstant.BROADCAST_ADDRESS)
+            )
             mIsRegisterReceiver = true
         } catch (_: Exception) {
         }
@@ -191,6 +175,7 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
                 broadcastReceiver = null
             }
         }
+        mMultipleStatusView = null
         mPresenter?.detachView()
         mPresenter?.onDestroy()
 
@@ -220,11 +205,11 @@ abstract class BaseDBActivity<P : BaseContract.BasePresenter, M : BaseContract.B
     }
 
     override fun showBusinessError(error: ErrorBean) {
-        mMultipleStatusView?.showError()
+//        mMultipleStatusView?.showError()
     }
 
     override fun showException(error: ErrorBean) {
-        mMultipleStatusView?.showNoNetwork()
+//        mMultipleStatusView?.showNoNetwork()
     }
 
 }

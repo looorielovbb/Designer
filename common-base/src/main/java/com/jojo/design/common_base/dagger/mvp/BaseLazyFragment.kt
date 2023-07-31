@@ -63,10 +63,6 @@ abstract class BaseLazyFragment<P : BaseContract.BasePresenter, M : BaseContract
         registerBroadCastReceiver()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //根据子类布局自定义的区域show多状态布局

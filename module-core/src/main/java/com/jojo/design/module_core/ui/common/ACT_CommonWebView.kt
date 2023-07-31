@@ -18,9 +18,8 @@ import com.jojo.design.module_core.R
  *    desc   : 公共的加载Url的WebView
  */
 @Route(path = ARouterConfig.ACT_WEB_VIEW)
-class ACT_CommonWebView<> : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel>(),BaseContract.BaseView {
+class ACT_CommonWebView : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel>(),BaseContract.BaseView {
     private var webUrl: String? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +28,14 @@ class ACT_CommonWebView<> : BaseActivity<BaseContract.BasePresenter, BaseContrac
     }
 
     fun startEvents() {
-        setHeaderTitle(intent.extras.getString(ARouterConstants.WEB_TITLE))
-        webUrl = intent.extras.getString(ARouterConstants.WEB_URL)
+        setHeaderTitle(intent.extras?.getString(ARouterConstants.WEB_TITLE)!!)
+        webUrl = intent.extras?.getString(ARouterConstants.WEB_URL)
         initWebView()
     }
 
     private fun initWebView() {
         val webview =findViewById<WebView>(R.id.webview)
-        webview.loadUrl(webUrl)
+        webview.loadUrl(webUrl!!)
         webview.getSettings().javaScriptEnabled = true
         webview.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
         webview.settings.domStorageEnabled = true
@@ -53,7 +52,8 @@ class ACT_CommonWebView<> : BaseActivity<BaseContract.BasePresenter, BaseContrac
             }
         }
         webview.webViewClient = object : WebViewClient() {
-            @Deprecated
+
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
                 return true

@@ -2,7 +2,6 @@ package com.jojo.design.module_core.widgets;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -11,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.jojo.design.common_ui.lrecyclerview.interfaces.IRefreshHeader;
 import com.jojo.design.module_core.R;
@@ -83,7 +84,8 @@ public class RefreshView extends LinearLayout implements IRefreshHeader {
         tvStatus.setText("别拉我...");
         if (getVisibleHeight() > 0 || offSet > 0) {
             setVisibleHeight((int) offSet + getVisibleHeight());
-            Log.e("height", "getVisibleHeight()=" + getVisibleHeight() + "*****mMeasureHeight=" + mMeasureHeight + "*****getMeasuredHeight()=" + getMeasuredHeight());
+            Log.e("height", "getVisibleHeight()=" + getVisibleHeight()
+                    + "*****mMeasureHeight=" + mMeasureHeight + "*****getMeasuredHeight()=" + getMeasuredHeight());
             if (getVisibleHeight() > mMeasureHeight) {
                 onPrepare();
             } else {

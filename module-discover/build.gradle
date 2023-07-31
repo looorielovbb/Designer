@@ -33,11 +33,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //支持DataBinding
+
+    viewBinding{
+        enable = true
+    }
+
     dataBinding {
         enabled = true
     }
-
 
     //java插件引入了一个概念叫做SourceSets，通过修改SourceSets中的属性，可以指定哪些源文件
     //（ 或文件夹下的源文件 ） 要被编译 ， 哪些源文件要被排除 。
@@ -53,6 +56,11 @@ android {
                 }
             }
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
@@ -74,6 +82,7 @@ dependencies {
 
     //ARouter
     implementation rootProject.ext.dependencies["arouter"]
+    implementation project(path: ':gsyvideo-lib')
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
 
     //dagger2
@@ -87,4 +96,10 @@ dependencies {
 
     implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxandroid"]
+
+     //net request
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+    implementation rootProject.ext.dependencies["retrofit-adapter"]
+    implementation rootProject.ext.dependencies["retrofit-log"]
 }

@@ -5,18 +5,18 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Environment
-import android.support.annotation.ColorInt
-import android.support.annotation.IntRange
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
+import androidx.annotation.ColorInt
 import com.jojo.design.common_base.R
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
-import java.util.*
+import java.util.Properties
+
 
 /**
  *    author : JOJO
@@ -89,7 +89,7 @@ object StatusBarHelper {
      * StatusBarHelper.setStautsBarColor(this, Color.RED, 255)：非全屏 黑色状态栏，白色文字、icon
      */
 
-    fun setStautsBarColor(activity: Activity, @ColorInt color: Int, @IntRange(from = 0, to = 255) statusBarAlpha: Int) {
+    fun setStautsBarColor(activity: Activity, @ColorInt color: Int,  statusBarAlpha: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             activity.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)

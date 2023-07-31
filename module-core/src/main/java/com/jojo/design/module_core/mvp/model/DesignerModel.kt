@@ -6,7 +6,7 @@ import com.jojo.design.module_core.bean.DesignerEntity
 import com.jojo.design.module_core.bean.TagCategoryEntity
 import com.jojo.design.module_core.mvp.contract.DesignerContract
 import com.smart.novel.net.BaseHttpResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 /**

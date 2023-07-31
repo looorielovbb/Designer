@@ -1,12 +1,14 @@
 package com.jojo.design.module_core.ui.test
 
+import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.bean.ErrorBean
 import com.jojo.design.common_base.dagger.mvp.databinding.BaseDBActivity
-import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.databinding.ActTestMvpBinding
 import com.jojo.design.module_core.mvp.model.TestModel
@@ -20,18 +22,23 @@ import com.jojo.design.module_core.mvp.presenter.TestPresenter
  */
 @Route(path = "/core/search")
 class TestMVPActivity : BaseDBActivity<TestPresenter, TestModel, ActTestMvpBinding>() {
-    lateinit var  tv_txt:TextView
-    override fun getContentViewLayoutId()=R.layout.act_test_mvp
+    private lateinit var tv_txt: TextView
+    private lateinit var binding: ActTestMvpBinding
 
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
-
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-//        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.inflate(layoutInflater,R.layout.act_test_mvp,null,false)
+        setContentView(binding.root)
     }
 
-    override fun startEvents() {
+    override fun onStart() {
+        super.onStart()
+        startEvents()
+    }
+
+    private fun startEvents() {
         mMultipleStatusView?.showLoading()
-        Handler().postDelayed({
+        Handler(Looper.myLooper()!!).postDelayed({
             mMultipleStatusView?.showContent()
             val fragment = TestFragment()
             val transaction = supportFragmentManager.beginTransaction()

@@ -56,5 +56,4 @@ dependencies {
 
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     implementation 'com.auth0.android:jwtdecode:2.0.2'
-
 }

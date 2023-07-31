@@ -1,13 +1,13 @@
 package com.jojo.design.module_core.adapter
 
 import android.content.Context
-import android.support.v4.view.PagerAdapter
-import android.support.v7.widget.CardView
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
+import androidx.viewpager.widget.PagerAdapter
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.config.arouter.ARouterConfig
 import com.jojo.design.common_base.config.arouter.ARouterConstants

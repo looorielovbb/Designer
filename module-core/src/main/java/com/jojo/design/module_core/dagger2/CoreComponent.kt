@@ -13,7 +13,7 @@ import dagger.Component
  *    date   : 2018/12/5 10:19 AM
  *    desc   :
  */
-@Component(dependencies = [(ApplicationComponent::class)])
+@Component()
 interface CoreComponent {
     fun inject(activity: TestMVPActivity)
     fun inject(activity: TestDaggerActivity)

@@ -2,6 +2,7 @@ package com.jojo.design.module_discover.ui.video
 
 import com.shuyu.gsyvideoplayer.listener.StandardVideoAllCallBack
 
+
 /**
  * Created by shuyu on 2016/11/23.
  */

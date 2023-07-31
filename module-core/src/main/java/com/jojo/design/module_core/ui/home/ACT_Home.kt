@@ -2,12 +2,12 @@ package com.jojo.design.module_core.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
+import com.flyco.tablayout.CommonTabLayout
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.utils.StatusBarHelper
-import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.bean.MainTabEntity
 
@@ -43,36 +43,25 @@ class ACT_Home : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel
     var mDesignerFragment: DesignerFragment? = null
     var mShoppingFragment: ShoppingFragment? = null
     private var mDiscorverFragment: DiscoveryFragment? = null
-    override fun getContentViewLayoutId(): Int = R.layout.act_main
-
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
-
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-
-    }
+    lateinit var tabLayout: CommonTabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
             mIndex = savedInstanceState.getInt("currTabIndex")
         }
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.act_main)
         initTab()
+        tabLayout = findViewById(R.id.tabLayout)
         tabLayout.currentTab = mIndex
         switchFragment(mIndex)
     }
 
-    override fun startEvents() {
-
-    }
-
     //初始化底部菜单
     private fun initTab() {
-        (0 until mTitles.size)
-            .mapTo(mTabList) {
+        (mTitles.indices).mapTo(mTabList) {
                 MainTabEntity(
-                    mTitles[it],
-                    mIconSelectIds[it],
-                    mIconUnSelectIds[it]
+                    mTitles[it], mIconSelectIds[it], mIconUnSelectIds[it]
                 )
             }
         //为Tab赋值
@@ -164,15 +153,12 @@ class ACT_Home : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel
         if (null != mDiscorverFragment) {
             transaction.hide(mDiscorverFragment!!)
         }
-
     }
 
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         //记录fragment的位置,防止崩溃 activity被系统回收时，fragment错乱
-        if (tabLayout != null) {
-            outState.putInt("currTabIndex", mIndex)
-        }
+        outState.putInt("currTabIndex", mIndex)
     }
 }

@@ -1,19 +1,20 @@
 package com.jojo.design.module_core.ui.home
 
 import android.graphics.Rect
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import com.jojo.design.common_base.BaseApplication
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
-import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.adapter.ADA_Handpicked
 import com.jojo.design.module_core.bean.*
-import com.jojo.design.module_core.dagger2.DaggerCoreComponent
+import com.jojo.design.module_core.databinding.FraHandpickedBinding
 import com.jojo.design.module_core.mvp.contract.ShoppingContract
 import com.jojo.design.module_core.mvp.model.ShoppingModel
 import com.jojo.design.module_core.mvp.presenter.ShoppingPresenter
-import kotlinx.android.synthetic.main.common_recyclcerview.*
 
 /**
  * author : JOJO
@@ -23,38 +24,40 @@ import kotlinx.android.synthetic.main.common_recyclcerview.*
  */
 class HandpickedFragment : BaseFragment<ShoppingPresenter, ShoppingModel>(), ShoppingContract.View {
     private var mAdapter: ADA_Handpicked? = null
-    override fun getContentViewLayoutId(): Int = R.layout.fra_handpicked
-    override fun onFirstUserVisible() {
+    private var binding:FraHandpickedBinding? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fra_handpicked,container,false)
     }
 
-    override fun onFirstUserInvisible() {
-    }
-
-    override fun onUserVisible() {
-    }
-
-    override fun onUserInvisible() {
-    }
-
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
-
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-        DaggerCoreComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
-    }
-
-    override fun startFragmentEvents() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         mPresenter?.getHandPickedGoods("2")
-
+        binding = FraHandpickedBinding.bind(view)
         mAdapter = ADA_Handpicked(mContext)
-        recyclerview.layoutManager = GridLayoutManager(mContext, 2)
-        recyclerview.adapter = mAdapter
+        binding?.baseLayout?.recyclerview?.layoutManager = GridLayoutManager(mContext, 2)
+        binding?.baseLayout?.recyclerview?.adapter = mAdapter
         //设置item之间的间距
-        recyclerview.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect, itemPosition: Int, parent: RecyclerView?) {
+        binding?.baseLayout?.recyclerview?.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
                 outRect.left = 30
                 outRect.top = 20
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     override fun getCategoryList(dataList: List<CategoryEntity>) {

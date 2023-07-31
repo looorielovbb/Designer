@@ -1,8 +1,8 @@
 package com.jojo.design.module_core.adapter
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jojo.design.common_base.adapter.rv.ItemViewDelegate
 import com.jojo.design.common_base.adapter.rv.ViewHolder
 import com.jojo.design.module_core.R
@@ -33,6 +33,5 @@ class GoodsViewType constructor(context: Context) : ItemViewDelegate<ContentBean
         rv.layoutManager = LinearLayoutManager(mContext)
         rv.adapter = adapter
         adapter.update(bean.goods, true)
-
     }
 }

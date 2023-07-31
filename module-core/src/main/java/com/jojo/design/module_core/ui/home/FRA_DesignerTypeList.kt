@@ -2,15 +2,16 @@ package com.jojo.design.module_core.ui.home
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
-import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.adapter.ADA_DesignerTypeList
 import com.jojo.design.module_core.bean.TagCategoryEntity
+import com.jojo.design.module_core.databinding.FraDesignertypeListBinding
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
-import kotlinx.android.synthetic.main.fra_designertype_list.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -21,11 +22,9 @@ import org.greenrobot.eventbus.ThreadMode
  *    desc   : Designer-设计分类 行业、风格等
  */
 class FRA_DesignerTypeList : BaseFragment<BaseContract.BasePresenter, BaseContract.BaseModel>() {
-    var mAdapter: ADA_DesignerTypeList? = null
-    var mSelectedPosition = 0
-    override fun getContentViewLayoutId(): Int = R.layout.fra_designertype_list
-
-
+    private var mAdapter: ADA_DesignerTypeList? = null
+    private var mSelectedPosition = 0
+    var binding:FraDesignertypeListBinding? = null
     companion object {
         fun newInstance(type: String): FRA_DesignerTypeList {
             val pagerFragment = FRA_DesignerTypeList()
@@ -34,7 +33,24 @@ class FRA_DesignerTypeList : BaseFragment<BaseContract.BasePresenter, BaseContra
             pagerFragment.arguments = bundle
             return pagerFragment
         }
+    }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fra_designertype_list,container,false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FraDesignertypeListBinding.bind(view)
+         mSelectedPosition = FragmentPagerItem.getPosition(arguments)
+
+        mAdapter = ADA_DesignerTypeList(mContext)
+        binding?.gridview?.adapter = mAdapter
+        binding?.gridview?.isFocusableInTouchMode = false
     }
 
     /**
@@ -42,7 +58,6 @@ class FRA_DesignerTypeList : BaseFragment<BaseContract.BasePresenter, BaseContra
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun refreshData(dataList: List<TagCategoryEntity>) {
-        Log.e("sss", "dataList[mSelectedPosition].tags=" + mSelectedPosition)
         mAdapter?.update(dataList[mSelectedPosition].tags, true)
         //解决进入页面时列表高度显示不全的问题
         Handler().postDelayed({
@@ -53,33 +68,5 @@ class FRA_DesignerTypeList : BaseFragment<BaseContract.BasePresenter, BaseContra
 
     override fun isBindEventBus(isBind: Boolean): Boolean {
         return super.isBindEventBus(true)
-    }
-
-
-    override fun onFirstUserVisible() {
-    }
-
-    override fun onFirstUserInvisible() {
-    }
-
-    override fun onUserVisible() {
-    }
-
-    override fun onUserInvisible() {
-    }
-
-
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
-
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-
-    }
-
-    override fun startFragmentEvents() {
-        mSelectedPosition = FragmentPagerItem.getPosition(arguments)
-
-        mAdapter = ADA_DesignerTypeList(mContext)
-        gridview.adapter = mAdapter
-        gridview.isFocusableInTouchMode = false
     }
 }

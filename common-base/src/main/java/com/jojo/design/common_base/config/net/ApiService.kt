@@ -1,10 +1,8 @@
 package com.zongxueguan.naochanle_android.retrofitrx
 
-import com.smart.novel.net.BaseHttpResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import okhttp3.RequestBody
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 

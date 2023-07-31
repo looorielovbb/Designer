@@ -5,7 +5,7 @@ import com.jojo.design.module_core.bean.*
 import com.jojo.design.module_core.mvp.contract.ShoppingContract
 import com.jojo.design.module_core.net.NetCoreProvider
 import com.smart.novel.net.BaseHttpResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 /**

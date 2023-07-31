@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cn.foretree.db.star.RxJava2Helper
+import com.jojo.design.common_base.utils.RxJava2Helper
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.BaseApplication
@@ -20,7 +20,6 @@ import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.utils.RecyclerviewHelper
 import com.jojo.design.common_base.utils.ToastUtils
-import com.jojo.design.common_ui.view.MultipleStatusView
 import com.jojo.design.module_mall.R
 import com.jojo.design.module_mall.adapter.ADA_SearchHistory
 import com.jojo.design.module_mall.bean.CategoryBean

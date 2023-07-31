@@ -5,7 +5,7 @@ import com.jojo.design.common_base.net.BaseResponse
 import com.jojo.design.module_core.bean.DesignerEntity
 import com.jojo.design.module_core.bean.TagCategoryEntity
 import com.smart.novel.net.BaseHttpResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  *    author : JOJO
@@ -29,6 +29,9 @@ interface DesignerContract {
     interface Model : BaseContract.BaseModel {
         fun getDesignerTypeList(): Observable<BaseHttpResponse<List<TagCategoryEntity>>>
         fun getRecommendDesigner(): Observable<BaseHttpResponse<DesignerEntity>>
-        fun getDesinerList(tagCategoryId: String, tagId: String): Observable<BaseResponse<List<DesignerEntity>>>
+        fun getDesinerList(
+            tagCategoryId: String,
+            tagId: String
+        ): Observable<BaseResponse<List<DesignerEntity>>>
     }
 }
