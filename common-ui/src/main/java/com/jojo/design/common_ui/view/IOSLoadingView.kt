@@ -52,7 +52,7 @@ class IOSLoadingView @JvmOverloads constructor(
 
     private fun init(context: Context, attrs: AttributeSet?) {
 
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.IOS_LoadingView)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.iOSLoadingView)
 
         val indexCount = typedArray.getIndexCount()
 
@@ -61,13 +61,13 @@ class IOSLoadingView @JvmOverloads constructor(
             val attr = typedArray.getIndex(i)
 
             when (attr) {
-                R.styleable.IOS_LoadingView_pathColor -> mSegmentColor =
+                R.styleable.iOSLoadingView_pathColor -> mSegmentColor =
                     typedArray.getColor(attr, mDefaultColor)
 
-                R.styleable.IOS_LoadingView_segmentLength -> mSegmentLength =
+                R.styleable.iOSLoadingView_segmentLength -> mSegmentLength =
                     typedArray.getDimensionPixelSize(attr, mDefaultSegmentLength)
 
-                R.styleable.IOS_LoadingView_segmentWidth -> mSegmentWidth =
+                R.styleable.iOSLoadingView_segmentWidth -> mSegmentWidth =
                     typedArray.getDimensionPixelSize(attr, mDefaultSegmentWidth)
             }
 

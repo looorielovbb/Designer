@@ -72,7 +72,7 @@ class DesignerFragment : BaseFragment<DesignerPresenter, DesignerModel>(), Desig
         tablayout = view.findViewById(R.id.tablayout)
         susTablayout = view.findViewById(R.id.susTablayout)
         viewpager = view.findViewById(R.id.viewpager)
-        dropScrollView.setOnScrollViewListener { scrollX, scrollY, oldx, oldY ->
+        dropScrollView.setOnScrollViewListener { _, scrollY, _, _ ->
             val lp = fade_status_bar.layoutParams
             lp.height = StatusBarHelper.getStatusBarHeight(mContext)
             fade_status_bar.layoutParams = lp

@@ -28,7 +28,7 @@ import javax.inject.Inject
  *    desc   : Dagger-MVP-Fragment懒加载
  */
 abstract class BaseLazyFragment<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> : Fragment(), BaseContract.BaseView {
-    lateinit var mLoadingDialog: LoadingDialog
+    protected lateinit var mLoadingDialog: LoadingDialog
     private var mIsBind: Boolean = false
     private var mIsRegisterReceiver = false
     protected var viewDataBinding: ViewDataBinding? = null
@@ -66,7 +66,7 @@ abstract class BaseLazyFragment<P : BaseContract.BasePresenter, M : BaseContract
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //根据子类布局自定义的区域show多状态布局
-//        mMultipleStatusView = getLoadingMultipleStatusView()
+        mMultipleStatusView = MultipleStatusView(context)
         mPresenter?.attachViewModel(this, mModel!!)
     }
 
@@ -100,7 +100,6 @@ abstract class BaseLazyFragment<P : BaseContract.BasePresenter, M : BaseContract
         }
     }
 
-
     @Synchronized private fun initPrepare() {
         if (!isPrepared) {
             isPrepared = true
@@ -113,13 +112,11 @@ abstract class BaseLazyFragment<P : BaseContract.BasePresenter, M : BaseContract
             val childFragmentManager = Fragment::class.java.getDeclaredField("mChildFragmentManager")
             childFragmentManager.isAccessible = true
             childFragmentManager.set(this, null)
-
         } catch (e: NoSuchFieldException) {
             throw RuntimeException(e)
         } catch (e: IllegalAccessException) {
             throw RuntimeException(e)
         }
-
     }
 
     override fun onDestroy() {
@@ -161,7 +158,6 @@ abstract class BaseLazyFragment<P : BaseContract.BasePresenter, M : BaseContract
         } catch (e: PackageManager.NameNotFoundException) {
             Log.e("TAG","sendBroadcast",e)
         }
-
     }
 
     //广播接收器

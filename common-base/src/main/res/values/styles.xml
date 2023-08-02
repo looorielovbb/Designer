@@ -2,7 +2,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!--Base AppTheme-->
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--指定windowIsTranslucent = true时，执行Activity动画时背景不会为黑色-->
         <item name="android:windowIsTranslucent">true</item>
     </style>
 

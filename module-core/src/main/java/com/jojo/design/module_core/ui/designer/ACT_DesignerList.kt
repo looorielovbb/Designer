@@ -37,16 +37,12 @@ class ACT_DesignerList : BaseActivity<DesignerPresenter, DesignerModel>(), Desig
         val extras = intent.extras
         setHeaderTitle(extras?.getString(ARouterConstants.TAG_NAME)!!)
         mPresenter?.getDesinerList(
-            extras?.getString(ARouterConstants.TAG_CATEGORY_ID)!!,
-            extras?.getString(ARouterConstants.TAG_ID)!!
+            extras.getString(ARouterConstants.TAG_CATEGORY_ID)!!,
+            extras.getString(ARouterConstants.TAG_ID)!!
         )
         mAdapter = ADA_DesignerList(mContext)
         RecyclerviewHelper.initRecyclerView(lrecyclerview, mAdapter!!, mContext)
         initListener()
-    }
-
-    fun startEvents() {
-
     }
 
     private fun initListener() {

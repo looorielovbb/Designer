@@ -9,7 +9,7 @@ import dagger.Component
  *    date   : 2018/12/13 11:21 AM
  *    desc   :
  */
-@Component(dependencies = [(ApplicationComponent::class)])
+@Component(dependencies = [])
 interface TestComponent {
     fun inject(activity: LoginActivity)
 }

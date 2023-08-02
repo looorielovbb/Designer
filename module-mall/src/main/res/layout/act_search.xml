@@ -33,7 +33,7 @@
                 android:textSize="13sp" />
 
             <com.jojo.design.common_ui.view.tag.TagFlowLayout
-                android:id="@+id/taglayout"
+                android:id="@+id/tag_layout"
                 app:layout_constraintTop_toBottomOf="@+id/tv_hot_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             <TextView
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/tv_recent_title"
-                app:layout_constraintTop_toBottomOf="@+id/taglayout"
+                app:layout_constraintTop_toBottomOf="@id/tag_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="15dp"

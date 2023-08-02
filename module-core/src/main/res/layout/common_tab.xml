@@ -15,7 +15,7 @@
         app:stl_defaultTabTextMinWidth="1dp"
         app:stl_defaultTabTextSize="12sp"
         app:stl_distributeEvenly="true"
-        app:stl_dividerColor="@color/transparent"
+        app:stl_dividerColor="@android:color/transparent"
         app:stl_indicatorColor="@color/color_app_yellow"
         app:stl_indicatorInterpolation="linear"
         app:stl_indicatorThickness="2dp"

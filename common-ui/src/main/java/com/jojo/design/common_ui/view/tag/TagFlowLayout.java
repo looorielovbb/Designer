@@ -42,8 +42,8 @@ public class TagFlowLayout extends FlowLayout
 
     public TagFlowLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.TagFlowLayout);
-        mSelectedMax = ta.getInt(R.styleable.TagFlowLayout_max_select, -1);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.tagFlowLayout);
+        mSelectedMax = ta.getInt(R.styleable.tagFlowLayout_max_select, -1);
         ta.recycle();
     }
 

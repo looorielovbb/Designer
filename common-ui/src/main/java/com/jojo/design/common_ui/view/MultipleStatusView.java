@@ -36,15 +36,15 @@ public class MultipleStatusView extends RelativeLayout {
     private View mLoadingView;
     private View mNoNetworkView;
     private View mContentView;
-    private int mEmptyViewResId;
-    private int mErrorViewResId;
-    private int mLoadingViewResId;
-    private int mNoNetworkViewResId;
-    private int mContentViewResId;
+    private final int mEmptyViewResId;
+    private final int mErrorViewResId;
+    private final int mLoadingViewResId;
+    private final int mNoNetworkViewResId;
+    private final int mContentViewResId;
     private int mViewStatus;
     private LayoutInflater mInflater;
     private OnClickListener mOnRetryClickListener;
-    private SparseArray<View> mViews = new SparseArray<>();
+    private final SparseArray<View> mViews = new SparseArray<>();
 
     public MultipleStatusView(Context context) {
         this(context, null);
@@ -56,12 +56,12 @@ public class MultipleStatusView extends RelativeLayout {
 
     public MultipleStatusView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MultipleStatusView, defStyleAttr, 0);
-        mEmptyViewResId = a.getResourceId(R.styleable.MultipleStatusView_emptyView, R.layout.empty_view);
-        mErrorViewResId = a.getResourceId(R.styleable.MultipleStatusView_errorView, R.layout.error_view);
-        mLoadingViewResId = a.getResourceId(R.styleable.MultipleStatusView_loadingView, R.layout.loading_view);
-        mNoNetworkViewResId = a.getResourceId(R.styleable.MultipleStatusView_noNetworkView, R.layout.no_network_view);
-        mContentViewResId = a.getResourceId(R.styleable.MultipleStatusView_contentView, NULL_RESOURCE_ID);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.multipleStatusView, defStyleAttr, 0);
+        mEmptyViewResId = a.getResourceId(R.styleable.multipleStatusView_emptyView, R.layout.empty_view);
+        mErrorViewResId = a.getResourceId(R.styleable.multipleStatusView_errorView, R.layout.error_view);
+        mLoadingViewResId = a.getResourceId(R.styleable.multipleStatusView_loadingView, R.layout.loading_view);
+        mNoNetworkViewResId = a.getResourceId(R.styleable.multipleStatusView_noNetworkView, R.layout.no_network_view);
+        mContentViewResId = a.getResourceId(R.styleable.multipleStatusView_contentView, NULL_RESOURCE_ID);
         a.recycle();
         mInflater = LayoutInflater.from(getContext());
     }
@@ -76,9 +76,7 @@ public class MultipleStatusView extends RelativeLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         clear(mEmptyView, mLoadingView, mErrorView, mNoNetworkView);
-        if (null != mOtherIds) {
-            mOtherIds.clear();
-        }
+        mOtherIds.clear();
         if (null != mOnRetryClickListener) {
             mOnRetryClickListener = null;
         }
@@ -142,9 +140,6 @@ public class MultipleStatusView extends RelativeLayout {
 
     /**
      * 通过viewId获取控件,减少findViewById的次数
-     *
-     * @param viewId
-     * @return
      */
     public <T extends View> T getView(View mConvertView, int viewId) {
         View view = mViews.get(viewId);

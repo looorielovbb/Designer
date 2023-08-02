@@ -2,7 +2,6 @@ package com.jojo.design.module_test
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.Html
@@ -11,16 +10,19 @@ import android.text.TextUtils
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.jojo.design.module_test.dagger22.B
-import kotlinx.android.synthetic.main.activity_main.*
+import com.jojo.design.module_test.databinding.ActivityMainBinding
 import org.xml.sax.XMLReader
 import java.util.*
 
 //TextView加载富文本 Html
 class MainActivity : AppCompatActivity() {
+    lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         Log.e("TAG", B().getData())
 
         var html1 = "直播回放 | " +
@@ -28,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         var html2 = "<span style='color: #ff0000'>这是高亮部分</span><span style='color: #333333;'>这是描述</span>"
         Log.e("TAG", "html2=" + html2)
         html2.replace("span", "font")
-        tv.text = Html.fromHtml(html1)
-        tv_2.text = Html.fromHtml(html2)
+        binding.tv.text = Html.fromHtml(html1)
+        binding.tv2.text = Html.fromHtml(html2)
     }
 
     //Android TextView通过解析html显示不同颜色和大小:https://www.jianshu.com/p/4c4a7870c554

@@ -12,7 +12,7 @@ class B {
     @Inject lateinit var a: A
 
     init {
-        DaggerABComponent.create().Inject(this)
+//        DaggerABComponent.create().Inject(this)
     }
 
     fun getData() = a.getData()

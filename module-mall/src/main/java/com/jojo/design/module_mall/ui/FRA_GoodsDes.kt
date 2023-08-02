@@ -1,13 +1,14 @@
 package com.jojo.design.module_mall.ui
 
+import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
-import com.jojo.design.common_ui.view.MultipleStatusView
-import com.jojo.design.module_mall.R
 import com.jojo.design.module_mall.adapter.ADA_GoodsDes
 import com.jojo.design.module_mall.bean.GoodsDesBean
+import com.jojo.design.module_mall.databinding.FraGoodsDesBinding
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -18,10 +19,16 @@ import org.greenrobot.eventbus.ThreadMode
  *    desc   : 商品详情-商品描述
  */
 class FRA_GoodsDes : BaseFragment<BaseContract.BasePresenter, BaseContract.BaseModel>() {
-    var mAdapter: ADA_GoodsDes? = null
-    override fun getContentViewLayoutId(): Int = R.layout.fra_goods_des
+    private var mAdapter: ADA_GoodsDes? = null
+    private var binding: FraGoodsDesBinding? = null
     override fun isBindEventBus(isBind: Boolean): Boolean {
         return super.isBindEventBus(true)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FraGoodsDesBinding.bind(view)
+        startFragmentEvents()
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -30,27 +37,11 @@ class FRA_GoodsDes : BaseFragment<BaseContract.BasePresenter, BaseContract.BaseM
         mAdapter?.update(dataList, true)
     }
 
-    override fun onFirstUserVisible() {
-    }
 
-    override fun onFirstUserInvisible() {
-    }
-
-    override fun onUserVisible() {
-    }
-
-    override fun onUserInvisible() {
-    }
-
-    override fun getLoadingMultipleStatusView(): MultipleStatusView? = null
-
-    override fun initDaggerInject(mApplicationComponent: ApplicationComponent) {
-    }
-
-    override fun startFragmentEvents() {
+    private fun startFragmentEvents() {
         mAdapter = ADA_GoodsDes(mContext)
-        lv_content.layoutManager = LinearLayoutManager(mContext)
-        lv_content.adapter = mAdapter
+        binding!!.lvContent.layoutManager = LinearLayoutManager(mContext)
+        binding!!.lvContent.adapter = mAdapter
 
     }
 }

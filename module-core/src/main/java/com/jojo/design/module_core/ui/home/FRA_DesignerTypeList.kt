@@ -2,6 +2,7 @@ package com.jojo.design.module_core.ui.home
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,7 +61,7 @@ class FRA_DesignerTypeList : BaseFragment<BaseContract.BasePresenter, BaseContra
     fun refreshData(dataList: List<TagCategoryEntity>) {
         mAdapter?.update(dataList[mSelectedPosition].tags, true)
         //解决进入页面时列表高度显示不全的问题
-        Handler().postDelayed({
+        Handler(Looper.myLooper()!!).postDelayed({
             (activity as ACT_Home).mDesignerFragment?.resetViewPagerHeight(0)
         }, 500)
 

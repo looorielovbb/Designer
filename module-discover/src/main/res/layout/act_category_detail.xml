@@ -128,7 +128,7 @@
                 android:paddingTop="12dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:titleTextColor="@color/transparent">
+                app:titleTextColor="@android:color/transparent">
 
                 <TextView
                     android:id="@+id/tv_title"

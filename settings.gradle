@@ -22,13 +22,13 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io"}
     }
 }
-rootProject.name = "ARouterDemo"
+rootProject.name = "Designer"
 //这里是我们配置的所有模块
 
 include ':app'
 include ':module-core'
 include ':common-base'
-include ':module-test'
+//include ':module-test'
 include ':module-mall'
 include ':common-ui'
 include ':module-discover'

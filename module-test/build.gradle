@@ -30,6 +30,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    
+    viewBinding{
+        enable = true
+    }
+
+    dataBinding{
+        enable = true
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -46,17 +54,53 @@ dependencies {
     implementation project(":common-base")
     implementation project(":common-ui")
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    //BaseAdapter
+    implementation 'com.github.GraceJoJo:DataBindingBaseAdapter:1.0.1'
+
+    //MultiDex分包
+    implementation rootProject.ext.dependencies["multidex"]
+
+    //网络请求
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+    implementation rootProject.ext.dependencies["retrofit-adapter"]
+    implementation rootProject.ext.dependencies["retrofit-log"]
+
+    //rxjava
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
+
+     //Room
+    implementation rootProject.ext.dependencies["room"]
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
+    implementation rootProject.ext.dependencies["room-support-rxjava"]
+
     //ARouter
     implementation rootProject.ext.dependencies["arouter"]
-    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor  rootProject.ext.dependencies["arouter-compiler"]
 
     //dagger2
     implementation rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
-    //room
+
+    //事件订阅eventbus
+    implementation rootProject.ext.dependencies["eventbus"]
+
+    //图片
+    implementation rootProject.ext.dependencies["glide"]
+
+    //数据库
     implementation rootProject.ext.dependencies["room"]
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
-    implementation rootProject.ext.dependencies["room-support-rxjava"]
+
+    //retrofit
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+    implementation rootProject.ext.dependencies["retrofit-adapter"]
+    //banner
+    implementation rootProject.ext.dependencies["banner"]
 
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     implementation 'com.auth0.android:jwtdecode:2.0.2'

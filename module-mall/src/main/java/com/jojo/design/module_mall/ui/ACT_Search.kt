@@ -1,5 +1,6 @@
 package com.jojo.design.module_mall.ui
 
+import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.KeyEvent
@@ -25,6 +26,7 @@ import com.jojo.design.module_mall.adapter.ADA_SearchHistory
 import com.jojo.design.module_mall.bean.CategoryBean
 import com.jojo.design.module_mall.bean.FilterBean
 import com.jojo.design.module_mall.bean.RecordsEntity
+import com.jojo.design.module_mall.databinding.ActSearchBinding
 import com.jojo.design.module_mall.db.bean.SearchHistoryBean
 import com.jojo.design.module_mall.db.AppDatabaseHelper
 import com.jojo.design.module_mall.mvp.contract.SearchContract
@@ -45,31 +47,31 @@ import kotlin.collections.ArrayList
  */
 @Route(path = ARouterConfig.ACT_SEARCH)
 class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.View {
-    var mHistoryAdapter: ADA_SearchHistory? = null
-    var mHotSearchAdapter: ADA_HotSearchTag? = null
-    var mHistoryList: ArrayList<SearchHistoryBean> = ArrayList()
-    lateinit var rvHistory:RecyclerView
-    lateinit var tv_cancle:TextView
-    lateinit var et_search:EditText
-    lateinit var iv_deleteAll:ImageView
+    private var mHistoryAdapter: ADA_SearchHistory? = null
+    private var mHotSearchAdapter: ADA_HotSearchTag? = null
+    private var mHistoryList: ArrayList<SearchHistoryBean> = ArrayList()
+    private lateinit var binding:ActSearchBinding
 
-
-    override fun startEvents() {
-        var data = ArrayList<SearchHistoryBean>()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActSearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        startEvents()
+    }
+    
+    private fun startEvents() {
+        val data = ArrayList<SearchHistoryBean>()
 //        (0..10).mapTo(data) { SearchHistoryBean(it.toLong(), "item=" + it) }
-
         //搜索历史
         mHistoryAdapter = ADA_SearchHistory(mContext)
-        RecyclerviewHelper.initNormalRecyclerView(rvHistory, mHistoryAdapter!!, object : LinearLayoutManager(mContext) {
+        RecyclerviewHelper.initNormalRecyclerView(binding.rvHistory, mHistoryAdapter!!, object : LinearLayoutManager(mContext) {
             override fun canScrollVertically(): Boolean {
                 return false
             }
         })
         mHistoryAdapter!!.update(data, true)
-
         mPresenter?.getHotList()
 //        mPresenter?.getSearchGoods("2", "", 0)
-
         getLocalHistory()
         initListener()
     }
@@ -79,42 +81,46 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ list ->
-                    val msg = "query succes, list is " + list?.size
+                    val msg = "query success, list is " + list.size
                     Log.e("TAG", msg)
-                    if (list != null) mHistoryList = list as ArrayList<SearchHistoryBean>
-
-                    Collections.reverse(mHistoryList)
+                    mHistoryList = list as ArrayList<SearchHistoryBean>
+                    mHistoryList.reverse()
                     mHistoryAdapter?.update(mHistoryList, true)
-                }, { throwable -> Log.e("TAG", throwable.message.toString()) })
+                }, { throwable -> Log.e("TAG", throwable.message.toString()) }).let { 
+                    
+            }
     }
 
     private fun initListener() {
-        tv_cancle.setOnClickListener {
+        
+        binding.llSearch.tvCancle.setOnClickListener {
             // 先隐藏键盘
             (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
                     .hideSoftInputFromWindow(currentFocus!!
                             .windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-            if (!TextUtils.isEmpty(et_search.text)) et_search.setText("") else finish()
+            if (!TextUtils.isEmpty(binding.llSearch.etSearch.text)) binding.llSearch.etSearch.setText("") else finish()
 
         }
         //键盘搜索
-        et_search.setOnKeyListener({ v, keyCode, event ->
+        binding.llSearch.etSearch.setOnKeyListener { _, keyCode, event ->
             // event.action == KeyEvent.ACTION_UP 解决回车键执行两次的问题
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 if (currentFocus != null && currentFocus!!.windowToken != null) {
                     // 先隐藏键盘
                     (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
-                            .hideSoftInputFromWindow(currentFocus!!
-                                    .windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+                        .hideSoftInputFromWindow(
+                            currentFocus!!
+                                .windowToken, InputMethodManager.HIDE_NOT_ALWAYS
+                        )
                 }
-                doSearch(et_search.text.toString().trim())
+                doSearch(binding.llSearch.etSearch.text.toString().trim())
             }
             false
-        })
+        }
         /*taglayout.setOnTagClickListener { view, position, parent ->
             var history = SearchHistoryBean()
             history.searchKeyWords = mHotSearchAdapter!!.getItem(position)
-            et_search.setText(history.searchKeyWords)
+            binding.llSearch.etSearch.setText(history.searchKeyWords)
 
             doSearch(mHotSearchAdapter!!.getItem(position))
             true
@@ -131,17 +137,16 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
 
         })
 
-        iv_deleteAll.setOnClickListener {
+        binding.ivDeleteAll.setOnClickListener {
             //删除所有记录
             RxJava2Helper.getFlowable {
                 AppDatabaseHelper.getInstance(mContext).appDataBase.historyDao().run {
                     deleteAll(mHistoryAdapter?.dataList!!)
                 }
             }.subscribe {
-                Log.e("TAG", "delete success delete_count=" + it)
+                Log.e("TAG", "delete success delete_count=$it")
             }.isDisposed
         }
-
     }
 
     /**
@@ -152,7 +157,7 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
             ToastUtils.makeShortToast(BaseApplication.application.getString(R.string.content_search_content_not_empty))
             return
         }
-        var bean = SearchHistoryBean()
+        val bean = SearchHistoryBean()
         bean.searchKeyWords = keywords.trim()
 
         saveLocalByRoom(bean)
@@ -186,18 +191,18 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
         }
         //插入一条记录
         RxJava2Helper.getFlowable {
-            AppDatabaseHelper.getInstance(mContext).appDataBase.historyDao().run {
+            AppDatabaseHelper.getInstance(mContext).appDataBase.historyDao().apply {
                 insert(bean)
             }
         }.subscribe {
-            Log.e("TAG", "insert success index=" + it!!)
+            Log.e("TAG", "insert success index=$it")
         }.isDisposed
     }
 
     override fun getHotList(dataList: List<String>) {
         Log.e("TAG", "dataList=" + dataList.size)
         mHotSearchAdapter = ADA_HotSearchTag(dataList)
-        taglayout.adapter = mHotSearchAdapter
+        binding.tagLayout.adapter = mHotSearchAdapter
     }
 
     override fun getSearchGoods(dataBean: RecordsEntity) {

@@ -4,16 +4,16 @@
     <string name="empty_view_hint">空空如也</string>
     <string name="error_view_hint">加载失败</string>
     <string name="no_network_view_hint">网络异常</string>
-    <string name="loading_text">加载中&#8230;</string>
+    <string name="loading_text">加载中</string>
     <string name="data_error">内容丢失在火星了(ㄒoㄒ)~~</string>
     <string name="no_network">请检查网络后点击重新加载</string>
 
     <!--LRecyclerView-->
     <string name="listview_header_hint_normal">下拉刷新</string>
     <string name="listview_header_hint_release">释放立即刷新</string>
-    <string name="listview_loading">正在加载...</string>
+    <string name="listview_loading">正在加载…</string>
     <string name="nomore_loading">没有了</string>
-    <string name="refreshing">正在刷新...</string>
+    <string name="refreshing">正在刷新…</string>
     <string name="refresh_done">刷新完成</string>
     <string name="listview_header_last_time">上次更新时间：</string>
 

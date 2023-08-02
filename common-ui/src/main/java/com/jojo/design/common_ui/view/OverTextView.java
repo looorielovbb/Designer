@@ -291,7 +291,7 @@ public class OverTextView extends AppCompatTextView {
         @Override
         public void updateDrawState(TextPaint ds) {
             ds.setUnderlineText(false);
-            ds.setColor(ContextCompat.getColor(mContext, R.color.transparent));
+            ds.setColor(Color.TRANSPARENT);
         }
     }
 

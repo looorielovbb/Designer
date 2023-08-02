@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_212121">
 
     <View
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/view_statusbar"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:background="@color/color_212121"
-        android:focusableInTouchMode="true"></View>
+        android:focusableInTouchMode="true"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,4 +47,4 @@
             android:textSize="15sp" />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,18 +1,20 @@
 package com.jojo.design.module_test.room;
 
-import android.arch.persistence.room.Room;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.jojo.design.common_base.utils.ToastUtils;
 import com.jojo.design.module_test.R;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 /**
@@ -57,6 +59,7 @@ public class TestRoomActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("CheckResult")
     public void queryItem(View view) {
 //        new Thread(new Runnable() {
 //            @Override

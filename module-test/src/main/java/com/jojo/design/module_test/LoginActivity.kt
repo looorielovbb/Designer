@@ -1,11 +1,9 @@
 package com.jojo.design.module_test
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.jojo.design.common_base.BaseApplication
-import com.jojo.design.module_test.component.DaggerTestComponent
-import kotlinx.android.synthetic.main.act_login.*
+import androidx.appcompat.app.AppCompatActivity
+import com.jojo.design.module_test.databinding.ActLoginBinding
 import javax.inject.Inject
 
 
@@ -18,12 +16,14 @@ import javax.inject.Inject
 class LoginActivity : AppCompatActivity() {
     @Inject
     lateinit var presenter: PresenterImpl
+    private lateinit var binding:ActLoginBinding
 //    @Inject
 //    lateinit var helloWorld: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.act_login)
+        binding = ActLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         //普通方式
 //        LoginPresenter(this).login(UserInfo(line_1,"",""))
 
@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
 //                .build()
 //                .inject(this)
 
-        DaggerTestComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
+//        DaggerTestComponent.builder().applicationComponent(BaseApplication.mApplicationComponent).build().inject(this)
 
         Toast.makeText(this, presenter.getData(), Toast.LENGTH_SHORT).show()
 //        startAnimation()
