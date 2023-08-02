@@ -12,8 +12,10 @@ import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.utils.glide.GlideUtils
 import com.jojo.design.module_discover.bean.ItemEntity
 import com.jojo.design.module_discover.databinding.ActPlayvideoBinding
+import com.shuyu.gsyvideoplayer.utils.GSYVideoType
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils
-import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer
 
 
 /**
@@ -37,13 +39,12 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
         return super.getOverridePendingTransitionMode(TransitionMode.BOTTOM)
     }
 
-    private lateinit var binding:ActPlayvideoBinding
+    private lateinit var binding: ActPlayvideoBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActPlayvideoBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
-
 
 
     private fun startEvents() {
@@ -97,11 +98,11 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
      */
     private fun initVideoListener() {
         //设置返回按键功能
-        binding.videoPlayer.backButton.setOnClickListener { v -> onBackPressed() }
+        binding.videoPlayer.backButton.setOnClickListener { _ -> onBackPressed() }
         //设置全屏按键功能,这是使用的是选择屏幕，而不是全屏
-        binding.videoPlayer.fullscreenButton.setOnClickListener { v -> orientationUtils?.resolveByClick() }
+        binding.videoPlayer.fullscreenButton.setOnClickListener { _ -> orientationUtils?.resolveByClick() }
 
-        binding.videoPlayer.setLockClickListener { view, lock ->
+        binding.videoPlayer.setLockClickListener { _, lock ->
             if (orientationUtils != null) {
                 //配合下方的onConfigurationChanged
                 orientationUtils!!.isEnable = !lock
@@ -119,6 +120,7 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
             override fun onClickStartIcon(url: String, vararg objects: Any) {
                 super.onClickStartIcon(url, *objects)
             }
+
             override fun onAutoComplete(url: String, vararg objects: Any) {
                 super.onAutoComplete(url, objects)
             }
@@ -145,7 +147,6 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
         }
     }
 
-    @Deprecated
     override fun onBackPressed() {
 
         if (orientationUtils != null) {
@@ -156,7 +157,7 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
             return
         }
         //释放所有
-        videoPlayer.setStandardVideoAllCallBack(null)
+        binding.videoPlayer.setStandardVideoAllCallBack(null)
         GSYVideoPlayer.releaseAllVideos()
         super.onBackPressed()
     }
@@ -185,8 +186,8 @@ class ACT_PlayVideo : BaseActivity<BaseContract.BasePresenter, BaseContract.Base
     }
 
     private fun getCurPlay(): GSYVideoPlayer {
-        return if (videoPlayer.fullWindowPlayer != null) {
-            videoPlayer.fullWindowPlayer
-        } else videoPlayer
+        return if (binding.videoPlayer.fullWindowPlayer != null) {
+            binding.videoPlayer.fullWindowPlayer
+        } else binding.videoPlayer
     }
 }

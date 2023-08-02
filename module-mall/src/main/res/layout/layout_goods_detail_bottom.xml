@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="55dp"
@@ -9,7 +9,8 @@
         android:id="@+id/view_div"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_dddddd">
+        android:background="@color/color_dddddd"
+        app:layout_constraintTop_toTopOf="parent">
 
     </View>
 
@@ -18,14 +19,15 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:background="@color/color_ffffff"
-        android:drawablePadding="3dp"
         android:drawableTop="@drawable/ic_contact_seller"
+        android:drawablePadding="3dp"
         android:gravity="center"
         android:text="联系买家"
         android:textColor="@color/color_black"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_div"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,4 +56,4 @@
         app:layout_constraintLeft_toRightOf="@+id/tv_add_cart"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_div" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

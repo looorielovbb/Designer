@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jojo.design.common_base.dagger.mvp.BaseFragment
 import com.jojo.design.common_base.utils.RecyclerviewHelper
 import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerView
-import com.jojo.design.module_discover.mvp.contract.CategoryContract
 import com.jojo.design.module_core.mvp.model.CategoryModel
 import com.jojo.design.module_core.mvp.presenter.CategoryPresenter
 import com.jojo.design.module_discover.R
@@ -18,6 +17,7 @@ import com.jojo.design.module_discover.adapter.ADA_CategoryDetail
 import com.jojo.design.module_discover.bean.CategoryBean
 import com.jojo.design.module_discover.bean.ItemEntity
 import com.jojo.design.module_discover.bean.TabEntity
+import com.jojo.design.module_discover.mvp.contract.CategoryContract
 
 /**
  *    author : JOJO
@@ -42,10 +42,10 @@ class FRA_CategoryDetail : BaseFragment<CategoryPresenter, CategoryModel>(), Cat
         var type = arguments?.getInt("type")
         //懒加载：第一次进来时请求数据，后续切换tab不再请求
         mPresenter?.getCategorieDetail((activity as ACT_CategoryDetail).categoryId, type!!)
-        Log.d("tab", "type=" + type)
+        Log.d("tab", "type=$type")
 //        initTestData(type)
         mAdapter = ADA_CategoryDetail(requireActivity())
-        rv = view.findViewById<LRecyclerView>(R.id.rv)
+        rv = view.findViewById(R.id.rv)
         rv.setPullRefreshEnabled(false)
         RecyclerviewHelper.initLayoutManagerRecyclerView(
             rv,
@@ -89,12 +89,5 @@ class FRA_CategoryDetail : BaseFragment<CategoryPresenter, CategoryModel>(), Cat
 
     override fun getCategoryDetail(dataBean: ItemEntity) {
         mAdapter?.update(dataBean?.itemList, true)
-//        for (i in 0 until dataBean.itemList.size) {
-//            if (!dataBean?.itemList[i]?.type.equals("video")) {
-//                Log.e("TAG", "datatype=" + dataBean?.itemList[i].data.dataType)
-//            } else {
-//                Log.e("TAG", "title=" + dataBean?.itemList[i].data.title)
-//            }
-//        }
     }
 }

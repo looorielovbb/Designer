@@ -13,13 +13,13 @@ import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.utils.StatusBarHelper
 import com.jojo.design.common_base.utils.glide.GlideUtils
-import com.jojo.design.module_discover.mvp.contract.CategoryContract
 import com.jojo.design.module_core.mvp.model.CategoryModel
 import com.jojo.design.module_core.mvp.presenter.CategoryPresenter
 import com.jojo.design.module_discover.R
 import com.jojo.design.module_discover.bean.CategoryBean
 import com.jojo.design.module_discover.bean.ItemEntity
 import com.jojo.design.module_discover.bean.TabEntity
+import com.jojo.design.module_discover.mvp.contract.CategoryContract
 import com.ogaclejapan.smarttablayout.SmartTabLayout
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
@@ -101,7 +101,6 @@ class ACT_CategoryDetail : BaseActivity<CategoryPresenter, CategoryModel>(), Cat
                         StatusBarHelper.setStatusTextColor(false, this)
                     }
                     mState = AppBarState.MIDDLE//修改状态标记为中间
-
                 }
             }
         }
@@ -112,10 +111,10 @@ class ACT_CategoryDetail : BaseActivity<CategoryPresenter, CategoryModel>(), Cat
      */
     private fun initToorbar() {
         val tv_title = findViewById<TextView>(R.id.tv_title)
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val appbar = findViewById<AppBarLayout>(R.id.appbar)
-//        setSupportActionBar(toolbar)
-//        supportActionBar?.setDisplayShowTitleEnabled(false);
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false);
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow_white)
         toolbar.setNavigationOnClickListener { onBackPressed() }
         tv_title.text = intent.extras?.getString(ARouterConstants.CATEGORY_NAME)

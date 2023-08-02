@@ -14,7 +14,7 @@ class ADA_CategoryDetail constructor(context: Activity) : MultiItemTypeAdapter<I
     init {
         super.mContext = context
         addItemViewDelegate(ScrollCardType(context))
-        addItemViewDelegate(TextViewType(context))
+        addItemViewDelegate(TextViewType())
         addItemViewDelegate(VideoViewType())
     }
 

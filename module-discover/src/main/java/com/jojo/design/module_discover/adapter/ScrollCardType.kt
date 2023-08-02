@@ -28,14 +28,14 @@ class ScrollCardType constructor(context: Context) : ItemViewDelegate<ItemEntity
         (item.type == "videoCollectionOfHorizontalScrollCard" || item.type == "videoCollectionWithBrief")
 
     override fun convert(holder: ViewHolder, bean: ItemEntity.ItemDataEntity, position: Int) {
-        if (bean.type == "videoCollectionWithBrief" && bean.data.header != null) {
+        if (bean.type == "videoCollectionWithBrief") {
             holder.setVisible(R.id.tv_des, true)
-            holder.setText(R.id.tv_des, bean?.data?.header?.description)
+            holder.setText(R.id.tv_des, bean.data.header.description)
         } else {
             holder.setText(R.id.tv_des, "")
             holder.setVisible(R.id.tv_des, false)
         }
-        holder.setText(R.id.tv_title, bean?.data?.header?.title)
+        holder.setText(R.id.tv_title, bean.data.header.title)
         val rv_card = holder.getView<RecyclerView>(R.id.rv_card)
         rv_card.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         val adapter = ADA_ItemCard(mContext!!)

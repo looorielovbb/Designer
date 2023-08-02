@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_app_yellow">
 
     <View
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/view_statusbar"
         android:layout_width="match_parent"
-        android:layout_height="20dp"></View>
+        android:layout_height="20dp"/>
 
     <ImageView
+        app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,7 +58,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/iv_share"
         app:layout_constraintLeft_toLeftOf="@+id/iv_share"
         app:layout_constraintRight_toRightOf="@+id/iv_share"
-        app:layout_constraintTop_toTopOf="@id/iv_share"></View>
+        app:layout_constraintTop_toTopOf="@id/iv_share"/>
 
     <View
         android:id="@+id/view_circle_two"
@@ -67,7 +69,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/iv_cart"
         app:layout_constraintLeft_toLeftOf="@+id/iv_cart"
         app:layout_constraintRight_toRightOf="@+id/iv_cart"
-        app:layout_constraintTop_toTopOf="@id/iv_cart"></View>
+        app:layout_constraintTop_toTopOf="@id/iv_cart"/>
 
     <View
         android:id="@+id/view_circle_three"
@@ -78,7 +80,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/iv_back"
         app:layout_constraintLeft_toLeftOf="@+id/iv_back"
         app:layout_constraintRight_toRightOf="@+id/iv_back"
-        app:layout_constraintTop_toTopOf="@id/iv_back"></View>
+        app:layout_constraintTop_toTopOf="@id/iv_back"/>
 
 
     <View
@@ -87,5 +89,5 @@
         android:layout_height="1px"
         android:layout_marginTop="5dp"
         android:background="@color/color_dddddd"
-        app:layout_constraintTop_toBottomOf="@+id/iv_back"></View>
-</android.support.constraint.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/iv_back"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

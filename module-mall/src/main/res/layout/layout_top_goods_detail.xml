@@ -7,11 +7,12 @@
     android:overScrollMode="never"
     android:scrollbars="vertical">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.bigkoo.convenientbanner.ConvenientBanner
+            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="360dp"
@@ -19,6 +20,7 @@
             android:src="@drawable/app_icon" />
 
         <TextView
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/tv_goods_title"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
@@ -31,6 +33,7 @@
             app:layout_constraintTop_toBottomOf="@+id/banner" />
 
         <TextView
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,6 +60,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_goods_title" />
 
         <TextView
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/tv_postage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,6 +73,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_price" />
 
         <TextView
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/tv_productDiscountTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,14 +91,14 @@
             android:layout_height="1px"
             android:layout_marginTop="10dp"
             android:background="@color/color_f0f0f0"
-            app:layout_constraintTop_toBottomOf="@+id/tv_productDiscountTxt"></View>
+            app:layout_constraintTop_toBottomOf="@+id/tv_productDiscountTxt"/>
 
         <com.jojo.design.common_ui.view.NoScrollListView
             android:id="@+id/gv_guarantees"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/view_line"></com.jojo.design.common_ui.view.NoScrollListView>
+            app:layout_constraintTop_toBottomOf="@+id/view_line"/>
 
         <View
             android:id="@+id/view_wide_line"
@@ -101,13 +106,13 @@
             android:layout_height="10dp"
             android:layout_marginTop="10dp"
             android:background="@color/color_f0f0f0"
-            app:layout_constraintTop_toBottomOf="@+id/gv_guarantees"></View>
+            app:layout_constraintTop_toBottomOf="@+id/gv_guarantees"/>
 
         <ImageView
             android:id="@+id/iv_productUser"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/app_icon"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -117,7 +122,7 @@
             android:id="@+id/tv_productUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:text="主理人"
             android:textColor="@color/color_858585"
             android:textSize="15sp"
@@ -128,7 +133,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="15dp"
+            android:paddingStart="15dp"
             android:src="@drawable/ic_arrow_grey"
             app:layout_constraintBottom_toBottomOf="@+id/iv_productUser"
             app:layout_constraintRight_toRightOf="parent"
@@ -140,14 +145,14 @@
             android:layout_height="1px"
             android:layout_marginTop="5dp"
             android:background="@color/color_f0f0f0"
-            app:layout_constraintTop_toBottomOf="@+id/iv_productUser"></View>
+            app:layout_constraintTop_toBottomOf="@+id/iv_productUser"/>
 
 
         <ImageView
             android:id="@+id/iv_brand"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/app_icon"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -157,7 +162,7 @@
             android:id="@+id/tv_brand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:text="品牌"
             android:textColor="@color/color_858585"
             android:textSize="15sp"
@@ -191,7 +196,7 @@
             android:id="@+id/tv_watch_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="15dp"
+            android:paddingEnd="15dp"
             android:text="查看更多"
             android:textColor="@color/color_app_yellow"
             android:textSize="13sp"
@@ -204,7 +209,7 @@
             android:layout_height="10dp"
             android:layout_marginTop="5dp"
             android:background="@color/color_f0f0f0"
-            app:layout_constraintTop_toBottomOf="@+id/tv_watch_more"></View>
+            app:layout_constraintTop_toBottomOf="@+id/tv_watch_more"/>
 
 
         <TextView
@@ -224,14 +229,15 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background="@color/color_f0f0f0"
-            app:layout_constraintTop_toBottomOf="@+id/tv_desc"></View>
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc"/>
 
         <TextView
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/tv_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
             android:text="喜欢55"
             android:textColor="@color/color_212121"
             android:textSize="15sp"
@@ -247,7 +253,7 @@
             android:textColor="@color/color_212121"
             android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@+id/tv_like" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </com.jojo.design.common_ui.view.IOSScrollView>

@@ -26,7 +26,7 @@ import javax.inject.Inject
  *    desc   : Dagger2_MVP-Activity的基类 (Activity动画、事件订阅EventBus/广播、状态栏、ButterKnife，多状态View切换)
  */
 open class BaseActivity<P : BaseContract.BasePresenter, M : BaseContract.BaseModel> :
-    FragmentActivity(), BaseContract.BaseView {
+    AppCompatActivity(), BaseContract.BaseView {
     @Inject
     @JvmField
     var mPresenter: P? = null

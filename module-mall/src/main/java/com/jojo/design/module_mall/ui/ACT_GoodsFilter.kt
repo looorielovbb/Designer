@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.jojo.design.common_base.BaseApplication
 import com.jojo.design.common_base.adapter.rv.MultiItemTypeAdapter
 import com.jojo.design.common_base.config.arouter.ARouterConfig
@@ -18,6 +19,7 @@ import com.jojo.design.common_base.config.arouter.ARouterConstants
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
 import com.jojo.design.common_base.utils.RecyclerviewHelper
 import com.jojo.design.common_base.utils.ToastUtils
+import com.jojo.design.common_ui.lrecyclerview.recyclerview.LRecyclerView
 import com.jojo.design.common_ui.view.MyPopupWindow
 import com.jojo.design.common_ui.view.NoScrollGridView
 import com.jojo.design.module_mall.R
@@ -28,6 +30,7 @@ import com.jojo.design.module_mall.adapter.ADA_SearchGoods
 import com.jojo.design.module_mall.bean.CategoryBean
 import com.jojo.design.module_mall.bean.FilterBean
 import com.jojo.design.module_mall.bean.RecordsEntity
+import com.jojo.design.module_mall.databinding.ActGoodsFilterBinding
 import com.jojo.design.module_mall.dialog.DIA_Filter
 import com.jojo.design.module_mall.helper.PopupFilter
 import com.jojo.design.module_mall.mvp.contract.SearchContract
@@ -64,6 +67,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
     var isClick = false
     var preBean: CategoryBean? = null
     var preBeanRec: CategoryBean? = null
+    lateinit var binding:ActGoodsFilterBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,11 +76,11 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
     }
 
     fun startEvents() {
-        ivSearch.visibility = View.VISIBLE
-        outCategoryId = intent.extras.getString(ARouterConstants.TAG_CATEGORY_ID)
-        keyword = intent.extras.getString(ARouterConstants.SEARCH_KEYWORDS)
+        ivSearch?.visibility = View.VISIBLE
+        outCategoryId = intent.extras?.getString(ARouterConstants.TAG_CATEGORY_ID)
+        keyword = intent.extras?.getString(ARouterConstants.SEARCH_KEYWORDS)
         setHeaderTitle(keyword!!)
-        setSupportActionBar()
+//        setSupportActionBar(binding.llTitle.toolbar)
 
         initGoodsRecyclerview()
 
@@ -129,18 +133,23 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
      * 初始化商品列表
      */
     private fun initGoodsRecyclerview() {
-        val lrecyclerview = findViewById<>()
+        val lrecyclerview = findViewById<LRecyclerView>(R.id.lrecyclerview)
         mAdapter = ADA_SearchGoods(mContext)
         RecyclerviewHelper.initLayoutManagerRecyclerView(lrecyclerview, mAdapter!!, GridLayoutManager(mContext, 2), mContext)
         lrecyclerview.setPullRefreshEnabled(false)
         // //设置item之间的间距
         lrecyclerview.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect, itemPosition: Int, parent: RecyclerView?) {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
                 //设计图item之间的间距为40 (header占了一个位置，故从位置1开始显示实际的item)
-                if (itemPosition != 0) {
+                if (parent.getChildAdapterPosition(view) != 0) {
                     outRect.top = 40
                 }
-                if ((itemPosition - 1) % 2 == 0) {
+                if ((parent.getChildAdapterPosition(view) - 1) % 2 == 0) {
                     outRect.left = 40
                 } else {
                     outRect.left = 20
@@ -154,23 +163,23 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
 
     private fun initListener() {
         //推荐
-        rb_recommend.setOnClickListener {
-            rb_category.isSelected = false
+        binding.llFilter.rbRecommend.setOnClickListener {
+            binding.llFilter.rbCategory.isSelected = false
             mCategoryPupWindow?.dismiss()
 
             if (isClick) hideRecommendPopup() else showRecommendPopup()
 
         }
         //选择分类
-        rb_category.setOnClickListener {
-            rb_recommend.isSelected = false
+        binding.llFilter.rbCategory.setOnClickListener {
+            binding.llFilter.rbRecommend.isSelected = false
             mRecommendPupWindow?.dismiss()
 
             if (isClick) hideCategoryPopup() else showCategoryPopup()
 
         }
         //筛选
-        rb_filter.setOnClickListener {
+        binding.llFilter.rbFilter.setOnClickListener {
             mDiaFilter?.show()
         }
         //选择分类筛选操作
@@ -197,10 +206,10 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
                 var paramsMap = HashMap<String, String>()
                 //传了分类ID，就不传关键字匹配
                 outCategoryId = bean.id.toString()
-                if (bean.id == 0) outCategoryId = intent.extras.getString(ARouterConstants.TAG_CATEGORY_ID)
+                if (bean.id == 0) outCategoryId = intent.extras?.getString(ARouterConstants.TAG_CATEGORY_ID)
                 requestGoodList(paramsMap)
 
-                rb_category.text = bean.name
+                binding.llFilter.rbCategory.text = bean.name
             }
 
             override fun onItemLongClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int): Boolean {
@@ -230,7 +239,7 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
                 sort = bean.id
                 requestGoodList(paramsMap)
 
-                rb_recommend.text = bean.name
+                binding.llFilter.rbRecommend.text = bean.name
             }
 
             override fun onItemLongClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int): Boolean {
@@ -297,9 +306,9 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
      * 隐藏选择分类弹窗
      */
     fun hideCategoryPopup() {
-        rb_category.isSelected = false
+        binding.llFilter.rbCategory.isSelected = false
         isClick = false
-        bg_popup.visibility = View.GONE
+        binding.bgPopup.visibility = View.GONE
         mCategoryPupWindow?.dismiss()
     }
 
@@ -307,19 +316,19 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
      * 展示选择分类弹窗
      */
     fun showCategoryPopup() {
-        rb_category.isSelected = true
+        binding.llFilter.rbCategory.isSelected = true
         isClick = true
-        bg_popup.visibility = View.VISIBLE
-        mCategoryPupWindow?.showAsDropDown(ll_filter)
+        binding.bgPopup.visibility = View.VISIBLE
+        mCategoryPupWindow?.showAsDropDown(binding.llFilter.root)
     }
 
     /**
      * 隐藏推荐弹窗
      */
     fun hideRecommendPopup() {
-        rb_recommend.isSelected = false
+        binding.llFilter.rbRecommend.isSelected = false
         isClick = false
-        bg_popup.visibility = View.GONE
+        binding.bgPopup.visibility = View.GONE
         mRecommendPupWindow?.dismiss()
     }
 
@@ -327,10 +336,10 @@ class ACT_GoodsFilter : BaseActivity<SearchPresenter, SearchModel>(), SearchCont
      * 展示推荐弹窗
      */
     fun showRecommendPopup() {
-        rb_recommend.isSelected = true
+        binding.llFilter.rbRecommend.isSelected = true
         isClick = true
-        bg_popup.visibility = View.VISIBLE
-        mRecommendPupWindow?.showAsDropDown(ll_filter)
+        binding.bgPopup.visibility = View.VISIBLE
+        mRecommendPupWindow?.showAsDropDown(binding.llFilter.root)
     }
 
     override fun onDestroy() {

@@ -25,8 +25,8 @@ class ADA_ItemGoods constructor(context: Context) : CommonAdapter<GoodsEntity>(c
         holder.setText(R.id.tv_name, bean.name)
         holder.setText(R.id.tv_title, bean.title)
         val rvGoods = holder.getView<RecyclerView>(R.id.rl_goods)
-        var adapter = ADA_ChildGoods(mContext!!)
-        var rv = holder.getView<RecyclerView>(R.id.rv)
+        val adapter = ADA_ChildGoods(mContext!!)
+        holder.getView<RecyclerView>(R.id.rv)
         rvGoods.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
         rvGoods.adapter = adapter
         adapter.update(bean.items, true)

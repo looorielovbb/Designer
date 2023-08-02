@@ -30,12 +30,12 @@ class GoodsCategoryViewType constructor(context: Context) : ItemViewDelegate<Con
     }
 
     override fun convert(holder: ViewHolder, bean: ContentBean, position: Int) {
-        var gv = holder.getView<NoScrollGridView>(R.id.gv)
-        var adapter = ADA_ItemGoodsCategory(mContext!!)
+        val gv = holder.getView<NoScrollGridView>(R.id.gv)
+        val adapter = ADA_ItemGoodsCategory(mContext!!)
         gv.adapter = adapter
         adapter.update(bean.categorys, true)
 
-        gv.setOnItemClickListener { adapterView, view, i, l ->
+        gv.setOnItemClickListener { _, _, i, _ ->
             ARouter.getInstance().build(ARouterConfig.ACT_GOODS_FILTER)
                     .withString(ARouterConstants.SEARCH_KEYWORDS, adapter.dataList[i].name)
                     .withString(ARouterConstants.TAG_CATEGORY_ID,  adapter.dataList[i].id)

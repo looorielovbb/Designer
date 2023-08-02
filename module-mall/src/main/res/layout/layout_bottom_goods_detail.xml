@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <View
+        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/sus_title"
         android:layout_width="match_parent"
-        android:layout_height="70dp"></View>
+        android:layout_height="70dp"/>
 
     <View
         android:id="@+id/line_one"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/color_f0f0f0"
-        app:layout_constraintTop_toBottomOf="@+id/sus_title"></View>
+        app:layout_constraintTop_toBottomOf="@+id/sus_title"/>
 
     <TextView
         android:id="@+id/tv_product_des"
@@ -50,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/color_f0f0f0"
-        app:layout_constraintTop_toBottomOf="@+id/tv_product_des"></View>
+        app:layout_constraintTop_toBottomOf="@+id/tv_product_des"/>
 
     <View
         android:id="@+id/line_bottom_one"
@@ -59,7 +60,7 @@
         android:background="@color/color_app_yellow"
         app:layout_constraintLeft_toLeftOf="@+id/tv_product_des"
         app:layout_constraintRight_toRightOf="@+id/tv_product_des"
-        app:layout_constraintTop_toBottomOf="@+id/tv_product_des"></View>
+        app:layout_constraintTop_toBottomOf="@+id/tv_product_des"/>
 
     <View
         android:id="@+id/line_bottom_two"
@@ -69,7 +70,7 @@
         android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="@+id/tv_comment"
         app:layout_constraintRight_toRightOf="@+id/tv_comment"
-        app:layout_constraintTop_toBottomOf="@+id/tv_comment"></View>
+        app:layout_constraintTop_toBottomOf="@+id/tv_comment"/>
 
 
     <FrameLayout
@@ -77,6 +78,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_bottom_two"></FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/line_bottom_two"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

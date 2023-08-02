@@ -35,9 +35,9 @@ class ViewPagerViewType constructor(context: Activity) : ItemViewDelegate<Conten
     }
 
     override fun convert(holder: ViewHolder, bean: ContentBean, position: Int) {
-        viewpager = holder.getView<CustomViewPager>(R.id.viewpager)
-        var tablayout = holder.getView<SmartTabLayout>(R.id.tablayout)
-        createFragment(viewpager!!, tablayout, bean)
+        viewpager = holder.getView(R.id.viewpager)
+        val tab = holder.getView<SmartTabLayout>(R.id.tablayout)
+        createFragment(viewpager!!, tab)
     }
 
     /**
@@ -45,8 +45,7 @@ class ViewPagerViewType constructor(context: Activity) : ItemViewDelegate<Conten
      */
     private fun createFragment(
         viewpager: CustomViewPager,
-        tablayout: SmartTabLayout,
-        bean: ContentBean
+        tab: SmartTabLayout
     ) {
         var dataList = ArrayList<String>()
         dataList.add("精选")
@@ -64,8 +63,7 @@ class ViewPagerViewType constructor(context: Activity) : ItemViewDelegate<Conten
             (activity as FragmentActivity).supportFragmentManager,
             pages
         )
-        viewpager.adapter = adapter!!
-        tablayout.setViewPager(viewpager)
-        //        susTablayout.setViewPager(viewpager)
+        viewpager.adapter = adapter
+        tab.setViewPager(viewpager)
     }
 }
