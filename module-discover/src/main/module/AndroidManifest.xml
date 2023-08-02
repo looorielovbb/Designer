@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/BaseAppTheme">
         <activity
+            android:exported="true"
             android:name="com.jojo.design.module_discover.ui.ACT_Category"
             android:configChanges="keyboardHidden|orientation">
             <intent-filter>

@@ -21,13 +21,13 @@ import com.jojo.design.module_mall.R
 class PopupFilter {
 
     companion object {
-        var mPopWindow: PopupWindow? = null
+        private var mPopWindow: PopupWindow? = null
         fun initPopupWindow(mContext: Activity, adapter: RecyclerView.Adapter<*>, isDefaltAnim: Boolean): MyPopupWindow {
             //设置contentView，在布局中外层macthParent的布局中设置半透明的背景阴影
-            var contentView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods_filter, null)
-            var recyclerviewFilter = contentView.findViewById<RecyclerView>(R.id.rv)
-            var popup_root = contentView.findViewById<ConstraintLayout>(R.id.popup_root)
-            popup_root.setOnClickListener { mPopWindow!!.dismiss() }
+            val contentView = LayoutInflater.from(mContext).inflate(R.layout.popup_goods_filter, null)
+            val recyclerviewFilter = contentView.findViewById<RecyclerView>(R.id.rv)
+            val popupRoot = contentView.findViewById<ConstraintLayout>(R.id.popup_root)
+            popupRoot.setOnClickListener { mPopWindow!!.dismiss() }
             //适配7.0版本
             mPopWindow = MyPopupWindow(contentView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
 //            mPopWindow = PopupWindow(this) //7.0以上,高度设置为matchParent会导致popupwindow覆盖全屏，showAsDropDown()方法无效
@@ -40,8 +40,7 @@ class PopupFilter {
             mPopWindow!!.isOutsideTouchable = false
             mPopWindow!!.isFocusable = false
             mPopWindow!!.setBackgroundDrawable(BitmapDrawable())
-            RecyclerviewHelper.initNormalRecyclerView(mContext, recyclerviewFilter!!, adapter!!, LinearLayoutManager(mContext))
-
+            RecyclerviewHelper.initNormalRecyclerView(mContext, recyclerviewFilter!!, adapter, LinearLayoutManager(mContext))
             return mPopWindow as MyPopupWindow
         }
     }

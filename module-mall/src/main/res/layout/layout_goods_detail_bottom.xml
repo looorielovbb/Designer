@@ -9,7 +9,7 @@
         android:id="@+id/view_div"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_dddddd"
+        android:background="@color/colorD"
         app:layout_constraintTop_toTopOf="parent">
 
     </View>

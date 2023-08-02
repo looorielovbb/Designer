@@ -7,9 +7,9 @@ ext {
     isBuildModule = false
 
     android = [
-            compileSdkVersion: 34,
+            compileSdkVersion: 33,
             minSdkVersion    : 21,
-            targetSdkVersion : 34,
+            targetSdkVersion : 33,
             versionCode      : 1,
             versionName      : "1.0"
     ]

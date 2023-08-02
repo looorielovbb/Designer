@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- 适配Android8.0未知来源应用安装权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"></uses-permission>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <!--在Module单独开发模式下使用该mainfest-->
     <application
         android:name=".MainApplication"
@@ -17,15 +17,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
-        <activity android:name=".ui.home.ACT_Home">
+        <activity
+            android:exported="true"
+            android:name=".ui.home.ACT_Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.designer.ACT_DesignerList"></activity>
-        <activity android:name=".ui.common.ACT_CommonWebView"></activity>
+        <activity android:name=".ui.designer.ACT_DesignerList"/>
+        <activity android:name=".ui.common.ACT_CommonWebView"/>
     </application>
 
 </manifest>

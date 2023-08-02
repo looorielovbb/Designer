@@ -41,9 +41,9 @@ class ACT_Home : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel
     private var mIndex = 2
     private var mTopicFragment: TopicFragment? = null
     var mDesignerFragment: DesignerFragment? = null
-    var mShoppingFragment: ShoppingFragment? = null
-    private var mDiscorverFragment: DiscoveryFragment? = null
-    lateinit var tabLayout: CommonTabLayout
+    private var mShoppingFragment: ShoppingFragment? = null
+    private var mDiscoverFragment: DiscoveryFragment? = null
+    private lateinit var tabLayout: CommonTabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
@@ -121,11 +121,11 @@ class ACT_Home : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel
 
             3 //发现
             -> {
-                if (mDiscorverFragment == null) {
-                    mDiscorverFragment = DiscoveryFragment.getInstance(mTitles[position])
-                    transaction.add(R.id.fl_container, mDiscorverFragment!!, "discovery")
+                if (mDiscoverFragment == null) {
+                    mDiscoverFragment = DiscoveryFragment.getInstance(mTitles[position])
+                    transaction.add(R.id.fl_container, mDiscoverFragment!!, "discovery")
                 } else {
-                    transaction.show(mDiscorverFragment!!)
+                    transaction.show(mDiscoverFragment!!)
                 }
                 StatusBarHelper.setStatusTextColor(true, this)
             }
@@ -150,8 +150,8 @@ class ACT_Home : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel
         if (null != mShoppingFragment) {
             transaction.hide(mShoppingFragment!!)
         }
-        if (null != mDiscorverFragment) {
-            transaction.hide(mDiscorverFragment!!)
+        if (null != mDiscoverFragment) {
+            transaction.hide(mDiscoverFragment!!)
         }
     }
 

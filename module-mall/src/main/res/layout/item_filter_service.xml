@@ -8,7 +8,7 @@
         android:id="@+id/tv_value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_shape_ffffff_6"
+        android:background="@drawable/bg_shape_6"
         android:gravity="center"
         android:paddingLeft="5dp"
         android:paddingTop="10dp"

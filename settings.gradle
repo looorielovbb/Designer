@@ -28,7 +28,7 @@ rootProject.name = "Designer"
 include ':app'
 include ':module-core'
 include ':common-base'
-//include ':module-test'
+include ':module-test'
 include ':module-mall'
 include ':common-ui'
 include ':module-discover'

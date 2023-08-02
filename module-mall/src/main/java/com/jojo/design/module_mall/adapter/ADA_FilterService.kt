@@ -21,7 +21,7 @@ class ADA_FilterService constructor(context: Context) : CommonAdapterListView<Fi
             holder.setBackgroundRes(R.id.tv_value,R.drawable.bg_shape_app_yellow_6)
         }else{
             holder.setTextColor(R.id.tv_value,ContextCompat.getColor(mContext,R.color.color_858585))
-            holder.setBackgroundRes(R.id.tv_value,R.drawable.bg_shape_ffffff_6)
+            holder.setBackgroundRes(R.id.tv_value,R.drawable.bg_shape_6)
         }
     }
 

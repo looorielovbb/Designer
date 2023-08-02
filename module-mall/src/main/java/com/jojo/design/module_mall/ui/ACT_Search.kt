@@ -93,7 +93,7 @@ class ACT_Search : BaseActivity<SearchPresenter, SearchModel>(), SearchContract.
 
     private fun initListener() {
         
-        binding.llSearch.tvCancle.setOnClickListener {
+        binding.llSearch.tvCancel.setOnClickListener {
             // 先隐藏键盘
             (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
                     .hideSoftInputFromWindow(currentFocus!!

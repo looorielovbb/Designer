@@ -88,6 +88,6 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginTop="5dp"
-        android:background="@color/color_dddddd"
+        android:background="@color/colorD"
         app:layout_constraintTop_toBottomOf="@+id/iv_back"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
