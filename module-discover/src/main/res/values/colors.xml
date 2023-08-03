@@ -7,4 +7,6 @@
     <color name="color_878787">#878787</color>
     <color name="color_tab_selected">#b50000</color>
     <color name="color_tab_unselected">#878787</color>
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_333333">#333333</color>
 </resources>

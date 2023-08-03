@@ -3,23 +3,44 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk rootProject.ext.android["compileSdkVersion"]
     defaultConfig {
         namespace 'com.shuyu.gsyvideoplayer'
-        minSdkVersion 16
-        targetSdkVersion 34
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
         }
     }
+
+     viewBinding{
+        enable = true
+    }
+
+    dataBinding{
+        enable = true
+    }
+
 }
 
 dependencies {

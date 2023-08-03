@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!--StatusBarHelper-->
-    <item type="id" name="fake_status_bar_view" />
-    <item name="tag_view_binding" type="id">view_binding_tag</item>
-</resources>

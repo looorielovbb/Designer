@@ -1,10 +1,5 @@
 package com.jojo.design.module_test.room;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
 
 /**
  * author : JOJO
@@ -12,6 +7,12 @@ import android.arch.persistence.room.PrimaryKey;
  * date   : 2019/1/4 5:50 PM
  * desc   : 数据库对应的bean类（切记不要把属性声明为private，否则编译会报：Error:Execution failed for task ':module-test:kaptDebugKotlin'）
  */
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 /**
  * 有些时候, 数据库中的某些域或几组域必须是唯一的. 你可以通过将注解@Index的unique属性设置为true, 强制完成唯一的属性.
@@ -37,7 +38,7 @@ public class User {
     int age;
 
     @Ignore
-    public User(int uid, String firstName, String lastName, int age) {
+    public User(int uid, String firstName, String lastName) {
         this.uid = uid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -80,6 +81,7 @@ public class User {
         this.lastName = lastName;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "User{" +

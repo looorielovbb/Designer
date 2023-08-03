@@ -50,7 +50,7 @@ public class TestRoomActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                User user = new User(2, "娟娟", "jojo", 18);
+                User user = new User(2, "娟娟", "jojo");
                 Long index = mUserDao.insert(user);
                 Log.e("TAG", "insert success index=" + index);
             }
@@ -87,7 +87,7 @@ public class TestRoomActivity extends AppCompatActivity {
     }
 
     public void updateItem(View view) {
-        final User user = new User(2, "娟娟小花花", "jojo", 20);
+        final User user = new User(2, "娟娟小花花", "jojo");
         new Thread(new Runnable() {
             @Override
             public void run() {

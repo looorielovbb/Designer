@@ -8,5 +8,5 @@ import com.jojo.design.common_base.R
 
 @Suppress("UNCHECKED_CAST")
 fun <VB : ViewBinding> View.getBinding(bind: (View) -> VB): VB =
-    getTag(R.id.tag_view_binding) as? VB ?: bind(this).also { setTag(R.id.tag_view_binding, it) }
+    getTag(0x11) as? VB ?: bind(this).also { setTag(0x11, it) }
 

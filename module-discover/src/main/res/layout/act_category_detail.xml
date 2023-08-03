@@ -10,8 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="270dp">
 
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -127,7 +126,6 @@
                 android:minHeight="?attr/actionBarSize"
                 android:paddingTop="12dp"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:titleTextColor="@android:color/transparent">
 
                 <TextView
