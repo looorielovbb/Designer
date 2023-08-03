@@ -2,7 +2,6 @@ package com.jojo.design.module_core.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
-import com.flyco.tablayout.CommonTabLayout
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.jojo.design.common_base.dagger.mvp.BaseActivity
@@ -10,6 +9,7 @@ import com.jojo.design.common_base.dagger.mvp.BaseContract
 import com.jojo.design.common_base.utils.StatusBarHelper
 import com.jojo.design.module_core.R
 import com.jojo.design.module_core.bean.MainTabEntity
+import com.jojo.design.module_core.databinding.ActMainBinding
 
 /**
  *    author : JOJO
@@ -43,30 +43,31 @@ class ACT_Home : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel
     var mDesignerFragment: DesignerFragment? = null
     private var mShoppingFragment: ShoppingFragment? = null
     private var mDiscoverFragment: DiscoveryFragment? = null
-    private lateinit var tabLayout: CommonTabLayout
+
+    private lateinit var binding: ActMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
             mIndex = savedInstanceState.getInt("currTabIndex")
         }
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.act_main)
+        binding = ActMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initTab()
-        tabLayout = findViewById(R.id.tabLayout)
-        tabLayout.currentTab = mIndex
+        binding.tabLayout.currentTab = mIndex
         switchFragment(mIndex)
     }
 
     //初始化底部菜单
     private fun initTab() {
         (mTitles.indices).mapTo(mTabList) {
-                MainTabEntity(
-                    mTitles[it], mIconSelectIds[it], mIconUnSelectIds[it]
-                )
-            }
+            MainTabEntity(
+                mTitles[it], mIconSelectIds[it], mIconUnSelectIds[it]
+            )
+        }
         //为Tab赋值
-        tabLayout.setTabData(mTabList)
-        tabLayout.setOnTabSelectListener(object : OnTabSelectListener {
+        binding.tabLayout.setTabData(mTabList)
+        binding.tabLayout.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
                 //切换Fragment
                 switchFragment(position)
@@ -131,10 +132,9 @@ class ACT_Home : BaseActivity<BaseContract.BasePresenter, BaseContract.BaseModel
             }
         }
         mIndex = position
-        tabLayout.currentTab = mIndex
+        binding.tabLayout.currentTab = mIndex
         transaction.commitAllowingStateLoss()
     }
-
 
     /**
      * 隐藏所有的Fragment
